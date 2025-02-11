@@ -3,6 +3,8 @@ import gc
 import os
 import time
 from collections import deque
+from typing import Any, TYPE_CHECKING
+from collections.abc import Callable
 
 from setproctitle import getproctitle
 
@@ -27,14 +29,24 @@ class Priority:
   CTRL_HIGH = 53
 
 
+if TYPE_CHECKING:
+  # These type definitions are only used by mypy
+  os_sched_setscheduler: Callable[[int, int, Any], None]
+  os_sched_setaffinity: Callable[[int, list[int]], None]
+
+# Use getattr to handle cases where the OS doesn't support these functions
+os_sched_setscheduler = getattr(os, 'sched_setscheduler', lambda pid, policy, param: None)
+os_sched_setaffinity = getattr(os, 'sched_setaffinity', lambda pid, cpus: None)
+
+
 def set_realtime_priority(level: int) -> None:
   if not PC:
-    os.sched_setscheduler(0, os.SCHED_FIFO, os.sched_param(level))
+    os_sched_setscheduler(0, os.SCHED_FIFO, os.sched_param(level))
 
 
 def set_core_affinity(cores: list[int]) -> None:
   if not PC:
-    os.sched_setaffinity(0, cores)
+    os_sched_setaffinity(0, cores)
 
 
 def config_realtime_process(cores: int | list[int], priority: int) -> None:
