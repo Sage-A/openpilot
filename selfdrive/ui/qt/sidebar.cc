@@ -77,7 +77,7 @@ void Sidebar::updateState(const UIState &s) {
   networking = networking ? networking : window()->findChild<Networking *>("");
   bool tethering_on = networking && networking->wifi->tethering_on;
   auto deviceState = sm["deviceState"].getDeviceState();
-  setProperty("netType", tethering_on ? "Hotspot": network_type[deviceState.getNetworkType()]);
+  setProperty("netType", tethering_on ? "Hotspot": "Testing");
   int strength = tethering_on ? 4 : (int)deviceState.getNetworkStrength();
   setProperty("netStrength", strength > 0 ? strength + 1 : 0);
 
