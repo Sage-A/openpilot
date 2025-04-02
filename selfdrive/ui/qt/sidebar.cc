@@ -117,7 +117,7 @@ void Sidebar::paintEvent(QPaintEvent *event) {
 
   // buttons
   p.setOpacity(settings_pressed ? 0.65 : 1.0);
-  p.drawText(settings_btn.x(), settings_btn.y(), QString("Settings");
+  p.drawText(settings_btn.x(), settings_btn.y(), QString("Settings"));
   p.setOpacity(1.0);
   p.drawPixmap(custom_btn.x(), custom_btn.y(), QString("CUSTOM"));
   p.setOpacity(onroad && flag_pressed ? 0.65 : 1.0);
