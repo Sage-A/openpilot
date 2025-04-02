@@ -111,7 +111,11 @@ private:
 
   bool is_onroad = false;
 
-  ButtonControl *enableGui;
+  QLabel *onroadLbl;
+  LabelControl *versionLbl;
+  ButtonControl *installBtn;
+  ButtonControl *downloadBtn;
+  ButtonControl *targetBranchBtn;
 
   Params params;
   ParamWatcher *fs_watch;
