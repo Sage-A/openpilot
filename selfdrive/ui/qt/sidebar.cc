@@ -117,13 +117,19 @@ void Sidebar::paintEvent(QPaintEvent *event) {
 
   // buttons
   p.setOpacity(settings_pressed ? 0.65 : 1.0);
-  p.drawText(settings_btn.x(), settings_btn.y(), QString("Settings"));
-  p.setOpacity(1.0);
-  p.drawPixmap(custom_btn.x(), custom_btn.y(), QString("CUSTOM"));
+  p.drawPixmap(settings_btn.x(), settings_btn.y(), settings_img);
   p.setOpacity(onroad && flag_pressed ? 0.65 : 1.0);
   p.drawPixmap(home_btn.x(), home_btn.y(), onroad ? flag_img : home_img);
   p.setOpacity(1.0);
 
+  // network
+   int x = 58;
+   const QColor gray(0x54, 0x54, 0x54);
+   for (int i = 0; i < 5; ++i) {
+     p.setBrush(i < net_strength ? Qt::white : gray);
+     p.drawEllipse(x, 196, 27, 27);
+     x += 37;
+   }
   // metrics
   drawMetric(p, temp_status.first, temp_status.second, 338);
   drawMetric(p, panda_status.first, panda_status.second, 496);
