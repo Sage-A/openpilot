@@ -29,6 +29,10 @@ CustomPanel::CustomPanel(QWidget* parent) : ListWidget(parent) {
   versionLbl = new LabelControl(tr("Current Version"), "");
   addItem(versionLbl);
 
+  //Custom button
+  enableGui = new ButtonControl(tr("Test1"), tr("Test2"));
+  addItem(enableGui);
+
   // download update btn
   downloadBtn = new ButtonControl(tr("Download"), tr("CHECK"));
   connect(downloadBtn, &ButtonControl::clicked, [=]() {
