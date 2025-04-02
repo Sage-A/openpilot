@@ -24,13 +24,9 @@ CustomPanel::CustomPanel(QWidget* parent) : ListWidget(parent) {
   onroadLbl = new QLabel(tr("Updates are only downloaded while the car is off."));
   onroadLbl->setStyleSheet("font-size: 50px; font-weight: 400; text-align: left; padding-top: 30px; padding-bottom: 30px;");
   addItem(onroadLbl);
-
-  // current version
-  versionLbl = new LabelControl(tr("Current Version"), "");
-  addItem(versionLbl);
-
+  
   //Custom button
-  enableGui = new ButtonControl(tr("Test1"), tr("Test2"));
+  enableGui = new ButtonControl(tr("Drive-by-wire GUI"), tr("ENABLE"));
   addItem(enableGui);
 
   // download update btn
