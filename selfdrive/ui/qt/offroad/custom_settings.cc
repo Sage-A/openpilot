@@ -21,9 +21,6 @@ void CustomPanel::checkForUpdates() {
 }
 
 CustomPanel::CustomPanel(QWidget* parent) : ListWidget(parent) {
-  onroadLbl = new QLabel(tr("Updates are only downloaded while the car is off."));
-  onroadLbl->setStyleSheet("font-size: 50px; font-weight: 400; text-align: left; padding-top: 30px; padding-bottom: 30px;");
-  addItem(onroadLbl);
   
   //Custom button
   enableGui = new ButtonControl(tr("Drive-by-wire GUI"), tr("ENABLE"));
@@ -115,7 +112,6 @@ void CustomPanel::updateLabels() {
   }
 
   // updater only runs offroad
-  onroadLbl->setVisible(is_onroad);
   downloadBtn->setVisible(!is_onroad);
 
   // download update
@@ -143,10 +139,6 @@ void CustomPanel::updateLabels() {
     downloadBtn->setEnabled(true);
   }
   targetBranchBtn->setValue(QString::fromStdString(params.get("UpdaterTargetBranch")));
-
-  // current + new versions
-  versionLbl->setText(QString::fromStdString(params.get("UpdaterCurrentDescription")));
-  versionLbl->setDescription(QString::fromStdString(params.get("UpdaterCurrentReleaseNotes")));
 
   installBtn->setVisible(!is_onroad && params.getBool("UpdateAvailable"));
   installBtn->setValue(QString::fromStdString(params.get("UpdaterNewDescription")));
