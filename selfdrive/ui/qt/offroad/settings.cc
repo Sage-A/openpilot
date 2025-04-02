@@ -384,6 +384,7 @@ SettingsWindow::SettingsWindow(QWidget *parent) : QFrame(parent) {
     {tr("Toggles"), toggles},
     {tr("Software"), new SoftwarePanel(this)},
     {tr("Developer"), new DeveloperPanel(this)},
+    {tr("Custom"), new SoftwarePanel(this)},
   };
 
   nav_btns = new QButtonGroup(this);
@@ -396,7 +397,7 @@ SettingsWindow::SettingsWindow(QWidget *parent) : QFrame(parent) {
         color: grey;
         border: none;
         background: none;
-        font-size: 65px;
+        font-size: 50px;
         font-weight: 500;
       }
       QPushButton:checked {
