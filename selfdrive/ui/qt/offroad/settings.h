@@ -112,6 +112,7 @@ private:
   bool is_onroad = false;
 
   QLabel *onroadLbl;
+  ButtonControl *enableGui;
   LabelControl *versionLbl;
   ButtonControl *installBtn;
   ButtonControl *downloadBtn;
