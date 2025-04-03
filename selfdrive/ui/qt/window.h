@@ -18,7 +18,7 @@ private:
   bool eventFilter(QObject *obj, QEvent *event) override;
   void openSettings(int index = 0, const QString &param = "");
   void closeSettings();
-  void openCustom(int index = 0, const QString &param = "");
+  void openCustom();
   void closeCustom();
 
   QStackedLayout *main_layout;
