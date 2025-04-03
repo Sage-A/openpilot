@@ -26,11 +26,6 @@ void CustomWindow::setCurrentPanel(int index, const QString &param) {
 
 CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   // setup two main layouts
-  sidebar_widget = new QWidget;
-  QVBoxLayout *sidebar_layout = new QVBoxLayout(sidebar_widget);
-  panel_widget = new QStackedWidget();
-
-  // close button
   QPushButton *close_btn = new QPushButton(tr("×"));
   close_btn->setStyleSheet(R"(
     QPushButton {
@@ -45,54 +40,18 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
     }
   )");
   close_btn->setFixedSize(200, 200);
-  sidebar_layout->addSpacing(45);
-  sidebar_layout->addWidget(close_btn, 0, Qt::AlignCenter);
   QObject::connect(close_btn, &QPushButton::clicked, this, &CustomWindow::closeCustom);
-  
-  QList<QPair<QString, QWidget *>> panels = {
-    {tr("Software"), new SoftwarePanel(this)},
-    {tr("Developer"), new DeveloperPanel(this)},
-    {tr("Custom"), new CustomPanel(this)},
-  };
-
-  nav_btns = new QButtonGroup(this);
-  for (auto &[name, panel] : panels) {
-    QPushButton *btn = new QPushButton(name);
-    btn->setCheckable(true);
-    btn->setChecked(nav_btns->buttons().size() == 0);
-    btn->setStyleSheet(R"(
-      QPushButton {
-        color: grey;
-        border: none;
-        background: none;
-        font-size: 50px;
-        font-weight: 500;
-      }
-      QPushButton:checked {
-        color: white;
-      }
-      QPushButton:pressed {
-        color: #ADADAD;
-      }
-    )");
-    btn->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
-    nav_btns->addButton(btn);
-    sidebar_layout->addWidget(btn, 0, Qt::AlignRight);
-    
-  sidebar_layout->setContentsMargins(50, 50, 100, 50);
 
   // main settings layout, sidebar + main panel
   QHBoxLayout *main_layout = new QHBoxLayout(this);
-
-  sidebar_widget->setFixedWidth(500);
-  main_layout->addWidget(sidebar_widget);
+  main_layout->addWidget(close_btn);
 
   setStyleSheet(R"(
     * {
       color: white;
       font-size: 50px;
     }
-    SettingsWindow {
+    CustomWindow {
       background-color: black;
     }
     QStackedWidget, ScrollView {
