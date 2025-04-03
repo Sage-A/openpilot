@@ -15,6 +15,13 @@
 #include "selfdrive/ui/qt/widgets/scrollview.h"
 #include "selfdrive/ui/qt/offroad/developer_panel.h"
 
+CustomPanel::CustomPanel(QWidget* parent) : ListWidget(parent) {
+  //Custom button
+  enableGui = new ButtonControl(tr("Drive-by-wire GUI"), tr("ENABLE"));
+  connect(enableGui, &ButtonControl::clicked, [=]() { emit openCustom(); });
+  addItem(enableGui);
+}
+
 TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
   // param, title, desc, icon
   std::vector<std::tuple<QString, QString, QString, QString>> toggle_defs{
@@ -378,13 +385,16 @@ SettingsWindow::SettingsWindow(QWidget *parent) : QFrame(parent) {
   auto networking = new Networking(this);
   QObject::connect(uiState()->prime_state, &PrimeState::changed, networking, &Networking::setPrimeType);
 
+  CustomPanel *customGui = new CustomPanel(this);
+  QObject::connect(customGui, &CustomPanel::openCustom, this, &SettingsWindow::openCustom);
+
   QList<QPair<QString, QWidget *>> panels = {
     {tr("Device"), device},
     {tr("Network"), networking},
     {tr("Toggles"), toggles},
     {tr("Software"), new SoftwarePanel(this)},
     {tr("Developer"), new DeveloperPanel(this)},
-    {tr("Custom"), new CustomPanel(this)},
+    {tr("Custom"), customGui},
   };
 
   nav_btns = new QButtonGroup(this);
