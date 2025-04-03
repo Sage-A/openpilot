@@ -294,3 +294,8 @@ public:
     setLayout(l);
   }
 };
+
+// Slider controls
+class SliderControl : public AbstractControl {
+  Q_OBJECT
+};
