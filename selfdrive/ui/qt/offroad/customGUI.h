@@ -27,7 +27,4 @@ protected:
 
 signals:
   void closeCustom();
-
-private:
-  QPushButton *closeCustom;
 };
