@@ -106,14 +106,5 @@ public:
   explicit CustomPanel(QWidget* parent = nullptr);
 
 private:
-  void showEvent(QShowEvent *event) override;
-  void updateLabels();
-  void checkForUpdates();
-
-  bool is_onroad = false;
-
   ButtonControl *enableGui;
- 
-  Params params;
-  ParamWatcher *fs_watch;
 };
