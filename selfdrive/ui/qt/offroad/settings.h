@@ -13,7 +13,6 @@
 #include "selfdrive/ui/ui.h"
 #include "selfdrive/ui/qt/util.h"
 #include "selfdrive/ui/qt/widgets/controls.h"
-#include "selfdrive/ui/qt/offroad/customGUI.h"
 
 // ********** settings window + top-level panels **********
 class SettingsWindow : public QFrame {
@@ -33,14 +32,10 @@ signals:
   void expandToggleDescription(const QString &param);
 
 private:
-  void openCustom(int index = 0, const QString &param = "");
-  void closeCustom();
-
   QPushButton *sidebar_alert_widget;
   QWidget *sidebar_widget;
   QButtonGroup *nav_btns;
   QStackedWidget *panel_widget;
-  CustomWindow *customWindow;
 };
 
 class DevicePanel : public ListWidget {
