@@ -14,6 +14,7 @@
 #include "selfdrive/ui/qt/widgets/controls.h"
 #include "selfdrive/ui/qt/widgets/input.h"
 #include "system/hardware/hw.h"
+#include "selfdrive/ui/qt/offroad/settings.h"
 
 
 void CustomPanel::checkForUpdates() {
@@ -24,6 +25,7 @@ CustomPanel::CustomPanel(QWidget* parent) : ListWidget(parent) {
   
   //Custom button
   enableGui = new ButtonControl(tr("Drive-by-wire GUI"), tr("ENABLE"));
+  connect(enableGui, &ButtonControl::clicked, this, &CustomPanel::openCustom);
   addItem(enableGui);
 
   updateLabels();
