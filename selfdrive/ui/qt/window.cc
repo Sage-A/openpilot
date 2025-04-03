@@ -33,6 +33,11 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     main_layout->setCurrentWidget(onboardingWindow);
   }
 
+  customWindow = new CustomWindow(this);
+  main_layout->addWidget(customWindow);
+  QObject::connect(customWindow, &CustomWindow::closeCustom, this, &MainWindow::closeCustom);
+  QObject::connect(settingsWindow, &SettingsWindow::openCustom, this, &MainWindow::openCustom);
+
   QObject::connect(uiState(), &UIState::offroadTransition, [=](bool offroad) {
     if (!offroad) {
       closeSettings();
@@ -70,12 +75,20 @@ void MainWindow::openSettings(int index, const QString &param) {
   settingsWindow->setCurrentPanel(index, param);
 }
 
+void MainWindow::openCustom(int index, const QString &param) {
+  main_layout->setCurrentWidget(customWindow);
+}
+
 void MainWindow::closeSettings() {
   main_layout->setCurrentWidget(homeWindow);
 
   if (uiState()->scene.started) {
     homeWindow->showSidebar(false);
   }
+}
+
+void MainWindow::closeCustom() {
+  main_layout->setCurrentWidget(settingsWindow);
 }
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event) {
