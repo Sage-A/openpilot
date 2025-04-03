@@ -49,9 +49,6 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   QObject::connect(close_btn, &QPushButton::clicked, this, &CustomWindow::closeCustom);
   
   QList<QPair<QString, QWidget *>> panels = {
-    {tr("Device"), device},
-    {tr("Network"), networking},
-    {tr("Toggles"), toggles},
     {tr("Software"), new SoftwarePanel(this)},
     {tr("Developer"), new DeveloperPanel(this)},
     {tr("Custom"), new CustomPanel(this)},
