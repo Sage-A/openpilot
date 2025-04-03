@@ -75,7 +75,7 @@ void MainWindow::openSettings(int index, const QString &param) {
   settingsWindow->setCurrentPanel(index, param);
 }
 
-void MainWindow::openCustom(int index, const QString &param) {
+void MainWindow::openCustom() {
   main_layout->setCurrentWidget(customWindow);
 }
 
