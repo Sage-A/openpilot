@@ -104,7 +104,8 @@ class CustomPanel : public ListWidget {
   Q_OBJECT
 public:
   explicit CustomPanel(QWidget* parent = nullptr);
-
+signals:
+  void openCustom();
 private:
   ButtonControl *enableGui;
 };
