@@ -27,6 +27,7 @@ protected:
 
 signals:
   void closeSettings();
+  void openCustom();
   void reviewTrainingGuide();
   void showDriverView();
   void expandToggleDescription(const QString &param);
@@ -112,10 +113,7 @@ private:
   bool is_onroad = false;
 
   ButtonControl *enableGui;
-  ButtonControl *installBtn;
-  ButtonControl *downloadBtn;
-  ButtonControl *targetBranchBtn;
-
+ 
   Params params;
   ParamWatcher *fs_watch;
 };
