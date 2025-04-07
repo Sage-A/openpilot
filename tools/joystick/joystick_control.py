@@ -38,7 +38,43 @@ class Keyboard:
     else:
       return False
     return True
+    
+class SteeringGUI:
+def __init__(self, steer_slider):
+        self.steering_value = 0.0  # Default center position (0) for steering
+  def set_steering_value(self, value): #sets steering value based on GUI slider input
+        # Initialize window for the GUI
+        self.steering_value = max(-1, min(value, 1)) # Clamp the value to -1 and 1
+  def get_steering_value(self): # returns current steering value
+        return self.steering_value
+/
+class SteeringGUI:
+    def __init__(self, steer_slider):
+        self.steer_slider = steer_slider  # GUI slider reference
+        self.steering_value = 0.0
 
+    def update(self):
+        # Get the current slider value
+        self.steering_value = self.steer_slider.get()
+
+        # Clamp the steering value to make sure it's between -1 and 1
+        self.steering_value = max(-1, min(self.steering_value, 1))
+
+    def get_steering_value(self):
+        return self.steering_value
+/
+
+
+
+  
+
+        # Initialize the steering axis values
+        self.steer_axis = 'steer'
+        self.min_axis_value = {self.steer_axis: -1.}
+        self.max_axis_value = {self.steer_axis: 1.}
+        self.axes_values = {self.steer_axis: 0.}
+
+    
 
 class Joystick:
   def __init__(self):
