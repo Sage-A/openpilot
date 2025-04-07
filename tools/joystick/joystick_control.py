@@ -59,6 +59,20 @@ class SteeringGUI:
 
         # Clamp the steering value to make sure it's between -1 and 1
         self.steering_value = max(-1, min(self.steering_value, 1))
+     
+        # Send the updated steering value to OpenPilot
+        self.send_steering_value(self.steering_value)
+
+    def send_steering_value(self, value):
+      if value > 0:
+            print(f"Steering right with value: {value}")
+            # Send the steering command to turn right in the car
+        elif value < 0:
+            print(f"Steering left with value: {value}")
+            # Send the steering command to turn left in the car
+        else:
+            print("Centering steering (no turn)")
+            # Send the command to center the steering wheel
 
     def get_steering_value(self):
         return self.steering_value
