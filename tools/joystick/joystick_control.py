@@ -42,7 +42,7 @@ class Keyboard:
 class SteeringGUI:
 def __init__(self, steer_slider):
         self.steering_value = 0.0  # Default center position (0) for steering
-  def set_steering_value(self, value): #sets steering value based on GUI slider input
+  def set_steering_value(self, steer_slider): #sets steering value based on GUI slider input
         # Initialize window for the GUI
         self.steering_value = max(-1, min(value, 1)) # Clamp the value to -1 and 1
   def get_steering_value(self): # returns current steering value
