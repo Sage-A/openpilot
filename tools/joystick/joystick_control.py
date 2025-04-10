@@ -41,52 +41,56 @@ class Keyboard:
     
 class SteeringGUI:
 def __init__(self, steer_slider):
-        self.steering_value = 0.0  # Default center position (0) for steering
-  def set_steering_value(self, steer_slider): #sets steering value based on GUI slider input
-        # Initialize window for the GUI
-        self.steering_value = max(-1, min(value, 1)) # Clamp the value to -1 and 1
-  def get_steering_value(self): # returns current steering value
-        return self.steering_value
-/
-class SteeringGUI:
-    def __init__(self, steer_slider):
-        self.steer_slider = steer_slider  # GUI slider reference
-        self.steering_value = 0.0
+  # Refers to the acceleration and steering inputs
+  self.accel_axis = 'GUI_ACCEL'
+  self.steer_axis = 'GUI_STEER'
 
-    def update(self):
-        # Get the current slider value
-        self.steering_value = self.steer_slider.get()
+  # Acceleration and steering both range from -1.0 to 1.0
+  self.min_axis_value = {self.accel_axis: -1.0, self.steer_axis: -1.0}
+  self.max_axis_value = {self.accel_axis: 1.0, self.steer_axis: 1.0}
 
-        # Clamp the steering value to make sure it's between -1 and 1
-        self.steering_value = max(-1, min(self.steering_value, 1))
-     
-        # Send the updated steering value to OpenPilot
-        self.send_steering_value(self.steering_value)
-
-    def send_steering_value(self, value):
-      if value > 0:
-            print(f"Steering right with value: {value}")
-            # Send the steering command to turn right in the car
-        elif value < 0:
-            print(f"Steering left with value: {value}")
-            # Send the steering command to turn left in the car
-        else:
-            print("Centering steering (no turn)")
-            # Send the command to center the steering wheel
-
-    def get_steering_value(self):
-        return self.steering_value
-/
-
-
-
+  # Initially, acceleration and steering are set to 0
+  self.axes_values = {self.accel_axis: 0., self.steer_axis: 0.}
   
+  # Defines the order in which to read/process the axes
+  self.axes_order = [self.accel_axis, self.steer_axis]
 
-        # Initialize the steering axis values
-        self.steer_axis = 'steer'
-        self.min_axis_value = {self.steer_axis: -1.}
-        self.max_axis_value = {self.steer_axis: 1.}
-        self.axes_values = {self.steer_axis: 0.}
+  # Tracks whether the "cancel" button (or an emergency stop control) has been pressed in the GUI
+  self.cancel = False
+
+  # Tracks the previous state of the cancel button
+  self._cancel_prev = False
+
+def update(self):
+  # Read input values directly from the GUI
+  try:
+    accel_raw = get_throttle_value()
+    steer_raw = get_slider_value()
+    cancel_now = is_cancel_pressed()
+
+  except Exception:
+    # If GUI is unavailable or throws error, set neutral state
+    self.axes_values = {ax: 0. for ax in self.axes_values}
+    return False
+
+  # Update cancel logic joystick-style, detect when a button is pressed or released
+  if not self._cancel_prev and cancel_now:
+    self.cancel = True  # rising edge
+  elif self._cancel_prev and not cancel_now:
+    self.cancel = False  # falling edge
+  
+  # Was the cancel button not pressed last update, but is pressed now?
+  self._cancel_prev = cancel_now  
+
+  # Normalizing accel/steer input
+  for axis, raw_value in [(self.accel_axis, accel_raw), (self.steer_axis, steer_raw)]:
+    norm = -float(np.interp(raw_value, [self.min_axis_value[axis], self.max_axis_value[axis]], [-1., 1.]))
+    norm = norm if abs(norm) > 0.03 else 0.  # deadzone
+    self.axes_values[axis] = EXPO * norm ** 3 + (1 - EXPO) * norm
+
+  return True
+  /  
+
 
     
 
