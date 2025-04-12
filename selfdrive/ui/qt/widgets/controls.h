@@ -314,4 +314,5 @@ public slots:
 
 private:
   QPushButton btn;
+  QSlider slider;
 };
