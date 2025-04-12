@@ -160,5 +160,22 @@ SliderControl::SliderControl(const QString &title, const QString &text, const QS
   )");
   btn.setFixedSize(250, 100);
   QObject::connect(&btn, &QPushButton::clicked, this, &SliderControl::clicked);
+
+  //Start slider code here
+  slider.setMinimum(0);
+  slider.setMaximum(100);
+  slider.setStyleSheet(R"(
+    QSlider {
+      color: #FFFFFF;
+      background-color: #FFFFFF;
+    }
+  )");
+  
   hlayout->addWidget(&btn);
+  hlayout->addWidget(&slider);
 }
+
+void SliderControl::setMaximum(int value){
+  
+}
+void SliderControl::setMinimum(int value){}
