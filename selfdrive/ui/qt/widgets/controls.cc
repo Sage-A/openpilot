@@ -174,8 +174,3 @@ SliderControl::SliderControl(const QString &title, const QString &text, const QS
   hlayout->addWidget(&btn);
   hlayout->addWidget(&slider);
 }
-
-void SliderControl::setMaximum(int value){
-  
-}
-void SliderControl::setMinimum(int value){}
