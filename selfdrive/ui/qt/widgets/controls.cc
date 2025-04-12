@@ -155,6 +155,7 @@ SliderControl::SliderControl(Qt::Orientation orientation, QWidget *parent) {
   slider.setOrientation(orientation);
   slider.setMinimum(0);
   slider.setMaximum(100);
+  slider.setMinimumHeight(200);
   slider.setStyleSheet(R"(
     QSlider {
       color: #FFFFFF;
