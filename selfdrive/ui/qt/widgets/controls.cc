@@ -161,6 +161,12 @@ SliderControl::SliderControl(Qt::Orientation orientation, QWidget *parent) {
       color: #FFFFFF;
       background-color: #FFFFFF;
     }
+    QSlider::groove{
+      height: 100px;
+    }
+    QSlider::handle{
+      height: 100px;
+    }
   )");
   
   hlayout->addWidget(&slider);
