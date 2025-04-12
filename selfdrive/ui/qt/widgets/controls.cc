@@ -140,7 +140,7 @@ void ParamControl::toggleClicked(bool state) {
   }
 }
 
-SliderControl::SliderControl(QWidget *parent) {
+SliderControl::SliderControl(Qt::Orientation orientation, QWidget *parent) {
   QVBoxLayout *main_layout = new QVBoxLayout(this);
   main_layout->setMargin(0);
 
@@ -152,6 +152,7 @@ SliderControl::SliderControl(QWidget *parent) {
   main_layout->addStretch();
 
   //Start slider code here
+  slider.setOrientation(orientation);
   slider.setMinimum(0);
   slider.setMaximum(100);
   slider.setStyleSheet(R"(
