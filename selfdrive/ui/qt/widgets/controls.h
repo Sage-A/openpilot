@@ -302,19 +302,10 @@ class SliderControl : public QFrame {
 
 public:
   SliderControl(QWidget *parent = nullptr);
-  inline void setText(const QString &text) { btn.setText(text); }
-  inline QString text() const { return btn.text(); }
   inline void setMaximum(int value) {slider.setMaximum(value); }
   inline void setMinimum(int value) { slider.setMinimum(value); }
 
-signals:
-  void clicked();
-
-public slots:
-  void setEnabled(bool enabled) { btn.setEnabled(enabled);}
-
 private:
   QHBoxLayout *hlayout;
-  QPushButton btn;
   QSlider slider;
 };
