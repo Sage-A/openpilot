@@ -301,7 +301,7 @@ class SliderControl : public QFrame {
   Q_OBJECT
 
 public:
-  SliderControl(QWidget *parent = nullptr);
+  SliderControl(Qt::Orientation orientation, QWidget *parent = nullptr);
   inline void setMaximum(int value) {slider.setMaximum(value); }
   inline void setMinimum(int value) { slider.setMinimum(value); }
 
