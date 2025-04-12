@@ -155,7 +155,7 @@ SliderControl::SliderControl(Qt::Orientation orientation, QWidget *parent) {
   slider.setOrientation(orientation);
   slider.setStyleSheet(R"(
     QSlider {
-      color: #FFFFFF;
+      color: #FF00FF;
       background-color: #FFFFFF;
     }
     QSlider::groove:horizontal {
