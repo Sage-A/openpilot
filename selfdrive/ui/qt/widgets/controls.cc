@@ -152,7 +152,6 @@ SliderControl::SliderControl(QWidget *parent) {
   main_layout->addLayout(hlayout);
   main_layout->addStretch();
 
-  btn.setText(text);
   btn.setStyleSheet(R"(
     QPushButton {
       padding: 0;
