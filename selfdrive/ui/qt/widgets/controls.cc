@@ -141,7 +141,6 @@ void ParamControl::toggleClicked(bool state) {
 }
 
 SliderControl::SliderControl(QWidget *parent) {
-
   QVBoxLayout *main_layout = new QVBoxLayout(this);
   main_layout->setMargin(0);
 
@@ -151,25 +150,6 @@ SliderControl::SliderControl(QWidget *parent) {
 
   main_layout->addLayout(hlayout);
   main_layout->addStretch();
-
-  btn.setStyleSheet(R"(
-    QPushButton {
-      padding: 0;
-      border-radius: 50px;
-      font-size: 35px;
-      font-weight: 500;
-      color: #E4E4E4;
-      background-color: #393939;
-    }
-    QPushButton:pressed {
-      background-color: #4a4a4a;
-    }
-    QPushButton:disabled {
-      color: #33E4E4E4;
-    }
-  )");
-  btn.setFixedSize(250, 100);
-  QObject::connect(&btn, &QPushButton::clicked, this, &SliderControl::clicked);
 
   //Start slider code here
   slider.setMinimum(0);
@@ -181,6 +161,5 @@ SliderControl::SliderControl(QWidget *parent) {
     }
   )");
   
-  hlayout->addWidget(&btn);
   hlayout->addWidget(&slider);
 }
