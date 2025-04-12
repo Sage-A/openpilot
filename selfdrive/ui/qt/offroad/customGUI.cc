@@ -27,6 +27,7 @@ void CustomWindow::setCurrentPanel(int index, const QString &param) {
 CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   // setup two main layouts
   QPushButton *close_btn = new QPushButton(tr("×"));
+  SliderControl *speed_slider = new SliderControl(tr("Title"), tr("click"));
   close_btn->setStyleSheet(R"(
     QPushButton {
       font-size: 140px;
@@ -45,6 +46,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   // main settings layout, sidebar + main panel
   QHBoxLayout *main_layout = new QHBoxLayout(this);
   main_layout->addWidget(close_btn);
+  main_layout->addWidget(speed_slider);
 
   setStyleSheet(R"(
     * {
