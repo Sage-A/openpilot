@@ -295,7 +295,21 @@ public:
   }
 };
 
-// Slider controls
+// slider widget
 class SliderControl : public AbstractControl {
   Q_OBJECT
+
+public:
+  SliderControl(const QString &title, const QString &text, const QString &desc = "", QWidget *parent = nullptr);
+  inline void setText(const QString &text) { btn.setText(text); }
+  inline QString text() const { return btn.text(); }
+
+signals:
+  void clicked();
+
+public slots:
+  void setEnabled(bool enabled) { btn.setEnabled(enabled); }
+
+private:
+  QPushButton btn;
 };
