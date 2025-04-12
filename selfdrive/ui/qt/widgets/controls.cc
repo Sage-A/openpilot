@@ -140,7 +140,18 @@ void ParamControl::toggleClicked(bool state) {
   }
 }
 
-SliderControl::SliderControl(const QString &title, const QString &text, const QString &desc, QWidget *parent) : AbstractControl(title, desc, "", parent) {
+SliderControl::SliderControl(QWidget *parent) {
+
+  QVBoxLayout *main_layout = new QVBoxLayout(this);
+  main_layout->setMargin(0);
+
+  hlayout = new QHBoxLayout;
+  hlayout->setMargin(0);
+  hlayout->setSpacing(20);
+
+  main_layout->addLayout(hlayout);
+  main_layout->addStretch();
+
   btn.setText(text);
   btn.setStyleSheet(R"(
     QPushButton {
