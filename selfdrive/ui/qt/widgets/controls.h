@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <QPainter>
 #include <QPushButton>
+#include <QSlider>
 
 #include "common/params.h"
 #include "selfdrive/ui/qt/widgets/input.h"
@@ -303,8 +304,8 @@ public:
   SliderControl(const QString &title, const QString &text, const QString &desc = "", QWidget *parent = nullptr);
   inline void setText(const QString &text) { btn.setText(text); }
   inline QString text() const { return btn.text(); }
-  void setMaximum(int value);
-  void setMinimum(int value);
+  inline void setMaximum(int value) {slider.setMaximum(value); }
+  inline void setMinimum(int value) { slider.setMinimum(value); }
 
 signals:
   void clicked();
