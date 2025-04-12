@@ -27,7 +27,7 @@ void CustomWindow::setCurrentPanel(int index, const QString &param) {
 CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   // setup two main layouts
   QPushButton *close_btn = new QPushButton(tr("×"));
-  SliderControl *speed_slider = new SliderControl(tr("Title"), tr("click"));
+  SliderControl *speed_slider = new SliderControl();
   close_btn->setStyleSheet(R"(
     QPushButton {
       font-size: 140px;
