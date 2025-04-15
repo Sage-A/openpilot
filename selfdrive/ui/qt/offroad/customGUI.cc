@@ -41,18 +41,24 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
     }
   )");
     speed_slider->setStyleSheet(R"(
-        QSlider:horizontal {
-            min-height: 50px;
-        }
-        QSlider::groove:horizontal {
-            margin: -10px 0;
-        }
-        QSlider::handle:horizontal {
-            width: 40px;
-            height: 40px;
-            margin: -8px 0; /* Adjust the margin to center the handle */
-            border-radius: 20px;
-        }
+              QSlider {
+          min-height: 68px;
+          max-height: 68px;
+          background: #5F4141;
+      }
+      QSlider::groove:horizontal {
+          border: 1px solid #262626;
+          height: 5px;
+          background: #393939;
+          margin: 0 12px;
+      }
+      QSlider::handle:horizontal {
+          background: #22B14C;
+          border: 5px solid #B5E61D;
+          width: 23px;
+          height: 100px;
+          margin: -24px -12px;
+      }
           )");
   close_btn->setFixedSize(200, 200);
   QObject::connect(close_btn, &QPushButton::clicked, this, &CustomWindow::closeCustom);
