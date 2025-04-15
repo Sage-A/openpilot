@@ -49,10 +49,6 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   main_layout->addWidget(speed_slider);
 
   setStyleSheet(R"(
-    * {
-      color: white;
-      font-size: 50px;
-    }
     CustomWindow {
       background-color: black;
     }
