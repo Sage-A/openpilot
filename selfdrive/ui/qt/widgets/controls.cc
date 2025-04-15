@@ -151,11 +151,5 @@ SliderControl::SliderControl(Qt::Orientation orientation, QWidget *parent) {
 
   //Start slider code here
   slider.setOrientation(orientation);
-  slider.setStyleSheet(R"(
-    QSlider {
-      color: #FF0000;
-      background-color: #FF0000;
-    }
-  )");
-  	hlayout->addWidget(&slider);
+  hlayout->addWidget(&slider);
 }
