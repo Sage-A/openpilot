@@ -152,13 +152,13 @@ SliderControl::SliderControl(Qt::Orientation orientation, QWidget *parent) {
   main_layout->addStretch();
 
   //Start slider code here
-  slider->setOrientation(orientation);
-  slider->setStyleSheet(R"(
+  slider.setOrientation(orientation);
+  slider.setStyleSheet(R"(
     QSlider {
       color: #FF00FF;
       background-color: #FFFFFF;
     }
   )");
-	slider->resize(200, 50);
+	slider.resize(200, 50);
   	hlayout->addWidget(&slider);
 }
