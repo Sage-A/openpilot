@@ -42,8 +42,8 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   )");
     speed_slider->setStyleSheet(R"(
               QSlider {
-          min-height: 68px;
-          max-height: 68px;
+          min-height: 100px;
+          max-height: 100px;
           background: #5F4141;
       }
       QSlider::groove:horizontal {
