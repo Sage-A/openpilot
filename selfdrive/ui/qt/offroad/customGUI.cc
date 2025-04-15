@@ -48,15 +48,15 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
       }
       QSlider::groove:horizontal {
           border: 1px solid #262626;
-          height: 5px;
-          background: #393939;
+          height: 25px;
+          background: #FF0000;
           margin: 0 12px;
       }
       QSlider::handle:horizontal {
           background: #22B14C;
           border: 5px solid #B5E61D;
-          width: 23px;
-          height: 100px;
+          width: 30px;
+          height: 150px;
           margin: -24px -12px;
       }
           )");
