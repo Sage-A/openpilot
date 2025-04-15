@@ -40,15 +40,20 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
       background-color: #3B3B3B;
     }
   )");
-
-  speed_slider->setStyleSheet(R"(
+    speed_slider->setStyleSheet(R"(
         QSlider:horizontal {
-            min-height: 32px;
+            min-height: 50px;
         }
         QSlider::groove:horizontal {
-            margin: -2px 0;
+            margin: -10px 0;
         }
-      )");
+        QSlider::handle:horizontal {
+            width: 40px;
+            height: 40px;
+            margin: -8px 0; /* Adjust the margin to center the handle */
+            border-radius: 20px;
+        }
+          )");
   close_btn->setFixedSize(200, 200);
   QObject::connect(close_btn, &QPushButton::clicked, this, &CustomWindow::closeCustom);
 
