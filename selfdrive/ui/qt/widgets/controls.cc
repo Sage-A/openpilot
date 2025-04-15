@@ -152,24 +152,13 @@ SliderControl::SliderControl(Qt::Orientation orientation, QWidget *parent) {
   main_layout->addStretch();
 
   //Start slider code here
-  slider.setOrientation(orientation);
-  slider.setStyleSheet(R"(
+  slider->setOrientation(orientation);
+  slider->setStyleSheet(R"(
     QSlider {
       color: #FF00FF;
       background-color: #FFFFFF;
     }
-    QSlider::groove:horizontal {
-	    border: 1px solid #999999;
-	    height: 8px;
-	    margin: 2px 0;
-	}
-	QSlider::handle:horizontal {
-	    border: 1px solid #5c5c5c;
-	    width: 18px;
-	    margin: -2px 0;
-	    border-radius: 3px;
-	}
   )");
-  
-  hlayout->addWidget(&slider);
+	slider->resize(200, 50);
+  	hlayout->addWidget(&slider);
 }
