@@ -175,11 +175,12 @@ def main():
 
 
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(description='Publishes events from your joystick to control your car.\n' +
+  parser = argparse.ArgumentParser(description='Publishes events from your GUI, joystick to control your car.\n' +
                                                'openpilot must be offroad before starting joystick_control. This tool supports ' +
                                                'a PlayStation 5 DualSense controller on the comma 3X.',
                                    formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-  parser.add_argument('--keyboard', action='store_true', help='Use your keyboard instead of a joystick')
+  parser.add_argument('--keyboard', action='store_true', help='Use your keyboard instead of a keyboard joystick')
+  parser.add_argument('--gui', action='store_true', help='Use your GUI instead of a joystick')
   args = parser.parse_args()
 
   if not Params().get_bool("IsOffroad") and "ZMQ" not in os.environ:
@@ -187,7 +188,9 @@ if __name__ == '__main__':
     exit()
 
   print()
-  if args.keyboard:
+  if args.gui:
+    print('Using GUI for control (slider + throttle inputs).')
+  elif args.keyboard:
     print('Gas/brake control: `W` and `S` keys')
     print('Steering control: `A` and `D` keys')
     print('Buttons')
@@ -197,5 +200,12 @@ if __name__ == '__main__':
     print('Using joystick, make sure to run cereal/messaging/bridge on your device if running over the network!')
     print('If not running on a comma device, the mapping may need to be adjusted.')
 
-  joystick = Keyboard() if args.keyboard else Joystick()
-  joystick_control_thread(joystick)
+  # Controller selection logic
+  if args.gui:
+    # Replace 'your_module' with the module that has these functions
+    from your_module import get_slider_value, get_throttle_value, is_cancel_pressed
+    control = SteeringGUI(get_slider_value, get_throttle_value, is_cancel_pressed)
+    steering_control_thread(control)
+  else:
+    joystick = Keyboard() if args.keyboard else Joystick()
+    joystick_control_thread(joystick)
