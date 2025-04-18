@@ -4,6 +4,7 @@ import argparse
 import threading
 import numpy as np
 from inputs import UnpluggedError, get_gamepad
+from joystick_control import get_slider_value, get_throttle_value, is_cancel_pressed
 
 from cereal import messaging
 from openpilot.common.params import Params
@@ -40,7 +41,7 @@ class Keyboard:
     return True
     
 class SteeringGUI:
-def __init__(self, steer_slider):
+  def __init__(self, steer_slider):
   # Refers to the acceleration and steering inputs
   self.accel_axis = 'GUI_ACCEL'
   self.steer_axis = 'GUI_STEER'
