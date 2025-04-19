@@ -29,8 +29,12 @@ signals:
   void closeCustom();
 };
 
-class speedSlider : public QWidget {
+class steeringSlider : public QWidget {
   Q_OBJECT
 public:
-  explicit speedSlider(QWidget *parent);
+  explicit steeringSlider(QWidget *parent);
+
+private:
+  SliderControl *steering_slider;
+  QLabel *turnAngle;
 };
