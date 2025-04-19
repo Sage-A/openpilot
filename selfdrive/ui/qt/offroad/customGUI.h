@@ -28,3 +28,9 @@ protected:
 signals:
   void closeCustom();
 };
+
+class speedSlider : public QWidget {
+  Q_OBJECT
+public:
+  explicit speedSlider(SettingsWindow *parent);
+};
