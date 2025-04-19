@@ -144,12 +144,7 @@ SliderControl::SliderControl(Qt::Orientation orientation, QWidget *parent) {
   QVBoxLayout *main_layout = new QVBoxLayout(this);
   main_layout->setMargin(0);
 
-  hlayout = new QHBoxLayout;
-  hlayout->setMargin(0);
-
-  main_layout->addLayout(hlayout);
-
   //Start slider code here
   slider.setOrientation(orientation);
-  hlayout->addWidget(&slider);
+  main_layout->addWidget(&slider);
 }
