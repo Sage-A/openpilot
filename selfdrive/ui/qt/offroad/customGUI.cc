@@ -56,6 +56,7 @@ speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
   speed_slider->setMinimum(-100);
   speed_slider->setMaximum(100);
   speed_slider->setValue(0);
+  speed_slider->setTickInterval(10);
   main->addWidget(speed_slider);
 }
 
