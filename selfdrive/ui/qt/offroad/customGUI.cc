@@ -29,6 +29,7 @@ speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
   )");
 
   main->addWidget(title);
+  
   SliderControl *speed_slider = new SliderControl(Qt::Horizontal);
   speed_slider->setStyleSheet(R"(
           QSlider {
@@ -49,6 +50,8 @@ speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
           margin: -24px -12px;
       }
           )");
+
+  speed_slider->setTickPosition(QSlider::TicksBothSides);
   main->addWidget(speed_slider);
 }
 
