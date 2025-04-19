@@ -308,6 +308,8 @@ public:
   inline void setValue(int value) {slider.setValue(value); }
   inline void setTickInterval(int value) { slider.setTickInterval(value); }
 
+signal:
+  void valueChanged(int value);
 private:
   QSlider slider;
 };
