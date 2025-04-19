@@ -30,7 +30,7 @@ steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
   turnAngle->setStyleSheet(R"(
     QLabel {
     font-size: 25px;
-    color: #ccccccc;
+    color: #CCCCCC;
     }
   )");
 
