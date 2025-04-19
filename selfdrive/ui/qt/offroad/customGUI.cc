@@ -19,7 +19,7 @@
 steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
   QVBoxLayout *main = new QVBoxLayout(this);
   QLabel *title = new QLabel("Wheel Control");
-  QLabel *
+  turnAngle = new QLabel("Angle: 0");
   title->setStyleSheet(R"(
     QLabel {
       font-size: 40px;
@@ -27,8 +27,15 @@ steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
       color: #a9a9a9;
     }
   )");
+  turnAngle->setStyleSheet(R"(
+    QLabel {
+    font-size: 25px;
+    color: #ccccccc;
+    }
+  )");
 
   main->addWidget(title);
+  main->addWidget(turnAngle);
   
   steering_slider = new SliderControl(Qt::Horizontal);
   steering_slider->setStyleSheet(R"(
