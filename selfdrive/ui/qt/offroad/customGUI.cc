@@ -22,7 +22,8 @@ speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
 
   title->setStyleSheet(R"(
     QLabel {
-      font-size: 25px;
+      font-size: 40px;
+      font-weight: bold;
       color: #a9a9a9;
     }
   )");
@@ -93,7 +94,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   
   setStyleSheet(R"(
     CustomWindow {
-      background-color: white;
+      background-color: black;
     }
     QStackedWidget, ScrollView {
       background-color: #292929;
