@@ -306,6 +306,7 @@ public:
   inline void setMinimum(int value) { slider.setMinimum(value); }
   inline void setTickStyle(QSlider::TickPosition position) { slider.setTickPosition(position); }
   inline void setValue(int value) {slider.setValue(value); }
+  inline void setTickInterval(int value) { slider.setTickInterval(value); }
 
 private:
   QSlider slider;
