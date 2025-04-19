@@ -18,7 +18,7 @@
 
 speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
   QHBoxLayout *main = new QHBoxLayout(this);
-  QLabel title = QLabel("Speed Control");
+  QLabel *title = new QLabel("Speed Control");
 
   main->addWidget(title);
   SliderControl *speed_slider = new SliderControl(Qt::Horizontal);
