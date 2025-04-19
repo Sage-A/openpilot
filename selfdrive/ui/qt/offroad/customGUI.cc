@@ -17,7 +17,7 @@
 #include "selfdrive/ui/qt/offroad/customGUI.h"
 
 speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
-  QHBoxLayout *main = new QVBoxLayout(this);
+  QVBoxLayout *main = new QVBoxLayout(this);
   QLabel *title = new QLabel("Speed Control");
 
   title->setStyleSheet(R"(
