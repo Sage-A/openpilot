@@ -16,10 +16,10 @@
 #include "selfdrive/ui/qt/offroad/developer_panel.h"
 #include "selfdrive/ui/qt/offroad/customGUI.h"
 
-speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
+steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
   QVBoxLayout *main = new QVBoxLayout(this);
-  QLabel *title = new QLabel("Speed Control");
-
+  QLabel *title = new QLabel("Wheel Control");
+  QLabel *
   title->setStyleSheet(R"(
     QLabel {
       font-size: 40px;
@@ -30,8 +30,8 @@ speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
 
   main->addWidget(title);
   
-  SliderControl *speed_slider = new SliderControl(Qt::Horizontal);
-  speed_slider->setStyleSheet(R"(
+  steering_slider = new SliderControl(Qt::Horizontal);
+  steering_slider->setStyleSheet(R"(
           QSlider {
           min-height: 100px;
           max-height: 100px;
@@ -52,12 +52,12 @@ speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
       }
           )");
 
-  speed_slider->setTickStyle(QSlider::TicksBothSides);
-  speed_slider->setMinimum(-100);
-  speed_slider->setMaximum(100);
-  speed_slider->setValue(0);
-  speed_slider->setTickInterval(10);
-  main->addWidget(speed_slider);
+  steering_slider->setTickStyle(QSlider::TicksBothSides);
+  steering_slider->setMinimum(-100);
+  steering_slider->setMaximum(100);
+  steering_slider->setValue(0);
+  steering_slider->setTickInterval(10);
+  main->addWidget(steering_slider);
 }
 
 void CustomWindow::showEvent(QShowEvent *event) {
@@ -93,7 +93,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
 
   sidebar->addWidget(close_btn);
   
-  speedSlider *ss = new speedSlider(this);
+  steeringSlider *ss = new steeringSlider(this);
   primary->addWidget(ss);
 
   main_layout->addLayout(sidebar);
