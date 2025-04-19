@@ -16,6 +16,35 @@
 #include "selfdrive/ui/qt/offroad/developer_panel.h"
 #include "selfdrive/ui/qt/offroad/customGUI.h"
 
+speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
+  QHBoxLayout *main = new QHBoxLayout(this);
+  QLabel title = new QLabel(Qtext("Speed Control");
+
+  main->addWidget(title);
+  SliderControl speed_slider = new SliderControl(Qt::Horizontal);
+  speed_slider.setStyleSheet(R"(
+          QSlider {
+          min-height: 100px;
+          max-height: 100px;
+          background: #5F4141;
+      }
+      QSlider::groove:horizontal {
+          border: 1px solid #262626;
+          height: 25px;
+          background: #FF0000;
+          margin: 0 12px;
+      }
+      QSlider::handle:horizontal {
+          background: #22B14C;
+          border: 5px solid #B5E61D;
+          width: 30px;
+          height: 150px;
+          margin: -24px -12px;
+      }
+          )");
+  main->addWidget(speed_slider);
+}
+
 void CustomWindow::showEvent(QShowEvent *event) {
   setCurrentPanel(0);
 }
@@ -69,7 +98,9 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   QVBoxLayout *speed_bar = new QVBoxLayout();
 
   sidebar->addWidget(close_btn);
-  primary->addWidget(speed_slider);
+
+  speedSlider ss = new speedSlider(this);
+  primary->addWidget(ss);
 
   main_layout->addLayout(sidebar);
   main_layout->addLayout(primary);
