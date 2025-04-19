@@ -21,8 +21,8 @@ speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
   QLabel title = new QLabel(QString("Speed Control");
 
   main->addWidget(title);
-  SliderControl speed_slider = new SliderControl(Qt::Horizontal);
-  speed_slider.setStyleSheet(R"(
+  SliderControl *speed_slider = new SliderControl(Qt::Horizontal);
+  speed_slider->setStyleSheet(R"(
           QSlider {
           min-height: 100px;
           max-height: 100px;
