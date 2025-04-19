@@ -51,7 +51,7 @@ speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
       }
           )");
 
-  speed_slider->setTickPosition(QSlider::TicksBothSides);
+  speed_slider->setTickStyle(QSlider::TicksBothSides);
   main->addWidget(speed_slider);
 }
 
