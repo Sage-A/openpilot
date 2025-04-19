@@ -304,6 +304,7 @@ public:
   SliderControl(Qt::Orientation orientation, QWidget *parent = nullptr);
   inline void setMaximum(int value) {slider.setMaximum(value); }
   inline void setMinimum(int value) { slider.setMinimum(value); }
+  inline void setTickStyle(QSlider::TickPosition position) { slider.setTickPosition(position); }
 
 private:
   QSlider slider;
