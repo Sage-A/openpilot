@@ -32,5 +32,5 @@ signals:
 class speedSlider : public QWidget {
   Q_OBJECT
 public:
-  explicit speedSlider(SettingsWindow *parent);
+  explicit speedSlider(QWidget *parent);
 };
