@@ -306,6 +306,5 @@ public:
   inline void setMinimum(int value) { slider.setMinimum(value); }
 
 private:
-  QHBoxLayout *hlayout;
   QSlider slider;
 };
