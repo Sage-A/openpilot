@@ -146,5 +146,6 @@ SliderControl::SliderControl(Qt::Orientation orientation, QWidget *parent) {
 
   //Start slider code here
   slider.setOrientation(orientation);
+  QObject::connect(&slider, QAbstractSlider::valueChanged, this, &SliderControl::valueChanged);
   main_layout->addWidget(&slider);
 }
