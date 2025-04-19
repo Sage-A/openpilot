@@ -17,8 +17,15 @@
 #include "selfdrive/ui/qt/offroad/customGUI.h"
 
 speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
-  QHBoxLayout *main = new QHBoxLayout(this);
+  QHBoxLayout *main = new QVBoxLayout(this);
   QLabel *title = new QLabel("Speed Control");
+
+  title->setStyleSheet(R"(
+    QLabel {
+      font-size: 25px;
+      color: #a9a9a9;
+    }
+  )");
 
   main->addWidget(title);
   SliderControl *speed_slider = new SliderControl(Qt::Horizontal);
@@ -26,7 +33,7 @@ speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
           QSlider {
           min-height: 100px;
           max-height: 100px;
-          background: #5F4141;
+          background: #FFFFFF;
       }
       QSlider::groove:horizontal {
           border: 1px solid #262626;
@@ -35,8 +42,7 @@ speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
           margin: 0 12px;
       }
       QSlider::handle:horizontal {
-          background: #22B14C;
-          border: 5px solid #B5E61D;
+          background: #0000ff;
           width: 30px;
           height: 150px;
           margin: -24px -12px;
@@ -68,26 +74,6 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
       background-color: #3B3B3B;
     }
   )");
-    speed_slider->setStyleSheet(R"(
-              QSlider {
-          min-height: 100px;
-          max-height: 100px;
-          background: #5F4141;
-      }
-      QSlider::groove:horizontal {
-          border: 1px solid #262626;
-          height: 25px;
-          background: #FF0000;
-          margin: 0 12px;
-      }
-      QSlider::handle:horizontal {
-          background: #22B14C;
-          border: 5px solid #B5E61D;
-          width: 30px;
-          height: 150px;
-          margin: -24px -12px;
-      }
-          )");
   close_btn->setFixedSize(200, 200);
   QObject::connect(close_btn, &QPushButton::clicked, this, &CustomWindow::closeCustom);
 
@@ -98,7 +84,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   QVBoxLayout *speed_bar = new QVBoxLayout();
 
   sidebar->addWidget(close_btn);
-
+  
   speedSlider *ss = new speedSlider(this);
   primary->addWidget(ss);
 
