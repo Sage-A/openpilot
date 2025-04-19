@@ -99,7 +99,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
 
   sidebar->addWidget(close_btn);
 
-  speedSlider ss = new speedSlider(this);
+  speedSlider *ss = new speedSlider(this);
   primary->addWidget(ss);
 
   main_layout->addLayout(sidebar);
