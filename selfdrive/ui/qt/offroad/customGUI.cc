@@ -36,6 +36,7 @@ speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
           min-height: 100px;
           max-height: 100px;
           background: #FFFFFF;
+          color: black;
       }
       QSlider::groove:horizontal {
           border: 1px solid #262626;
@@ -52,6 +53,9 @@ speedSlider::speedSlider(QWidget* parent) : QWidget(parent) {
           )");
 
   speed_slider->setTickStyle(QSlider::TicksBothSides);
+  speed_slider->setMinimum(-100);
+  speed_slider->setMaximum(100);
+  speed_slider->setValue(0);
   main->addWidget(speed_slider);
 }
 
