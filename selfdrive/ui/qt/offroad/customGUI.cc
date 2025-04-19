@@ -108,7 +108,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   
   setStyleSheet(R"(
     CustomWindow {
-      background-color: black;
+      background-color: white;
     }
     QStackedWidget, ScrollView {
       background-color: #292929;
