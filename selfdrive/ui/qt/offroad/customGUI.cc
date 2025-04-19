@@ -25,7 +25,6 @@ void CustomWindow::setCurrentPanel(int index, const QString &param) {
 }
 
 CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
-  // setup two main layouts
   QPushButton *close_btn = new QPushButton(tr("×"));
   SliderControl *speed_slider = new SliderControl(Qt::Horizontal);
   close_btn->setStyleSheet(R"(
@@ -65,9 +64,17 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
 
   // main settings layout, sidebar + main panel
   QHBoxLayout *main_layout = new QHBoxLayout(this);
-  main_layout->addWidget(close_btn);
-  main_layout->addWidget(speed_slider);
+  QVBoxLayout *sidebar = new QVBoxLayout();
+  QVBoxLayout *primary = new QVBoxLayout();
+  QVBoxLayout *speed_bar = new QVBoxLayout();
 
+  sidebar->addWidget(close_btn);
+  primary->addWidget(speed_slider);
+
+  main_layout->addLayout(sidebar);
+  main_layout->addLayout(primary);
+  main_layout->addLayout(speed_bar);
+  
   setStyleSheet(R"(
     CustomWindow {
       background-color: black;
