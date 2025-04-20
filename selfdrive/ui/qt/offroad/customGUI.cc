@@ -72,21 +72,21 @@ steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
 }
 
 accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
+  QVBoxLayout *main = new QVBoxLayout(this);
   QLabel *title2 = new QLabel("Acceleration");
   title2->setStyleSheet(R"(
     QLabel {
      font-size: 40px;
      font-weight: bold;
-     color: a9a9a9;
+     color: #a9a9a9;
      }
     )");
+  
   QPushButton *incBtn = new QPushButton(tr("^"));
   incBtn->setFixedSize(200, 350);
   
   QPushButton *decBtn = new QPushButton(tr("V"));
   decBtn->setFixedSize(200, 350);
-
-  QVBoxLayout *main = new QVBoxLayout(this);
   
   main->addWidget(title2);
   main->addWidget(incBtn);
@@ -139,13 +139,13 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   // main settings layout, sidebar + main panel
   QHBoxLayout *main_layout = new QHBoxLayout(this);
   QVBoxLayout *sidebar = new QVBoxLayout();
-  //QVBoxLayout *primary = new QVBoxLayout();
+  QVBoxLayout *primary = new QVBoxLayout();
   QVBoxLayout *speed_bar = new QVBoxLayout();
 
   sidebar->addWidget(close_btn);
   
-  //steeringSlider *ss = new steeringSlider(this);
-  //primary->addWidget(ss);
+  steeringSlider *ss = new steeringSlider(this);
+  primary->addWidget(ss);
 
   accelWidget *accW = new accelWidget(this);
   speedWidget *spW = new speedWidget(this);
@@ -153,7 +153,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   speed_bar->addWidget(spW);
 
   main_layout->addLayout(sidebar);
-  //main_layout->addLayout(primary);
+  main_layout->addLayout(primary);
   main_layout->addLayout(speed_bar);
   
   setStyleSheet(R"(
