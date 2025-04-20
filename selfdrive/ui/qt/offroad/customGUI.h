@@ -23,6 +23,7 @@ class CustomWindow : public QFrame {
 public:
   explicit CustomWindow(QWidget *parent = 0);
   void setCurrentPanel(int index, const QString &param = "");
+  void update();
 
 protected:
   void showEvent(QShowEvent *event) override;
@@ -51,10 +52,12 @@ class speedWidget : public QWidget {
   Q_OBJECT
 public:
   explicit speedWidget(QWidget *parent);
+  void update();
 };
 
 class lightWidget : public QWidget {
   Q_OBJECT
 public:
   explicit lightWidget(QWidget *parent);
+  void update();
 };
