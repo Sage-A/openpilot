@@ -79,8 +79,8 @@ accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
 
   QVBoxLayout *main = new QVBoxLayout(this);
 
-  incBtn->setFixedSize(400, 300);
-  decBtn->setFixedSize(400, 300);
+  incBtn->setFixedSize(250, 400);
+  decBtn->setFixedSize(250, 400);
   
   main->addWidget(title);
   main->addWidget(incBtn);
@@ -90,7 +90,7 @@ accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
     QPushButton {
       font-size: 140px;
       padding-bottom: 20px;
-      background-color: #292929;
+      background-color: #DDDDDD;
       font-weight: 400;
     }
     QPushButton:pressed {
