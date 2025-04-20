@@ -149,8 +149,8 @@ lightWidget::lightWidget(QWidget* parent) : QWidget(parent) {
   QLabel *leftBlinker = new QLabel("Left Blinker");
   QLabel *rightBlinker = new QLabel("Right Blinker");
   
-  QPixmap *indicator = new QPixmap("../assets/icons/indicator_on");
-  QPixmap *ind2 = new QPixmap("../assets/icons/indicator_off");
+  QPixmap indicator = QPixmap("../assets/icons/indicator_on");
+  QPixmap ind2 = QPixmap("../assets/icons/indicator_off");
   QLabel *leftInd = new QLabel();
   QLabel *rightInd = new QLabel();
 
