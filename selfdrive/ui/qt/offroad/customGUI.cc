@@ -74,13 +74,14 @@ steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
 
 accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
   QLabel *title = new QLabel("Acceleration");
-  QPushButton *incBtn = new QPushButton(QPixmap("../assets/images/arrow.png"), tr("Up"));
+  QPushButton *incBtn = new QPushButton();
+  incBtn->setFixedSize(250, 400);
+  QPixmap("../assets/images/arrow.png").setIconSize(incBtn.getSize());
+  
   QPushButton *decBtn = new QPushButton(tr("Down"));
+  decBtn->setFixedSize(250, 400);
 
   QVBoxLayout *main = new QVBoxLayout(this);
-
-  incBtn->setFixedSize(250, 400);
-  decBtn->setFixedSize(250, 400);
   
   main->addWidget(title);
   main->addWidget(incBtn);
