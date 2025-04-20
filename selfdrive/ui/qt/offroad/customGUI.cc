@@ -151,13 +151,16 @@ lightWidget::lightWidget(QWidget* parent) : QWidget(parent) {
   
   QPixmap ind_on = QPixmap("../assets/icons/indicator_on");
   QPixmap ind_off = QPixmap("../assets/icons/indicator_off");
+
+  iconMap[0] = ind_on;
+  iconMap[1] = ind_off;
   QLabel *leftInd = new QLabel();
   leftInd->setScaledContents(true);
   QLabel *rightInd = new QLabel();
   rightInd->setScaledContents(true);
   
-  leftInd->setPixmap(ind_on);
-  rightInd->setPixmap(ind_off);
+  leftInd->setPixmap(iconMap[0]);
+  rightInd->setPixmap(iconMap[1]);
 
   leftInd->setStyleSheet(R"(
     QLabel {
@@ -220,13 +223,13 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
 
   sidebar->addWidget(close_btn);
   
-  steeringSlider *ss = new steeringSlider(this);
-  lightWidget *lW = new lightWidget(this);
+  ss = new steeringSlider(this);
+  lW = new lightWidget(this);
   primary->addWidget(lW);
   primary->addWidget(ss);
 
-  accelWidget *accW = new accelWidget(this);
-  speedWidget *spW = new speedWidget(this);
+  accW = new accelWidget(this);
+  spW = new speedWidget(this);
   speed_bar->addWidget(spW);
   speed_bar->addWidget(accW);
 
@@ -239,4 +242,19 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
       background-color: black;
     }
   )");
+}
+
+lightWidget::update(){
+  leftInd->setPixmap(iconMap[0]);
+  rightInd->setPixmap(iconMap[1]);
+}
+
+speedWidget::update(){
+  //Fetch current speed from car
+  indicator->setText("1");
+}
+
+CustomWindow::update(){
+  lW.update();
+  spW.update();
 }
