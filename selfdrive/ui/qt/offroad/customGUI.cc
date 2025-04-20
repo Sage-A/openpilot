@@ -144,6 +144,25 @@ speedWidget::speedWidget(QWidget* parent) : QWidget(parent) {
   main->setAlignment(Qt::AlignCenter);
 }
 
+lightWidget::lightWidget(QWidget* parent) : QWidget(parent) {
+  QVBoxLayout *main = new QVBoxLayout(this);
+  QLabel *leftBlinker = new QLabel("Left Blinker");
+  QLabel *rightBlinker = new QLabel("Right Blinker");
+  
+  QPixmap *indicator = new QPixmap("../assets/icons/indicator_on");
+  QPixmap *ind2 = new QPixmap("../assets/icons/indicator_off");
+  QLabel *leftInd = new QLabel();
+  QLabel *rightInd = new QLabel();
+
+  leftInd->setPixmap(indicator);
+  rightInd->setPixmap(ind2);
+  
+  main->addWidget(leftBlinker);
+  main->addWidget(leftInd);
+  main->addWidget(rightBlinker);
+  main->addWidget(rightInd);
+}
+
 void CustomWindow::showEvent(QShowEvent *event) {
   setCurrentPanel(0);
 }
@@ -178,6 +197,8 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   sidebar->addWidget(close_btn);
   
   steeringSlider *ss = new steeringSlider(this);
+  lightWidget *lW = new lightWidget(this);
+  primary->addWidget(lW);
   primary->addWidget(ss);
 
   accelWidget *accW = new accelWidget(this);
