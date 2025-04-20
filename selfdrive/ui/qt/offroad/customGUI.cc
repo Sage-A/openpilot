@@ -111,8 +111,36 @@ accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
 speedWidget::speedWidget(QWidget* parent) : QWidget(parent) {
   QVBoxLayout *main = new QVBoxLayout(this);
   QLabel *title = new QLabel("Speed");
+  title->setStyleSheet(R"(
+    QLabel {
+     font-size: 40px;
+     font-weight: bold;
+     color: #a9a9a9;
+     }
+    )");
+  
   main->addWidget(title);
 
+  QLabel *indicator = new QLabel("0");
+  QLabel *unit = new QLabel(" mph");
+
+  indicator->setStyleSheet(R"(
+    QLabel {
+     font-size: 30px;
+     color: #FFFFFF;
+     }
+    )");
+  unit->setStyleSheet(R"(
+    QLabel {
+     font-size: 30px;
+     color: #FFFFFF;
+     }
+    )");
+  QHBoxLayout *internal = new QHBoxLayout();
+  internal->addWidget(indicator);
+  internal->addWidget(unit);
+
+  main->addLayout(internal);
   main->setAlignment(Qt::AlignCenter);
 }
 
