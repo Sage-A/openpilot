@@ -75,10 +75,10 @@ steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
 accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
   QLabel *title = new QLabel("Acceleration");
   QPushButton *incBtn = new QPushButton(tr("^"));
-  incBtn->setFixedSize(250, 400);
+  incBtn->setFixedSize(200, 350);
   
   QPushButton *decBtn = new QPushButton(tr("V"));
-  decBtn->setFixedSize(250, 400);
+  decBtn->setFixedSize(200, 350);
 
   QVBoxLayout *main = new QVBoxLayout(this);
   
@@ -96,6 +96,11 @@ accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
     QPushButton:pressed {
       background-color: #3B3B3B;
     }
+    QLabel {
+     font-size: 40px;
+     font-weight: bold;
+     color: a9a9a9;
+     }
   )");
 }
 
