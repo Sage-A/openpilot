@@ -121,8 +121,8 @@ speedWidget::speedWidget(QWidget* parent) : QWidget(parent) {
   
   main->addWidget(title);
 
-  QLabel *indicator = new QLabel("0");
-  QLabel *unit = new QLabel(" mph");
+  indicator = new QLabel("0");
+  unit = new QLabel(" mph");
 
   indicator->setStyleSheet(R"(
     QLabel {
@@ -154,9 +154,9 @@ lightWidget::lightWidget(QWidget* parent) : QWidget(parent) {
 
   iconMap[0] = ind_on;
   iconMap[1] = ind_off;
-  QLabel *leftInd = new QLabel();
+  leftInd = new QLabel();
   leftInd->setScaledContents(true);
-  QLabel *rightInd = new QLabel();
+  rightInd = new QLabel();
   rightInd->setScaledContents(true);
   
   leftInd->setPixmap(iconMap[0]);
