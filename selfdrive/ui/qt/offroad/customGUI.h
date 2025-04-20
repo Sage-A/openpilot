@@ -30,6 +30,12 @@ protected:
 
 signals:
   void closeCustom();
+
+private:
+  steeringSlider *ss;
+  lightWidget *lW;
+  accelWidget *accW;
+  speedWidget *spW;
 };
 
 class steeringSlider : public QWidget {
