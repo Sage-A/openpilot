@@ -79,8 +79,8 @@ accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
 
   QVBoxLayout *main = new QVBoxLayout(this);
 
-  incBtn->setFixedSize(200, 200);
-  decBtn->setFixedSize(200, 200);
+  incBtn->setFixedSize(400, 300);
+  decBtn->setFixedSize(400, 300);
   
   main->addWidget(title);
   main->addWidget(incBtn);
