@@ -36,5 +36,5 @@ public:
 
 private:
   SliderControl *steering_slider;
-  QLabel *turnAngle;
+  QSpinBox *turnAngle;
 };
