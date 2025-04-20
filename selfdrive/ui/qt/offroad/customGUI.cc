@@ -244,17 +244,17 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   )");
 }
 
-lightWidget::update(){
+void lightWidget::update(){
   leftInd->setPixmap(iconMap[0]);
   rightInd->setPixmap(iconMap[1]);
 }
 
-speedWidget::update(){
+void speedWidget::update(){
   //Fetch current speed from car
   indicator->setText("1");
 }
 
-CustomWindow::update(){
-  lW.update();
-  spW.update();
+void CustomWindow::update(){
+  lW->update();
+  spW->update();
 }
