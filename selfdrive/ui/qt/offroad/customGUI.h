@@ -39,3 +39,10 @@ private:
   SliderControl *steering_slider;
   QSpinBox *turnAngle;
 };
+
+class accelWidget : public QWidget {
+  Q_OBJECT
+public:
+  explicit accelWidget(QWidget *parent);
+};
+
