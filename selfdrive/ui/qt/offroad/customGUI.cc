@@ -77,7 +77,7 @@ accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
   QPushButton *incBtn = new QPushButton();
   incBtn->setFixedSize(250, 400);
   incBtn->setIconSize(incBtn->size());
-  incBtn->setIcon(QPixmap("../assets/images/arrow.png"));
+  incBtn->setIcon(QPixmap("../assets/images/arrow.svg"));
   
   QPushButton *decBtn = new QPushButton(tr("Down"));
   decBtn->setFixedSize(250, 400);
