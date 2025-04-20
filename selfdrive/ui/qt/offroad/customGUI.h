@@ -59,6 +59,10 @@ class speedWidget : public QWidget {
 public:
   explicit speedWidget(QWidget *parent);
   void update();
+
+private:
+  QLabel *indicator;
+  QLabel *unit;
 };
 
 class lightWidget : public QWidget {
