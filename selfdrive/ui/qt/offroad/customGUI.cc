@@ -158,7 +158,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
     QPushButton {
       font-size: 140px;
       padding-bottom: 20px;
-      border-radius: 100px;
+      border-radius: 75px;
       background-color: #292929;
       font-weight: 400;
     }
@@ -166,7 +166,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
       background-color: #3B3B3B;
     }
   )");
-  close_btn->setFixedSize(200, 200);
+  close_btn->setFixedSize(150, 150);
   QObject::connect(close_btn, &QPushButton::clicked, this, &CustomWindow::closeCustom);
 
   // main settings layout, sidebar + main panel
@@ -182,8 +182,8 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
 
   accelWidget *accW = new accelWidget(this);
   speedWidget *spW = new speedWidget(this);
-  speed_bar->addWidget(accW);
   speed_bar->addWidget(spW);
+  speed_bar->addWidget(accW);
 
   main_layout->addLayout(sidebar);
   main_layout->addLayout(primary);
