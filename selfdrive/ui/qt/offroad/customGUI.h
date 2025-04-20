@@ -9,6 +9,7 @@
 #include <QPushButton>
 #include <QStackedWidget>
 #include <QWidget>
+#include <QSpinBox>
 
 #include "selfdrive/ui/ui.h"
 #include "selfdrive/ui/qt/util.h"
