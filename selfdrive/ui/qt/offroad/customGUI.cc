@@ -72,6 +72,19 @@ steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
   main->addWidget(steering_slider);
 }
 
+accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
+  QLabel *title = new QLabel("Acceleration");
+  QPushButton *incBtn = new QPushButton(tr("Up"));
+  QPushButton *decBtn = new QPushButton(tr("Down"));
+
+  QVBoxLayout *main = new QVBoxLayout(this);
+
+
+  main->addWidget(title);
+  main->addWidget(incBtn);
+  main->addWidget(decBtn);
+}
+
 void CustomWindow::showEvent(QShowEvent *event) {
   setCurrentPanel(0);
 }
@@ -107,6 +120,9 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   
   steeringSlider *ss = new steeringSlider(this);
   primary->addWidget(ss);
+
+  accelWidget *accW = new accelWidget(this);
+  speed_bar->addWidget(accW);
 
   main_layout->addLayout(sidebar);
   main_layout->addLayout(primary);
