@@ -31,6 +31,7 @@ steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
 
   
   main->addWidget(title);
+  main->addStretch();
   main->addWidget(turnAngle);
   
   steering_slider = new SliderControl(Qt::Horizontal);
