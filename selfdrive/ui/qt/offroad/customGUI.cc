@@ -79,7 +79,14 @@ accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
 
   QVBoxLayout *main = new QVBoxLayout(this);
 
-  main->setStyleSheet(R"(
+  incBtn->setFixedSize(200, 200);
+  decBtn->setFixedSize(200, 200);
+  
+  main->addWidget(title);
+  main->addWidget(incBtn);
+  main->addWidget(decBtn);
+
+   setStyleSheet(R"(
     QPushButton {
       font-size: 140px;
       padding-bottom: 20px;
@@ -90,12 +97,6 @@ accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
       background-color: #3B3B3B;
     }
   )");
-  incBtn->setFixedSize(200, 200);
-  decBtn->setFixedSize(200, 200);
-  
-  main->addWidget(title);
-  main->addWidget(incBtn);
-  main->addWidget(decBtn);
 }
 
 void CustomWindow::showEvent(QShowEvent *event) {
