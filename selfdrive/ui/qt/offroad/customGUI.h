@@ -17,27 +17,6 @@
 #include "selfdrive/ui/qt/widgets/controls.h"
 
 // ********** custom window + top-level panels **********
-class CustomWindow : public QFrame {
-  Q_OBJECT
-
-public:
-  explicit CustomWindow(QWidget *parent = 0);
-  void setCurrentPanel(int index, const QString &param = "");
-  void update();
-
-protected:
-  void showEvent(QShowEvent *event) override;
-
-signals:
-  void closeCustom();
-
-private:
-  steeringSlider *ss;
-  lightWidget *lW;
-  accelWidget *accW;
-  speedWidget *spW;
-};
-
 class steeringSlider : public QWidget {
   Q_OBJECT
 public:
@@ -75,4 +54,25 @@ private:
   QPixmap iconMap[2];
   QLabel *leftInd;
   QLabel *rightInd;
+};
+
+class CustomWindow : public QFrame {
+  Q_OBJECT
+
+public:
+  explicit CustomWindow(QWidget *parent = 0);
+  void setCurrentPanel(int index, const QString &param = "");
+  void update();
+
+protected:
+  void showEvent(QShowEvent *event) override;
+
+signals:
+  void closeCustom();
+
+private:
+  steeringSlider *ss;
+  lightWidget *lW;
+  accelWidget *accW;
+  speedWidget *spW;
 };
