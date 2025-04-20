@@ -56,9 +56,15 @@ steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
       }
           )");
 
+  turnAngle->setStyleSheet(R"(
+          QSpinBox {
+          font-size: 25px;
+      })");
+
   steering_slider->setTickStyle(QSlider::TicksBothSides);
   steering_slider->setMinimum(-100);
   steering_slider->setMaximum(100);
+  turnAngle->setRange(-100, 100);
   steering_slider->setValue(0);
   steering_slider->setTickInterval(10);
   main->addWidget(steering_slider);
