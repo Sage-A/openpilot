@@ -69,6 +69,7 @@ steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
   steering_slider->setValue(0);
   steering_slider->setTickInterval(10);
   main->addWidget(steering_slider);
+  main->setAlignment(Qt::AlignCenter);
 }
 
 accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
@@ -103,12 +104,16 @@ accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
       background-color: #3B3B3B;
     }
   )");
+
+  main->setAlignment(Qt::AlignCenter);
 }
 
 speedWidget::speedWidget(QWidget* parent) : QWidget(parent) {
   QVBoxLayout *main = new QVBoxLayout(this);
   QLabel *title = new QLabel("Speed");
   main->addWidget(title);
+
+  main->setAlignment(Qt::AlignCenter);
 }
 
 void CustomWindow::showEvent(QShowEvent *event) {
