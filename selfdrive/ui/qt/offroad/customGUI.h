@@ -10,6 +10,7 @@
 #include <QStackedWidget>
 #include <QWidget>
 #include <QSpinBox>
+#include <QPixmap>
 
 #include "selfdrive/ui/ui.h"
 #include "selfdrive/ui/qt/util.h"
