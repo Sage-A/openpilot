@@ -52,3 +52,9 @@ class speedWidget : public QWidget {
 public:
   explicit speedWidget(QWidget *parent);
 };
+
+class lightWidget : public QWidget {
+  Q_OBJECT
+public:
+  explicit lightWidget(QWidget *parent);
+};
