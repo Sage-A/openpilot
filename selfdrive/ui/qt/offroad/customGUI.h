@@ -70,4 +70,9 @@ class lightWidget : public QWidget {
 public:
   explicit lightWidget(QWidget *parent);
   void update();
+
+private:
+  QPixmap iconMap[2];
+  QLabel *leftInd;
+  QLabel *rightInd;
 };
