@@ -163,18 +163,28 @@ lightWidget::lightWidget(QWidget* parent) : QWidget(parent) {
     QLabel {
       max-height: 50px;
       max-width: 50px;
+      min-height: 50px;
+      min-width: 50px;
     }
     )");
   rightInd->setStyleSheet(R"(
     QLabel {
       max-height: 50px;
       max-width: 50px;
+      min-height: 50px;
+      min-width: 50px;
     }
     )");
   main->addWidget(leftBlinker);
   main->addWidget(leftInd);
   main->addWidget(rightBlinker);
   main->addWidget(rightInd);
+  setStyleSheet(R"(
+    QLabel {
+    color: #BBBBBB;
+    font-size: 30px;
+    }
+    )");
 }
 
 void CustomWindow::showEvent(QShowEvent *event) {
