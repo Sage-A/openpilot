@@ -149,14 +149,28 @@ lightWidget::lightWidget(QWidget* parent) : QWidget(parent) {
   QLabel *leftBlinker = new QLabel("Left Blinker");
   QLabel *rightBlinker = new QLabel("Right Blinker");
   
-  QPixmap indicator = QPixmap("../assets/icons/indicator_on");
-  QPixmap ind2 = QPixmap("../assets/icons/indicator_off");
+  QPixmap ind_on = QPixmap("../assets/icons/indicator_on");
+  QPixmap ind_off = QPixmap("../assets/icons/indicator_off");
   QLabel *leftInd = new QLabel();
+  leftInd->setScaledContents(true);
   QLabel *rightInd = new QLabel();
-
-  leftInd->setPixmap(indicator);
-  rightInd->setPixmap(ind2);
+  rightInd->setScaledContents(true);
   
+  leftInd->setPixmap(ind_on);
+  rightInd->setPixmap(ind_off);
+
+  leftInd->setStyleSheet(R"(
+    QLabel {
+      max-height: 50px;
+      max-width: 50px;
+    }
+    )");
+  rightInd->setStyleSheet(R"(
+    QLabel {
+      max-height: 50px;
+      max-width: 50px;
+    }
+    )");
   main->addWidget(leftBlinker);
   main->addWidget(leftInd);
   main->addWidget(rightBlinker);
