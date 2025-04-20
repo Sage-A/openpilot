@@ -74,7 +74,7 @@ steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
 
 accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
   QLabel *title = new QLabel("Acceleration");
-  QPushButton *incBtn = new QPushButton(QPixmap("../assets/images/arrow.png"));
+  QPushButton *incBtn = new QPushButton(QPixmap("../assets/images/arrow.png"), tr("Up"));
   QPushButton *decBtn = new QPushButton(tr("Down"));
 
   QVBoxLayout *main = new QVBoxLayout(this);
