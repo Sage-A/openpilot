@@ -47,3 +47,8 @@ public:
   explicit accelWidget(QWidget *parent);
 };
 
+class speedWidget : public QWidget {
+  Q_OBJECT
+public:
+  explicit speedWidget(QWidget *parent);
+};
