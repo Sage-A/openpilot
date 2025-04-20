@@ -105,6 +105,12 @@ accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
   )");
 }
 
+speedWidget::speedWidget(QWidget* parent) : QWidget(parent) {
+  QVBoxLayout *main = new QVBoxLayout(this);
+  QLabel *title = new QLabel("Speed");
+  main->addWidget(title);
+}
+
 void CustomWindow::showEvent(QShowEvent *event) {
   setCurrentPanel(0);
 }
@@ -142,7 +148,9 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   primary->addWidget(ss);
 
   accelWidget *accW = new accelWidget(this);
+  speedWidget *spW = new speedWidget(this);
   speed_bar->addWidget(accW);
+  speed_bar->addWidget(spW);
 
   main_layout->addLayout(sidebar);
   main_layout->addLayout(primary);
@@ -151,10 +159,6 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   setStyleSheet(R"(
     CustomWindow {
       background-color: black;
-    }
-    QStackedWidget, ScrollView {
-      background-color: #292929;
-      border-radius: 30px;
     }
   )");
 }
