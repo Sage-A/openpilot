@@ -255,6 +255,9 @@ void speedWidget::update(){
 }
 
 void CustomWindow::update(){
+  //UIState *s = uiState();
+  //SubMaster &sm = *(s->sm);
+  //float v_ego = sm["carState"].getCarState().getVEgo();
   lW->update();
   spW->update();
 }
