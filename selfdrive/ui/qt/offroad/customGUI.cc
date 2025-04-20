@@ -31,7 +31,6 @@ steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
 
   
   main->addWidget(title);
-  main->addStretch();
   main->addWidget(turnAngle);
   
   steering_slider = new SliderControl(Qt::Horizontal);
@@ -73,8 +72,8 @@ steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
 }
 
 accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
-  QLabel *title = new QLabel("Acceleration");
-  title->setStyleSheet(R"(
+  QLabel *title2 = new QLabel("Acceleration");
+  title2->setStyleSheet(R"(
     QLabel {
      font-size: 40px;
      font-weight: bold;
@@ -89,7 +88,7 @@ accelWidget::accelWidget(QWidget* parent) : QWidget(parent) {
 
   QVBoxLayout *main = new QVBoxLayout(this);
   
-  main->addWidget(title);
+  main->addWidget(title2);
   main->addWidget(incBtn);
   main->addWidget(decBtn);
 
