@@ -61,6 +61,7 @@ steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
           font-size: 25px;
       })");
 
+  turnAngle->setReadOnly(true);
   steering_slider->setTickStyle(QSlider::TicksBothSides);
   steering_slider->setMinimum(-100);
   steering_slider->setMaximum(100);
