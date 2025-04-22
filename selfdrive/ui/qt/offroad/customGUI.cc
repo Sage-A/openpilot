@@ -228,7 +228,7 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 void StatusWidget::update(const SubMaster &sm) {
   fuel_value->setText(QString::number(sm["carState"].getCarState().getFuelGauge()));
   door_value->setText(QString::number(sm["carState"].getCarState().getDoorOpen()));
-  gear_value->setText(QString(sm["carState"].getCarState().getGearShifter().getValue()));
+  gear_value->setText(QString(sm["carState"].getCarState().gearShifter));
 }
 
 void CustomWindow::showEvent(QShowEvent *event) {
