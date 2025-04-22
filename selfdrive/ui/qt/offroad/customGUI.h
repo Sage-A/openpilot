@@ -37,7 +37,7 @@ class speedWidget : public QWidget {
   Q_OBJECT
 public:
   explicit speedWidget(QWidget *parent);
-  void update();
+  void update(const SubMaster &sm);
 
 private:
   QLabel *indicator;
