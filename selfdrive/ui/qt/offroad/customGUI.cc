@@ -250,7 +250,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
 void CustomWindow::updateState(const UIState &s) {
   const SubMaster &sm = *(s.sm);
   lW->update(sm);
-  spW->update();
+  spW->update(sm);
 }
 
 void lightWidget::update(const SubMaster &sm){
@@ -269,7 +269,7 @@ void lightWidget::update(const SubMaster &sm){
   }
 }
 
-void speedWidget::update(){
+void speedWidget::update(const SubMaster &sm){
   //Fetch current speed from car
-  indicator->setText("1");
+  indicator->setText(sm["carState"].getCarState().getVEgoCluster());
 }
