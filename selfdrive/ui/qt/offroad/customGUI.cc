@@ -152,8 +152,8 @@ lightWidget::lightWidget(QWidget* parent) : QWidget(parent) {
   QPixmap ind_on = QPixmap("../assets/icons/indicator_on");
   QPixmap ind_off = QPixmap("../assets/icons/indicator_off");
 
-  iconMap[0] = ind_on;
-  iconMap[1] = ind_off;
+  iconMap[0] = ind_off;
+  iconMap[1] = ind_on;
   leftInd = new QLabel();
   leftInd->setScaledContents(true);
   rightInd = new QLabel();
@@ -199,6 +199,9 @@ void CustomWindow::setCurrentPanel(int index, const QString &param) {
 }
 
 CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
+    s = uiState();
+    &sm = *(s->sm);
+
   QPushButton *close_btn = new QPushButton(tr("×"));
   close_btn->setStyleSheet(R"(
     QPushButton {
@@ -244,9 +247,20 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   )");
 }
 
-void lightWidget::update(){
-  leftInd->setPixmap(iconMap[0]);
-  rightInd->setPixmap(iconMap[1]);
+void lightWidget::update(SubMaster &sm){
+  if(sm["carState"].getCarState().leftBlinker == true){
+    leftInd->setPixmap(iconMap[1]);
+  }
+  else{
+    leftInd->setPixmap(iconMap[0]);
+  }
+
+  if(sm["carState"].getCarState().rightBlinker == true){
+    rightInd->setPixmap(iconMap[1]);
+  }
+  else{
+    rightInd->setPixmap(iconMap[0]);
+  }
 }
 
 void speedWidget::update(){
@@ -254,10 +268,8 @@ void speedWidget::update(){
   indicator->setText("1");
 }
 
-void CustomWindow::update(){
-  //UIState *s = uiState();
-  //SubMaster &sm = *(s->sm);
+void CustomWindow::update(SubMaster &sm){
   //float v_ego = sm["carState"].getCarState().getVEgo();
-  lW->update();
+  lW->update(sm);
   spW->update();
 }
