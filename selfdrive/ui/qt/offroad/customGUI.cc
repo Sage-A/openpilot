@@ -207,16 +207,9 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 
   doorOpen->addWidget(door_status);
   doorOpen->addWidget(door_value);
-
-  QHBoxLayout *gearStatus = new QHBoxLayout();
-  QLabel *gear_status = new QLabel("Gear Status: ");
-  gear_value = new QLabel("NULL");
-
-  gearStatus->addWidget(gear_status);
-  gearStatus->addWidget(gear_value);
   
   main->addLayout(fuel);
-  main->addLayout(gearStatus);
+
   main->addLayout(doorOpen);
   setStyleSheet(R"(
     QLabel {
@@ -229,13 +222,6 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 void StatusWidget::update(const SubMaster &sm) {
   fuel_value->setText(QString::number(sm["carState"].getCarState().getFuelGauge()));
   door_value->setText(QString::number(sm["carState"].getCarState().getDoorOpen()));
-  if(sm["carState"].getCarState().getGearShifter().get()){
-    gear_value->setText("Drive");
-  }
-  elseif(sm["carState"].getCarState().getGearShifter() == ::cereal::CarState::GearShifter().park){
-    gear_value->setText("Parked");
-  }
-  
 }
 
 void CustomWindow::showEvent(QShowEvent *event) {
