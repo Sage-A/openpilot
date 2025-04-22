@@ -31,6 +31,7 @@ class StatusWidget : public QWidget {
   Q_OBJECT
 public:
   explicit StatusWidget(QWidget *parent);
+  void update(const SubMaster &sm);
 };
 
 class accelWidget : public QWidget {
