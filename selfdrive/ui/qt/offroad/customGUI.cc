@@ -145,7 +145,7 @@ speedWidget::speedWidget(QWidget* parent) : QWidget(parent) {
 }
 
 lightWidget::lightWidget(QWidget* parent) : QWidget(parent) {
-  QVBoxLayout *main = new QVBoxLayout(this);
+  QHBoxLayout *main = new QHBoxLayout(this);
   QLabel *leftBlinker = new QLabel("Left Blinker");
   QLabel *rightBlinker = new QLabel("Right Blinker");
   
