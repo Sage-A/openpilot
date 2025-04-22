@@ -271,5 +271,5 @@ void lightWidget::update(const SubMaster &sm){
 
 void speedWidget::update(const SubMaster &sm){
   //Fetch current speed from car
-  indicator->setText(QString(sm["carState"].getCarState().getVEgoCluster()));
+  indicator->setText(QString::number(sm["carState"].getCarState().getVEgoCluster()));
 }
