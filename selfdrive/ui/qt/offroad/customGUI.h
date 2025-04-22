@@ -48,7 +48,7 @@ class lightWidget : public QWidget {
   Q_OBJECT
 public:
   explicit lightWidget(QWidget *parent);
-  void update(bool left, bool right);
+  void update(SubMaster &sm);
 
 private:
   QPixmap iconMap[2];
@@ -75,4 +75,6 @@ private:
   lightWidget *lW;
   accelWidget *accW;
   speedWidget *spW;
+  UIState *s;
+  SubMaster &sm; 
 };
