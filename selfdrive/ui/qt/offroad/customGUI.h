@@ -35,6 +35,7 @@ public:
 
 private:
   QLabel *fuel_value;
+  QLabel *door_value;
 };
 
 class accelWidget : public QWidget {
