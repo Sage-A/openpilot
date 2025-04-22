@@ -247,7 +247,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   )");
 }
 
-void CustomGUI::updateState(const UIState &s) {
+void CustomWindow::updateState(const UIState &s) {
   const SubMaster &sm = *(s.sm);
   lW->update(sm);
   spW->update();
