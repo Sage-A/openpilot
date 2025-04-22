@@ -228,7 +228,13 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 void StatusWidget::update(const SubMaster &sm) {
   fuel_value->setText(QString::number(sm["carState"].getCarState().getFuelGauge()));
   door_value->setText(QString::number(sm["carState"].getCarState().getDoorOpen()));
-  gear_value->setText(QString(sm["carState"].getCarState().gearShifter));
+  if(sm["carState"].getCarState().getGearShifter() == GearShifter.drive){
+    gear_value->setText("Drive");
+  }
+  elseif(sm["carState"].getCarState().getGearShifter() == GearShifter.park){
+    gear_value->setText("Parked");
+  }
+  
 }
 
 void CustomWindow::showEvent(QShowEvent *event) {
