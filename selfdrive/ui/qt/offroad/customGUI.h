@@ -48,7 +48,7 @@ class lightWidget : public QWidget {
   Q_OBJECT
 public:
   explicit lightWidget(QWidget *parent);
-  void update();
+  void update(bool left, bool right);
 
 private:
   QPixmap iconMap[2];
