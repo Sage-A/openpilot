@@ -32,6 +32,9 @@ class StatusWidget : public QWidget {
 public:
   explicit StatusWidget(QWidget *parent);
   void update(const SubMaster &sm);
+
+private:
+  QLabel *fuel_value;
 };
 
 class accelWidget : public QWidget {
