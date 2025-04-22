@@ -199,9 +199,9 @@ void CustomWindow::setCurrentPanel(int index, const QString &param) {
 }
 
 CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
-    s = uiState();
-    &sm = *(s->sm);
 
+  QObject::connect(uiState(), &UIState::uiUpdate, this, &HomeWindow::updateState);
+  
   QPushButton *close_btn = new QPushButton(tr("×"));
   close_btn->setStyleSheet(R"(
     QPushButton {
@@ -247,7 +247,13 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   )");
 }
 
-void lightWidget::update(SubMaster &sm){
+void CustomGUI::updateState(const UIState &s) {
+  const SubMaster &sm = *(s.sm);
+  lW->update(sm);
+  spW->update();
+}
+
+void lightWidget::update(const SubMaster &sm){
   if(sm["carState"].getCarState().leftBlinker == true){
     leftInd->setPixmap(iconMap[1]);
   }
@@ -266,10 +272,4 @@ void lightWidget::update(SubMaster &sm){
 void speedWidget::update(){
   //Fetch current speed from car
   indicator->setText("1");
-}
-
-void CustomWindow::update(SubMaster &sm){
-  //float v_ego = sm["carState"].getCarState().getVEgo();
-  lW->update(sm);
-  spW->update();
 }
