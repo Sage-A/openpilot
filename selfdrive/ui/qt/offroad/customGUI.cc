@@ -254,14 +254,14 @@ void CustomWindow::updateState(const UIState &s) {
 }
 
 void lightWidget::update(const SubMaster &sm){
-  if(sm["carState"].leftBlinker == true){
+  if(sm["carState"].getLeftBlinker() == true){
     leftInd->setPixmap(iconMap[1]);
   }
   else{
     leftInd->setPixmap(iconMap[0]);
   }
 
-  if(sm["carState"].rightBlinker == true){
+  if(sm["carState"].getRightBlinker() == true){
     rightInd->setPixmap(iconMap[1]);
   }
   else{
