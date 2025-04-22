@@ -247,7 +247,9 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   
   ss = new steeringSlider(this);
   lW = new lightWidget(this);
+  statusW = new StatusWidget(this);
   primary->addWidget(lW);
+  primary->addWidget(statusW);
   primary->addWidget(ss);
 
   accW = new accelWidget(this);
