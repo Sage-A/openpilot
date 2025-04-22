@@ -200,7 +200,7 @@ void CustomWindow::setCurrentPanel(int index, const QString &param) {
 
 CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
 
-  QObject::connect(uiState(), &UIState::uiUpdate, this, &HomeWindow::updateState);
+  QObject::connect(uiState(), &UIState::uiUpdate, this, &CustomWindow::updateState);
   
   QPushButton *close_btn = new QPushButton(tr("×"));
   close_btn->setStyleSheet(R"(
