@@ -199,9 +199,13 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 
   fuel->addWidget(fuel_name);
   fuel->addWidget(fuel_value);
-
-  
   main->addLayout(fuel);
+  setStyleSheet(R"(
+    QLabel {
+    color: #BBBBBB;
+    font-size: 30px;
+    }
+    )");
 }
 
 void StatusWidget::update(const SubMaster &sm) {
