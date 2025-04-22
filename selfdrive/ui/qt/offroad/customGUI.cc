@@ -199,7 +199,16 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 
   fuel->addWidget(fuel_name);
   fuel->addWidget(fuel_value);
+
+  QHBoxLayout *doorOpen = new QHBoxLayout();
+  QLabel *door_status = new QLabel("Door Status: ");
+  door_value = new QLabel("NULL");
+
+  doorOpen->addWidget(door_status);
+  doorOpen->addWidget(door_value);
+  
   main->addLayout(fuel);
+  main->addLayout(doorOpen);
   setStyleSheet(R"(
     QLabel {
     color: #BBBBBB;
@@ -210,7 +219,7 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 
 void StatusWidget::update(const SubMaster &sm) {
   fuel_value->setText(QString::number(sm["carState"].getCarState().getFuelGauge()));
-  
+  door_value->setText(QString::number(sm["carState"].getCarState().getDoorOpen()));
 }
 
 void CustomWindow::showEvent(QShowEvent *event) {
