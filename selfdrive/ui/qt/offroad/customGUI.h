@@ -27,6 +27,12 @@ private:
   QSpinBox *turnAngle;
 };
 
+class StatusWidget : public QWidget {
+  Q_OBJECT
+public:
+  explicit StatusWidget(QWidget *parent);
+};
+
 class accelWidget : public QWidget {
   Q_OBJECT
 public:
@@ -75,4 +81,5 @@ private:
   lightWidget *lW;
   accelWidget *accW;
   speedWidget *spW;
+  StatusWidget *statusW;
 };
