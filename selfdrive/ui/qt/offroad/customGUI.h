@@ -48,7 +48,7 @@ class lightWidget : public QWidget {
   Q_OBJECT
 public:
   explicit lightWidget(QWidget *parent);
-  void update(SubMaster &sm);
+  void update(const SubMaster &sm);
 
 private:
   QPixmap iconMap[2];
@@ -62,7 +62,7 @@ class CustomWindow : public QFrame {
 public:
   explicit CustomWindow(QWidget *parent = 0);
   void setCurrentPanel(int index, const QString &param = "");
-  void update();
+  void updateState(const UIState &s);
 
 protected:
   void showEvent(QShowEvent *event) override;
@@ -75,6 +75,4 @@ private:
   lightWidget *lW;
   accelWidget *accW;
   speedWidget *spW;
-  UIState *s;
-  SubMaster &sm; 
 };
