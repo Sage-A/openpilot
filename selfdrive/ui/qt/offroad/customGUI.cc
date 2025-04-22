@@ -195,16 +195,16 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   QVBoxLayout *main = new QVBoxLayout(this);
   QHBoxLayout fuel = QHBoxLayout();
   QLabel fuel_name = QLabel("Fuel Level: ");
-  QLabel *fuel_value = new QLabel("NULL");
+  fuel_value = new QLabel("NULL");
 
-  fuel.addWidget(name);
-  fuel.addWidget(value);
+  fuel.addWidget(fuel_name);
+  fuel.addWidget(fuel_value);
 
   
   main->addWidget(fuel);
 }
 
-StatusWidget::update(const SubMaster &sm) {
+void StatusWidget::update(const SubMaster &sm) {
   fuel_value->setText(QString::number(sm["carState"].getCarState().getFuelGauge()));
   
 }
