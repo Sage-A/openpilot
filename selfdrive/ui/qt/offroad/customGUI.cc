@@ -201,7 +201,7 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   fuel.addWidget(fuel_value);
 
   
-  main->addWidget(fuel);
+  main->addLayout(fuel);
 }
 
 void StatusWidget::update(const SubMaster &sm) {
