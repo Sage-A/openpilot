@@ -190,12 +190,31 @@ lightWidget::lightWidget(QWidget* parent) : QWidget(parent) {
     )");
 }
 
+StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
+  //Tempory for testing in car on Tuesday
+  QVBoxLayout *main = new QVBoxLayout(this);
+  QHBoxLayout fuel = QHBoxLayout();
+  QLabel fuel_name = QLabel("Fuel Level: ");
+  QLabel *fuel_value = new QLabel("NULL");
+
+  fuel.addWidget(name);
+  fuel.addWidget(value);
+
+  
+  main->addWidget(fuel);
+}
+
+StatusWidget::update(const SubMaster &sm) {
+  fuel_value->setText(QString::number(sm["carState"].getCarState().getFuelGauge()));
+  
+}
+
 void CustomWindow::showEvent(QShowEvent *event) {
   setCurrentPanel(0);
 }
 
 void CustomWindow::setCurrentPanel(int index, const QString &param) {
- 
+   
 }
 
 CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
@@ -251,6 +270,7 @@ void CustomWindow::updateState(const UIState &s) {
   const SubMaster &sm = *(s.sm);
   lW->update(sm);
   spW->update(sm);
+  statusW->update(sm);
 }
 
 void lightWidget::update(const SubMaster &sm){
