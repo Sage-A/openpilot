@@ -193,8 +193,8 @@ lightWidget::lightWidget(QWidget* parent) : QWidget(parent) {
 StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   //Tempory for testing in car on Tuesday
   QVBoxLayout *main = new QVBoxLayout(this);
-  QHBoxLayout *fuel = QHBoxLayout();
-  QLabel *fuel_name = QLabel("Fuel Level: ");
+  QHBoxLayout *fuel = new QHBoxLayout();
+  QLabel *fuel_name = new QLabel("Fuel Level: ");
   fuel_value = new QLabel("NULL");
 
   fuel->addWidget(fuel_name);
