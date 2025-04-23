@@ -43,6 +43,8 @@ private:
   QLabel *ss_value;
   QLabel *steer_enabled;
   QLabel *steer_value;
+  QLabel *esp_value;
+  QLabel *cruise_value;
 };
 
 class accelWidget : public QWidget {
