@@ -201,16 +201,19 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   fuel->addWidget(fuel_name);
   fuel->addWidget(fuel_value);
 
-  QHBoxLayout *doorOpen = new QHBoxLayout();
+  QHBoxLayout *driverStatus = new QHBoxLayout();
   QLabel *door_status = new QLabel("Door Status: ");
+  QLabel *seatbelt_stat = new QLabel("Seatbelt: ");
   door_value = new QLabel("NULL");
+  seatbelt_value = new QLabel("NULL");
 
-  doorOpen->addWidget(door_status);
-  doorOpen->addWidget(door_value);
-  
+  driverStatus->addWidget(door_status);
+  driverStatus->addWidget(door_value);
+  driverStatus->addWidget(seatbelt_stat);
+  driverStatus->addWidget(seatbelt_value);
+
   main->addLayout(fuel);
-
-  main->addLayout(doorOpen);
+  main->addLayout(driverStatus);
   setStyleSheet(R"(
     QLabel {
     color: #BBBBBB;
@@ -222,6 +225,7 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 void StatusWidget::update(const SubMaster &sm) {
   fuel_value->setText(QString::number(sm["carState"].getCarState().getFuelGauge()));
   door_value->setText(QString::number(sm["carState"].getCarState().getDoorOpen()));
+  seatbelt_value->setText(QString::number(sm["carState"].getCarState().getSeatbeltUnlatched()));
 }
 
 void CustomWindow::showEvent(QShowEvent *event) {
