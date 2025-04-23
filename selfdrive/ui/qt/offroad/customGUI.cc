@@ -195,11 +195,19 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   //Tempory for testing in car on Tuesday
   QVBoxLayout *main = new QVBoxLayout(this);
   QHBoxLayout *fuel = new QHBoxLayout();
-  QLabel *fuel_name = new QLabel("Fuel Level: ");
+  QLabel *fuel_name = new QLabel("Gas Pedal: ");
+  QLabel *gas_pressed = new QLabel("Gas Engaged: ");
+  QLabel *brake_pressed = new QLabel("Brake Engaged: ");
   fuel_value = new QLabel("NULL");
+  gas_value = new QLabel("NULL");
+  brake_value = new QLabel("NULL");
 
   fuel->addWidget(fuel_name);
   fuel->addWidget(fuel_value);
+  fuel->addWidget(gas_pressed);
+  fuel->addWidget(gas_value);
+  fuel->addWidget(brake_pressed);
+  fuel->addWidget(brake_value);
 
   QHBoxLayout *driverStatus = new QHBoxLayout();
   QLabel *door_status = new QLabel("Door Status: ");
@@ -212,8 +220,24 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   driverStatus->addWidget(seatbelt_stat);
   driverStatus->addWidget(seatbelt_value);
 
+  QHBoxLayout *steeringStatus = new QHBoxLayout();
+  QLabel *standstill = new QLabel("Standstill: ");
+  QLabel *steeringPressed = new QLabel("Steering Engaged: ");
+  QLabel *steeringVal = new QLabel("Steering Val: ");
+  ss_value = new QLabel("NULL");
+  steer_enabled = new QLabel("NULL");
+  steer_value = new QLabel("NULL");
+
+  steeringStatus->addWidget(standstill);
+  steeringStatus->addWidget(ss_value);
+  steeringStatus->addWidget(steeringPressed);
+  steeringStatus->addWidget(steer_enabled);
+  steeringStatus->addWidget(steeringVal);
+  steeringStatus->addWidget(steer_value);
+
   main->addLayout(fuel);
   main->addLayout(driverStatus);
+  main->addLayout(steeringStatus);
   setStyleSheet(R"(
     QLabel {
     color: #BBBBBB;
@@ -223,9 +247,15 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 }
 
 void StatusWidget::update(const SubMaster &sm) {
-  fuel_value->setText(QString::number(sm["carState"].getCarState().getFuelGauge()));
-  door_value->setText(QString::number(sm["carState"].getCarState().getDoorOpen()));
-  seatbelt_value->setText(QString::number(sm["carState"].getCarState().getSeatbeltUnlatched()));
+  CarState cs = sm["carState"].getCarState();
+  fuel_value->setText(QString::number(cs.getGas()));
+  gas_value->setText(QString::number(cs.getGasPressed()));
+  door_value->setText(QString::number(cs.getDoorOpen()));
+  seatbelt_value->setText(QString::number(cs.getSeatbeltUnlatched()));
+  brake_value->setText(QString::number(cs.getBrakePressed()));
+  ss_value->setText(QString::number(cs.getStandstill()));
+  steer_enabled->setText(QString::number(cs.getSteeringPressed()));
+  steer_value->setText(QString::number(cs.getSteeringAngleDeg()));
 }
 
 void CustomWindow::showEvent(QShowEvent *event) {
