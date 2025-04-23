@@ -38,6 +38,11 @@ private:
   QLabel *door_value;
   QLabel *gear_value;
   QLabel *seatbelt_value;
+  QLabel *gas_value;
+  QLabel *brake_value;
+  QLabel *ss_value;
+  QLabel *steer_enabled;
+  QLabel *steer_value;
 };
 
 class accelWidget : public QWidget {
