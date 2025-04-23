@@ -238,13 +238,17 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   QHBoxLayout *carStat = new QHBoxLayout();
   QLabel *espEnabled = new QLabel("ESP Enabled: ");
   QLabel *cruiseStat = new QLabel("Cruise Control: ");
+  QLabel *gearShift = new QLabel("Gear: ");
   esp_value = new QLabel("NULL");
   cruise_value = new QLabel("NULL");
+  gear_value = new QLabel("NULL");
 
   carStat->addWidget(espEnabled);
   carStat->addWidget(esp_value);
   carStat->addWidget(cruiseStat);
   carStat->addWidget(cruise_value);
+  carStat->addWidget(gearShift);
+  carStat->addWidget(gear_value);
 
   
   main->addLayout(fuel);
@@ -261,7 +265,7 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 
 void StatusWidget::update(const SubMaster &sm) {
   auto cs = sm["carState"].getCarState();
-  fuel_value->setText(QString::number(static_cast<int>(cs.getGearShifter())));
+  gear_value->setText(QString::number(static_cast<int>(cs.getGearShifter())));
   fuel_value->setText(QString::number(cs.getGas()));
   gas_value->setText(QString::number(cs.getGasPressed()));
   door_value->setText(QString::number(cs.getDoorOpen()));
