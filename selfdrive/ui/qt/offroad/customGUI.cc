@@ -270,7 +270,7 @@ void StatusWidget::update(const SubMaster &sm) {
   steer_enabled->setText(QString::number(cs.getSteeringPressed()));
   steer_value->setText(QString::number(cs.getSteeringAngleDeg()));
   esp_value->setText(QString::number(cs.getEspDisabled()));
-  cruise_value->setText(QString::number(cs.getCruiseState().getEnabled());
+  cruise_value->setText(QString::number(cs.getCruiseState().getEnabled()));
 }
 
 void CustomWindow::showEvent(QShowEvent *event) {
