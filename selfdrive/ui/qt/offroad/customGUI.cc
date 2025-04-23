@@ -235,9 +235,22 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   steeringStatus->addWidget(steeringVal);
   steeringStatus->addWidget(steer_value);
 
+  QHBoxLayout *carStat = new QHBoxLayout();
+  QLabel *espEnabled = new QLabel("ESP Enabled: ");
+  QLabel *cruiseStat = new QLabel("Cruise Control: ");
+  esp_value = new QLabel("NULL");
+  cruise_value = new QLabel("NULL");
+
+  carStat->addWidget(espEnabled);
+  carStat->addWidget(esp_value);
+  carStat->addWidget(cruiseStat);
+  carStat->addWidget(cruise_value);
+
+  
   main->addLayout(fuel);
   main->addLayout(driverStatus);
   main->addLayout(steeringStatus);
+  main->addLayout(carStat);
   setStyleSheet(R"(
     QLabel {
     color: #BBBBBB;
@@ -256,6 +269,8 @@ void StatusWidget::update(const SubMaster &sm) {
   ss_value->setText(QString::number(cs.getStandstill()));
   steer_enabled->setText(QString::number(cs.getSteeringPressed()));
   steer_value->setText(QString::number(cs.getSteeringAngleDeg()));
+  esp_value->setText(QString::number(cs.getEspDisabled()));
+  cruise_value->setText(QString::number(cs.getCruiseState().getEnabled());
 }
 
 void CustomWindow::showEvent(QShowEvent *event) {
