@@ -62,34 +62,35 @@ class SteeringGUI:
       # Tracks the previous state of the cancel button
       self._cancel_prev = False
 
- def update(self):
-  # Read input values directly from the GUI
-  try:
-    accel_raw = get_throttle_value()
-    steer_raw = get_slider_value()
-    cancel_now = is_cancel_pressed()
+  def update(self):
+    # Read input values directly from the GUI
+    try:
+      accel_raw = get_throttle_value()
+      steer_raw = get_slider_value()
+      cancel_now = is_cancel_pressed()
 
-  except Exception:
-    # If GUI is unavailable or throws error, set neutral state
-    self.axes_values = {ax: 0. for ax in self.axes_values}
-    return False
+    except Exception:
+      # If GUI is unavailable or throws error, set neutral state
+      self.axes_values = {ax: 0. for ax in self.axes_values}
+      return False
 
-  # Update cancel logic joystick-style, detect when a button is pressed or released
-  if not self._cancel_prev and cancel_now:
-    self.cancel = True  # rising edge
-  elif self._cancel_prev and not cancel_now:
-    self.cancel = False  # falling edge
-  
-  # Was the cancel button not pressed last update, but is pressed now?
-  self._cancel_prev = cancel_now  
+    # Update cancel logic joystick-style, detect when a button is pressed or released
+    if not self._cancel_prev and cancel_now:
+      self.cancel = True  # rising edge
+    elif self._cancel_prev and not cancel_now:
+      self.cancel = False  # falling edge
+    
+    # Was the cancel button not pressed last update, but is pressed now?
+    self._cancel_prev = cancel_now  
 
-  # Normalizing accel/steer input
-  for axis, raw_value in [(self.accel_axis, accel_raw), (self.steer_axis, steer_raw)]:
-    norm = -float(np.interp(raw_value, [self.min_axis_value[axis], self.max_axis_value[axis]], [-1., 1.]))
-    norm = norm if abs(norm) > 0.03 else 0.  # deadzone
-    self.axes_values[axis] = EXPO * norm ** 3 + (1 - EXPO) * norm
+    # Normalizing accel/steer input
+    for axis, raw_value in [(self.accel_axis, accel_raw), (self.steer_axis, steer_raw)]:
+      norm = -float(np.interp(raw_value, [self.min_axis_value[axis], self.max_axis_value[axis]], [-1., 1.]))
+      norm = norm if abs(norm) > 0.03 else 0.  # deadzone
+      self.axes_values[axis] = EXPO * norm ** 3 + (1 - EXPO) * norm
 
-  return True
+    return True
+
   /  
 
 
