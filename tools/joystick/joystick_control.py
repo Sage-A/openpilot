@@ -4,7 +4,7 @@ import argparse
 import threading
 import numpy as np
 from inputs import UnpluggedError, get_gamepad
-from joystick_control import get_slider_value, get_throttle_value, is_cancel_pressed
+from joystick.joystick_control import get_slider_value, get_throttle_value, is_cancel_pressed
 
 from cereal import messaging
 from openpilot.common.params import Params
@@ -204,7 +204,7 @@ if __name__ == '__main__':
 
   # Controller selection logic
   if args.gui:
-    # Replace 'your_module' with the module that has these functions
+    # Replace gui with the module that has these functions
     from your_module import get_slider_value, get_throttle_value, is_cancel_pressed
     control = SteeringGUI(get_slider_value, get_throttle_value, is_cancel_pressed)
     steering_control_thread(control)
