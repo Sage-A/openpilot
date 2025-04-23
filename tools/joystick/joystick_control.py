@@ -42,27 +42,27 @@ class Keyboard:
     
 class SteeringGUI:
   def __init__(self, steer_slider):
-  # Refers to the acceleration and steering inputs
-  self.accel_axis = 'GUI_ACCEL'
-  self.steer_axis = 'GUI_STEER'
+      # Refers to the acceleration and steering inputs
+      self.accel_axis = 'GUI_ACCEL'
+      self.steer_axis = 'GUI_STEER'
 
-  # Acceleration and steering both range from -1.0 to 1.0
-  self.min_axis_value = {self.accel_axis: -1.0, self.steer_axis: -1.0}
-  self.max_axis_value = {self.accel_axis: 1.0, self.steer_axis: 1.0}
+      # Acceleration and steering both range from -1.0 to 1.0
+      self.min_axis_value = {self.accel_axis: -1.0, self.steer_axis: -1.0}
+      self.max_axis_value = {self.accel_axis: 1.0, self.steer_axis: 1.0}
 
-  # Initially, acceleration and steering are set to 0
-  self.axes_values = {self.accel_axis: 0., self.steer_axis: 0.}
+      # Initially, acceleration and steering are set to 0
+      self.axes_values = {self.accel_axis: 0., self.steer_axis: 0.}
   
-  # Defines the order in which to read/process the axes
-  self.axes_order = [self.accel_axis, self.steer_axis]
+      # Defines the order in which to read/process the axes
+      self.axes_order = [self.accel_axis, self.steer_axis]
 
-  # Tracks whether the "cancel" button (or an emergency stop control) has been pressed in the GUI
-  self.cancel = False
+      # Tracks whether the "cancel" button (or an emergency stop control) has been pressed in the GUI
+      self.cancel = False
 
-  # Tracks the previous state of the cancel button
-  self._cancel_prev = False
+      # Tracks the previous state of the cancel button
+      self._cancel_prev = False
 
-def update(self):
+ def update(self):
   # Read input values directly from the GUI
   try:
     accel_raw = get_throttle_value()
