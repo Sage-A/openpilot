@@ -247,7 +247,7 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 }
 
 void StatusWidget::update(const SubMaster &sm) {
-  ceral::CarState cs = sm["carState"].getCarState();
+  auto cs = sm["carState"].getCarState();
   fuel_value->setText(QString::number(cs.getGas()));
   gas_value->setText(QString::number(cs.getGasPressed()));
   door_value->setText(QString::number(cs.getDoorOpen()));
