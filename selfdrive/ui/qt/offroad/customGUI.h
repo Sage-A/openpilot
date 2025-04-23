@@ -36,7 +36,6 @@ public:
 private:
   QLabel *fuel_value;
   QLabel *door_value;
-  QLabel *gear_value;
   QLabel *seatbelt_value;
   QLabel *gas_value;
   QLabel *brake_value;
