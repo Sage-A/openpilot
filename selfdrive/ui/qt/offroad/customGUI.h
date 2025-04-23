@@ -44,7 +44,7 @@ private:
   QLabel *steer_value;
   QLabel *esp_value;
   QLabel *cruise_value;
-  QLabel *gear_value
+  QLabel *gear_value;
 };
 
 class accelWidget : public QWidget {
