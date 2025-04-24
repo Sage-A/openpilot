@@ -1,7 +1,7 @@
 #include <string>
 #include "selfdrive/ui/qt/offroad/custom_widgets/acceleration.h"
 
-acceleration::acceleration(QWidget* parent) : QWidget(parent) {
+AccelerationW::AccelerationW(QWidget* parent) : QWidget(parent) {
   QVBoxLayout *main = new QVBoxLayout(this);
   QLabel *title2 = new QLabel("Acceleration");
   title2->setStyleSheet(R"(
