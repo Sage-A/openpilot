@@ -15,6 +15,7 @@
 #include "selfdrive/ui/ui.h"
 #include "selfdrive/ui/qt/util.h"
 #include "selfdrive/ui/qt/widgets/controls.h"
+#include "selfdrive/ui/qt/offroad/custom_widgets/acceleration.h"
 
 // ********** custom window + top-level panels **********
 class steeringSlider : public QWidget {
@@ -45,12 +46,6 @@ private:
   QLabel *esp_value;
   QLabel *cruise_value;
   QLabel *gear_value;
-};
-
-class accelWidget : public QWidget {
-  Q_OBJECT
-public:
-  explicit accelWidget(QWidget *parent);
 };
 
 class speedWidget : public QWidget {
@@ -93,7 +88,7 @@ signals:
 private:
   steeringSlider *ss;
   lightWidget *lW;
-  accelWidget *accW;
+  acceleration *accW;
   speedWidget *spW;
   StatusWidget *statusW;
 };
