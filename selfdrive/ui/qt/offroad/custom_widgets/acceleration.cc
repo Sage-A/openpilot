@@ -1,4 +1,6 @@
 #include <string>
+#include <QDebug>
+
 #include "selfdrive/ui/qt/offroad/custom_widgets/acceleration.h"
 
 AccelerationW::AccelerationW(QWidget* parent) : QWidget(parent) {
