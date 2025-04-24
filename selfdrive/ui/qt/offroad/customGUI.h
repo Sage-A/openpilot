@@ -88,7 +88,7 @@ signals:
 private:
   steeringSlider *ss;
   lightWidget *lW;
-  acceleration *accW;
+  AccelerationW *accW;
   speedWidget *spW;
   StatusWidget *statusW;
 };
