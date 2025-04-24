@@ -11,6 +11,7 @@
 
 #include "selfdrive/ui/ui.h"
 #include "selfdrive/ui/qt/util.h"
+#include "selfdrive/ui/qt/qt_window.h"
 
 class AccelerationW : public QWidget {
   Q_OBJECT
