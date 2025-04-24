@@ -285,7 +285,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   primary->addWidget(statusW);
   primary->addWidget(ss);
 
-  accW = new acceleration(this);
+  accW = new AccelerationW(this);
   spW = new speedWidget(this);
   speed_bar->addWidget(spW);
   speed_bar->addWidget(accW);
