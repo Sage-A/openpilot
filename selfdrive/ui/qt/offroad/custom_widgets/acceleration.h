@@ -12,8 +12,8 @@
 #include "selfdrive/ui/ui.h"
 #include "selfdrive/ui/qt/util.h"
 
-class accelWidget : public QWidget {
+class AccelerationW : public QWidget {
   Q_OBJECT
 public:
-  explicit accelWidget(QWidget *parent);
+  explicit AccelerationW(QWidget *parent);
 };
