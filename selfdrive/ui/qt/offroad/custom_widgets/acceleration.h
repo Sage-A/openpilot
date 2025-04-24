@@ -3,15 +3,17 @@
 #include <map>
 #include <string>
 
+#include <QButtonGroup>
 #include <QFrame>
 #include <QLabel>
 #include <QPushButton>
+#include <QStackedWidget>
 #include <QWidget>
+#include <QSpinBox>
 #include <QPixmap>
 
 #include "selfdrive/ui/ui.h"
 #include "selfdrive/ui/qt/util.h"
-#include "selfdrive/ui/qt/qt_window.h"
 
 class AccelerationW : public QWidget {
   Q_OBJECT
