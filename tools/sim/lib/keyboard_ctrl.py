@@ -67,7 +67,7 @@ def keyboard_poll_thread(q: 'Queue[QueueMessage]'):
     elif c == '3':
       q.put(control_cmd_gen("cruise_cancel"))
     elif c == 'w':
-      q.put(control_cmd_gen(f"throttle_{1.0}"))
+      q.put(control_cmd_gen(f"throttle_{5.0}"))
     elif c == 'a':
       q.put(control_cmd_gen(f"steer_{-0.15}"))
     elif c == 's':
