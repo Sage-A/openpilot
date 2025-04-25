@@ -28,7 +28,7 @@ KEYBOARD_HELP = """
   |  r   | Reset Simulation      |
   |  i   | Toggle Ignition       |
   |  q   | Exit all              |
-  | wasd | Control manually      |
+  | basd | Control manually      |
 """
 
 
