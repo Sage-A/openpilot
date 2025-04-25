@@ -16,6 +16,7 @@
 #include "selfdrive/ui/qt/offroad/developer_panel.h"
 #include "selfdrive/ui/qt/offroad/customGUI.h"
 #include "cereal/gen/cpp/car.capnp.h"
+#include "selfdrive/ui/qt/offroad/custom_widgets/steering.h"
 
 steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
   QVBoxLayout *main = new QVBoxLayout(this);
