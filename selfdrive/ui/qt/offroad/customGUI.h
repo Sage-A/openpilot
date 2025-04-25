@@ -16,18 +16,9 @@
 #include "selfdrive/ui/qt/util.h"
 #include "selfdrive/ui/qt/widgets/controls.h"
 #include "selfdrive/ui/qt/offroad/custom_widgets/acceleration.h"
+#include "selfdrive/ui/qt/offroad/custom_widgets/steering.h"
 
 // ********** custom window + top-level panels **********
-class steeringSlider : public QWidget {
-  Q_OBJECT
-public:
-  explicit steeringSlider(QWidget *parent);
-
-private:
-  SliderControl *steering_slider;
-  QSpinBox *turnAngle;
-};
-
 class StatusWidget : public QWidget {
   Q_OBJECT
 public:
@@ -86,7 +77,7 @@ signals:
   void closeCustom();
 
 private:
-  steeringSlider *ss;
+  SteeringSlider *ss;
   lightWidget *lW;
   AccelerationW *accW;
   speedWidget *spW;
