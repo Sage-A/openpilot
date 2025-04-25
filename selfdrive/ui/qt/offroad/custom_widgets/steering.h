@@ -16,10 +16,10 @@
 #include "selfdrive/ui/qt/util.h"
 #include "selfdrive/ui/qt/widgets/controls.h"
 
-class steeringSlider : public QWidget {
+class SteeringSlider : public QWidget {
   Q_OBJECT
 public:
-  explicit steeringSlider(QWidget *parent);
+  explicit SteeringSlider(QWidget *parent);
 
 private:
   SliderControl *steering_slider;
