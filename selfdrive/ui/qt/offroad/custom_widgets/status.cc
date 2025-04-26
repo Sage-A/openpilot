@@ -104,10 +104,10 @@ void StatusWidget::update(const SubMaster &sm) {
 
 SpeedStatus::SpeedStatus(QWidget* parent, std::string units) : QWidget(parent) {
   convFactor = 1;
-  if(units.equals("MPH")){
+  if(units == "MPH"){
     convFactor = 2.2369;
   }
-  else if(units.equals("KMH")){
+  else if(units == "KMH"){
     convFactor = 3.6;
   }
       
