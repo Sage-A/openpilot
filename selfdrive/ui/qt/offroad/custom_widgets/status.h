@@ -27,7 +27,6 @@ class StatusWidget : public QWidget {
    QLabel *fuel_value;
    QLabel *gas_value;
    QLabel *brake_value;
-   QLabel *ss_value;
    QLabel *steer_enabled;
    QLabel *steer_value;
    QLabel *esp_value;
@@ -38,13 +37,14 @@ class StatusWidget : public QWidget {
 class SpeedStatus : public QWidget {
    Q_OBJECT
  public:
-   explicit SpeedStatus(QWidget *parent);
+   explicit SpeedStatus(QWidget *parent, string units);
    void update(const SubMaster &sm);
  
  private: // Current speed of car, standstill indicator
    QVBoxLayout *main;
-   QLabel *indicator;
+   QLabel *speed_value;
    QLabel *unit;
+   QLabel *ss_value;
 };
 
 class BlinkerStatus : public QWidget {
