@@ -104,10 +104,10 @@ void StatusWidget::update(const SubMaster &sm) {
 
 SpeedStatus::SpeedStatus(QWidget* parent, std::string* units) : QWidget(parent) {
   convFactor = 1;
-  if(units == "MPH"){
+  if(units.compare("MPH")){
     convFactor = 2.2369;
   }
-  else if(units == "KMH"){
+  else if(units.compare("KMH")){
     convFactor = 3.6;
   }
       
@@ -147,7 +147,7 @@ SpeedStatus::SpeedStatus(QWidget* parent, std::string* units) : QWidget(parent) 
     )");
 }
 
-SpeedStatus::update(const SubMaster &sm){
+void SpeedStatus::update(const SubMaster &sm){
     auto cs = sm["carState"].getCarState();
     ss_value->setText(QString::number(cs.getStandstill()));
     speed_value->setText(QString::number((convFactor+cs.getVEgoCluster())));
