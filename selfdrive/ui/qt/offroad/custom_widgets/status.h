@@ -45,6 +45,7 @@ class SpeedStatus : public QWidget {
    QLabel *speed_value;
    QLabel *unit;
    QLabel *ss_value;
+   float convFactor;
 };
 
 class BlinkerStatus : public QWidget {
