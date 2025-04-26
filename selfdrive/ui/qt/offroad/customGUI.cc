@@ -17,59 +17,11 @@
 #include "selfdrive/ui/qt/offroad/customGUI.h"
 #include "cereal/gen/cpp/car.capnp.h"
 
-lightWidget::lightWidget(QWidget* parent) : QWidget(parent) {
-  QHBoxLayout *main = new QHBoxLayout(this);
-  QLabel *leftBlinker = new QLabel("Left Blinker");
-  QLabel *rightBlinker = new QLabel("Right Blinker");
-  
-  QPixmap ind_on = QPixmap("../assets/icons/indicator_on");
-  QPixmap ind_off = QPixmap("../assets/icons/indicator_off");
-
-  iconMap[0] = ind_off;
-  iconMap[1] = ind_on;
-  leftInd = new QLabel();
-  leftInd->setScaledContents(true);
-  rightInd = new QLabel();
-  rightInd->setScaledContents(true);
-  
-  leftInd->setPixmap(iconMap[0]);
-  rightInd->setPixmap(iconMap[1]);
-
-  leftInd->setStyleSheet(R"(
-    QLabel {
-      max-height: 50px;
-      max-width: 50px;
-      min-height: 50px;
-      min-width: 50px;
-    }
-    )");
-  rightInd->setStyleSheet(R"(
-    QLabel {
-      max-height: 50px;
-      max-width: 50px;
-      min-height: 50px;
-      min-width: 50px;
-    }
-    )");
-  main->addWidget(leftBlinker);
-  main->addWidget(leftInd);
-  main->addWidget(rightBlinker);
-  main->addWidget(rightInd);
-  setStyleSheet(R"(
-    QLabel {
-    color: #BBBBBB;
-    font-size: 30px;
-    }
-    )");
-}
-
 void CustomWindow::showEvent(QShowEvent *event) {
   setCurrentPanel(0);
 }
 
-void CustomWindow::setCurrentPanel(int index, const QString &param) {
-   
-}
+void CustomWindow::setCurrentPanel(int index, const QString &param) {}
 
 CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
 
@@ -100,10 +52,16 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   sidebar->addWidget(close_btn);
   
   ss = new SteeringSlider(this);
-  lW = new lightWidget(this);
-  statusW = new StatusWidget(this);
+  lW = new BlinkerWidget(this);
+
+  carStat = new CarStatus(this);
+  steerStat = new SteerStatus(this);
+  driveStat = new DriveStatus(this);
+  
   primary->addWidget(lW);
-  primary->addWidget(statusW);
+  primary->addWidget(carStat);
+  primary->addWidget(steerStat);
+  primary->addWidget(driveStat);
   primary->addWidget(ss);
 
   accW = new AccelerationW(this);
@@ -126,21 +84,9 @@ void CustomWindow::updateState(const UIState &s) {
   const SubMaster &sm = *(s.sm);
   lW->update(sm);
   spW->update(sm);
-  statusW->update(sm);
+  carStat->update(sm);
+  steerStat->update(sm);
+  driveStat->update(sm);
 }
 
-void lightWidget::update(const SubMaster &sm){
-  if(sm["carState"].getCarState().getLeftBlinker() == true){
-    leftInd->setPixmap(iconMap[1]);
-  }
-  else{
-    leftInd->setPixmap(iconMap[0]);
-  }
 
-  if(sm["carState"].getCarState().getRightBlinker() == true){
-    rightInd->setPixmap(iconMap[1]);
-  }
-  else{
-    rightInd->setPixmap(iconMap[0]);
-  }
-}
