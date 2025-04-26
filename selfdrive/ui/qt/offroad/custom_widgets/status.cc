@@ -102,7 +102,7 @@ void StatusWidget::update(const SubMaster &sm) {
   cruise_value->setText(QString::number(cs.getCruiseState().getEnabled()));
 }
 
-SpeedStatus::SpeedStatus(QWidget* parent, std::string units) : QWidget(parent) {
+SpeedStatus::SpeedStatus(QWidget* parent, std::string* units) : QWidget(parent) {
   convFactor = 1;
   if(units == "MPH"){
     convFactor = 2.2369;
