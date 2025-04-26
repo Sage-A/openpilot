@@ -15,6 +15,7 @@
 #include "selfdrive/ui/qt/widgets/prime.h"
 #include "selfdrive/ui/qt/widgets/scrollview.h"
 #include "selfdrive/ui/qt/offroad/developer_panel.h"
+#include "selfdrive/ui/qt/offroad/customGUI.h"
 #include "selfdrive/ui/qt/offroad/custom_widgets/status.h"
 
 StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
