@@ -52,7 +52,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   sidebar->addWidget(close_btn);
   
   ss = new SteeringSlider(this);
-  lW = new BlinkerWidget(this);
+  lW = new BlinkerStatus(this);
 
   carStat = new CarStatus(this);
   steerStat = new SteerStatus(this);
