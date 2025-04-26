@@ -38,7 +38,7 @@ class SpeedStatus : public QWidget {
    Q_OBJECT
  public:
    explicit SpeedStatus(QWidget *parent, std::string units);
-   void update(const SubMaster &sm);
+   void update(auto cs);
  
  private: // Current speed of car, standstill indicator
    QVBoxLayout *main;
