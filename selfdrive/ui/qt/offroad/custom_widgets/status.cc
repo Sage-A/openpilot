@@ -30,8 +30,6 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 }
 
 void StatusWidget::update(const SubMaster &sm) {
-
- 
 }
 
 SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
@@ -223,7 +221,7 @@ setStyleSheet(R"(
     )");
 }
 
-void DriveStatus::update(QWidget *parent) : QWidget(parent) {
+void DriveStatus::update(const SubMaster &sm){
   auto cs = sm["carState"].getCarState();
   cruise_enabled->setText(QString::number(cs.getCruiseState().getEnabled()));
   gear_value->setText(QString::number(static_cast<int>(cs.getGearShifter())));
@@ -254,7 +252,7 @@ SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
     )");
 }
 
-void SteerStatus::update(QWidget *parent) : QWidget(parent) {
+void SteerStatus::update(const SubMaster &sm){
   auto cs = sm["carState"].getCarState();
   steer_enabled->setText(QString::number(cs.getSteeringPressed()));
   steer_value->setText(QString::number(cs.getSteeringAngleDeg()));
