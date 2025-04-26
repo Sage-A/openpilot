@@ -73,6 +73,7 @@ class CarStatus : public QWidget {
    QVBoxLayout *main;
    QLabel *door_value;
    QLabel *seatbelt_value;
+   QLabel *esp_value;
 };
 
 class DriveStatus : public QWidget {
