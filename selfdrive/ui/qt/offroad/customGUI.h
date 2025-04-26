@@ -20,18 +20,6 @@
 #include "selfdrive/ui/qt/offroad/custom_widgets/status.h"
 
 // ********** custom window + top-level panels **********
-
-class speedWidget : public QWidget {
-  Q_OBJECT
-public:
-  explicit speedWidget(QWidget *parent);
-  void update(const SubMaster &sm);
-
-private:
-  QLabel *indicator;
-  QLabel *unit;
-};
-
 class lightWidget : public QWidget {
   Q_OBJECT
 public:
@@ -62,6 +50,6 @@ private:
   SteeringSlider *ss;
   lightWidget *lW;
   AccelerationW *accW;
-  speedWidget *spW;
+  SpeedStatus *spW;
   StatusWidget *statusW;
 };
