@@ -21,7 +21,6 @@
 StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   //Tempory for testing in car on Tuesday
   main = new QVBoxLayout(this);
-
   
   QHBoxLayout *fuel = new QHBoxLayout();
   QLabel *fuel_name = new QLabel("Gas Pedal: ");
@@ -38,17 +37,6 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   fuel->addWidget(brake_pressed);
   fuel->addWidget(brake_value);
 
-  QHBoxLayout *driverStatus = new QHBoxLayout();
-  QLabel *door_status = new QLabel("Door Status: ");
-  QLabel *seatbelt_stat = new QLabel("Seatbelt: ");
-  door_value = new QLabel("NULL");
-  seatbelt_value = new QLabel("NULL");
-
-  driverStatus->addWidget(door_status);
-  driverStatus->addWidget(door_value);
-  driverStatus->addWidget(seatbelt_stat);
-  driverStatus->addWidget(seatbelt_value);
-
   QHBoxLayout *steeringStatus = new QHBoxLayout();
   QLabel *steeringPressed = new QLabel("Steering Engaged: ");
   QLabel *steeringVal = new QLabel("Steering Val: ");
@@ -61,15 +49,12 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   steeringStatus->addWidget(steer_value);
 
   QHBoxLayout *carStat = new QHBoxLayout();
-  QLabel *espEnabled = new QLabel("ESP Enabled: ");
   QLabel *cruiseStat = new QLabel("Cruise Control: ");
   QLabel *gearShift = new QLabel("Gear: ");
-  esp_value = new QLabel("NULL");
+
   cruise_value = new QLabel("NULL");
   gear_value = new QLabel("NULL");
 
-  carStat->addWidget(espEnabled);
-  carStat->addWidget(esp_value);
   carStat->addWidget(cruiseStat);
   carStat->addWidget(cruise_value);
   carStat->addWidget(gearShift);
@@ -77,7 +62,6 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 
   
   main->addLayout(fuel);
-  main->addLayout(driverStatus);
   main->addLayout(steeringStatus);
   main->addLayout(carStat);
   setStyleSheet(R"(
@@ -93,12 +77,10 @@ void StatusWidget::update(const SubMaster &sm) {
   gear_value->setText(QString::number(static_cast<int>(cs.getGearShifter())));
   fuel_value->setText(QString::number(cs.getGas()));
   gas_value->setText(QString::number(cs.getGasPressed()));
-  door_value->setText(QString::number(cs.getDoorOpen()));
-  seatbelt_value->setText(QString::number(cs.getSeatbeltUnlatched()));
   brake_value->setText(QString::number(cs.getBrakePressed()));
   steer_enabled->setText(QString::number(cs.getSteeringPressed()));
   steer_value->setText(QString::number(cs.getSteeringAngleDeg()));
-  esp_value->setText(QString::number(cs.getEspDisabled()));
+
   cruise_value->setText(QString::number(cs.getCruiseState().getEnabled()));
 }
 
@@ -154,3 +136,43 @@ void SpeedStatus::update(const SubMaster &sm){
     ss_value->setText(QString::number(cs.getStandstill()));
     speed_value->setText(QString::number((convFactor+cs.getVEgoCluster())));
 }
+
+BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
+  
+}
+
+CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
+  QHBoxLayout *driverStatus = new QHBoxLayout();
+  QLabel *door_status = new QLabel("Door Status: ");
+  QLabel *seatbelt_stat = new QLabel("Seatbelt: ");
+  QLabel *espEnabled = new QLabel("ESP Enabled: ");
+  door_value = new QLabel("NULL");
+  seatbelt_value = new QLabel("NULL");
+  esp_value = new QLabel("NULL");
+
+  driverStatus->addWidget(door_status);
+  driverStatus->addWidget(door_value);
+  driverStatus->addWidget(seatbelt_stat);
+  driverStatus->addWidget(seatbelt_value);
+  driverStatus->addWidget(espEnabled);
+  driverStatus->addWidget(esp_value);
+  
+  main->addLayout(driverStatus);
+  setStyleSheet(R"(
+    QLabel {
+    color: #BBBBBB;
+    font-size: 30px;
+    }
+    )");
+}
+
+void CarStatus::update(const SubMaster &sm){
+  auto cs = sm["carState"].getCarState();
+  door_value->setText(QString::number(cs.getDoorOpen()));
+  seatbelt_value->setText(QString::number(cs.getSeatbeltUnlatched()));
+  esp_value->setText(QString::number(cs.getEspDisabled()));
+}
+
+DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {}
+SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {}
+
