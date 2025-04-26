@@ -32,6 +32,8 @@ class StatusWidget : public QWidget {
    QLabel *esp_value;
    QLabel *cruise_value;
    QLabel *gear_value;
+   QLabel *door_value;
+   QLabel *seatbelt_value;
  };
 
 class SpeedStatus : public QWidget {
