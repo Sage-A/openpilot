@@ -50,15 +50,11 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   driverStatus->addWidget(seatbelt_value);
 
   QHBoxLayout *steeringStatus = new QHBoxLayout();
-  QLabel *standstill = new QLabel("Standstill: ");
   QLabel *steeringPressed = new QLabel("Steering Engaged: ");
   QLabel *steeringVal = new QLabel("Steering Val: ");
-  ss_value = new QLabel("NULL");
   steer_enabled = new QLabel("NULL");
   steer_value = new QLabel("NULL");
 
-  steeringStatus->addWidget(standstill);
-  steeringStatus->addWidget(ss_value);
   steeringStatus->addWidget(steeringPressed);
   steeringStatus->addWidget(steer_enabled);
   steeringStatus->addWidget(steeringVal);
