@@ -99,7 +99,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
 
   sidebar->addWidget(close_btn);
   
-  ss = new SteeringSlider(this, "MPH");
+  ss = new SteeringSlider(this);
   lW = new lightWidget(this);
   statusW = new StatusWidget(this);
   primary->addWidget(lW);
@@ -107,7 +107,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   primary->addWidget(ss);
 
   accW = new AccelerationW(this);
-  spW = new SpeedStatus(this);
+  spW = new SpeedStatus(this, "MPH");
   speed_bar->addWidget(spW);
   speed_bar->addWidget(accW);
 
