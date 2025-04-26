@@ -18,7 +18,7 @@
 #include "cereal/gen/cpp/car.capnp.h"
 #include "selfdrive/ui/qt/offroad/custom_widgets/steering.h"
 
-steeringSlider::steeringSlider(QWidget* parent) : QWidget(parent) {
+SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
   QVBoxLayout *main = new QVBoxLayout(this);
   QLabel *title = new QLabel("Wheel Control");
   turnAngle = new QSpinBox();
