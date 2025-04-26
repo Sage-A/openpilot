@@ -99,7 +99,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
 
   sidebar->addWidget(close_btn);
   
-  ss = new SteeringSlider(this);
+  ss = new SteeringSlider(this, "MPH");
   lW = new lightWidget(this);
   statusW = new StatusWidget(this);
   primary->addWidget(lW);
