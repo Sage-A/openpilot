@@ -102,13 +102,16 @@ void StatusWidget::update(const SubMaster &sm) {
   cruise_value->setText(QString::number(cs.getCruiseState().getEnabled()));
 }
 
-SpeedStatus::SpeedStatus(QWidget* parent, std::string* units) : QWidget(parent) {
+SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   convFactor = 1;
-  if(units->compare("MPH")){
+  QLabel *units;
+  if(uSel == 0){
     convFactor = 2.2369;
+    units = new QLabel("MPH");
   }
-  else if(units->compare("KMH")){
+  else if(uSel == 1){
     convFactor = 3.6;
+    units = new QLabel("KMH");
   }
       
   main = new QVBoxLayout(this);
@@ -124,14 +127,13 @@ SpeedStatus::SpeedStatus(QWidget* parent, std::string* units) : QWidget(parent) 
   main->addWidget(title);
   
   speed_value = new QLabel("0");
-  unit = new QLabel(QString(units));
   QLabel *standstill = new QLabel("Standstill: ");
   ss_value = new QLabel("NULL");
   
   QHBoxLayout *i = new QHBoxLayout();
   QHBoxLayout *i2 = new QHBoxLayout();
   i->addWidget(speed_value);
-  i->addWidget(unit);
+  i->addWidget(units);
   i2->addWidget(standstill);
   i2->addWidget(ss_value);
   
