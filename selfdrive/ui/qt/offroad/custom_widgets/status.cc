@@ -100,14 +100,58 @@ void StatusWidget::update(const SubMaster &sm) {
   door_value->setText(QString::number(cs.getDoorOpen()));
   seatbelt_value->setText(QString::number(cs.getSeatbeltUnlatched()));
   brake_value->setText(QString::number(cs.getBrakePressed()));
-  ss_value->setText(QString::number(cs.getStandstill()));
   steer_enabled->setText(QString::number(cs.getSteeringPressed()));
   steer_value->setText(QString::number(cs.getSteeringAngleDeg()));
   esp_value->setText(QString::number(cs.getEspDisabled()));
   cruise_value->setText(QString::number(cs.getCruiseState().getEnabled()));
 }
 
-SpeedStatus::SpeedStatus(QWidget *parent, QString units) : StatusWidget parent {
-// (Name, bool?, inverted, functionCall)
+SpeedStatus::SpeedStatus(QWidget* parent, string units) : QWidget(parent) {
+  convFactor = 1;
+  if(units.equals("MPH")){
+    convFactor = 2.2369;
+  }
+  else if(units.equals("KMH")){
+    convFactor = 3.6;
+  }
+      
+  main = new QVBoxLayout(this);
+  QLabel *title = new QLabel("Speed");
+  title->setStyleSheet(R"(
+    QLabel {
+     font-size: 40px;
+     font-weight: bold;
+     color: #a9a9a9;
+     }
+    )");
+  
+  main->addWidget(title);
 
+  speed_value = new QLabel("0");
+  unit = new QLabel(units);
+  QLabel *standstill = new QLabel("Standstill: ");
+  ss_value = new QLabel("NULL");
+  
+  QHBoxLayout *i = new QHBoxLayout();
+  QHBoxLayout *i2 = new QHBoxLayout();
+  i->addWidget(indicator);
+  i->addWidget(unit);
+  i2->addWidget(standstill);
+  i2->addWidget(ss_value);
+  
+  main->addLayout(i);
+  main->addLayout(i2);
+  main->setAlignment(Qt::AlignCenter);
+  
+  setStyleSheet(R"(
+    QLabel {
+     font-size: 30px;
+     color: #FFFFFF;
+     }
+    )");
+}
+
+SpeedStatus::update(auto cs){
+    ss_value->setText(QString::number(cs.getStandstill()));
+    speed_value->setText(QString::number((convFactor+cs.getVEgoCluster())));
 }
