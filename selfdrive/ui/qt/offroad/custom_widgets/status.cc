@@ -147,7 +147,8 @@ SpeedStatus::SpeedStatus(QWidget* parent, std::string units) : QWidget(parent) {
     )");
 }
 
-SpeedStatus::update(auto cs){
+SpeedStatus::update(const SubMaster &sm){
+    auto cs = sm["carState"].getCarState();v
     ss_value->setText(QString::number(cs.getStandstill()));
     speed_value->setText(QString::number((convFactor+cs.getVEgoCluster())));
 }
