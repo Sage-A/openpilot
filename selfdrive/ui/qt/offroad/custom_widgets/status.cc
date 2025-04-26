@@ -19,51 +19,8 @@
 #include "selfdrive/ui/qt/offroad/custom_widgets/status.h"
 
 StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
-  //Tempory for testing in car on Tuesday
   main = new QVBoxLayout(this);
   
-  QHBoxLayout *fuel = new QHBoxLayout();
-  QLabel *fuel_name = new QLabel("Gas Pedal: ");
-  QLabel *gas_pressed = new QLabel("Gas Engaged: ");
-  QLabel *brake_pressed = new QLabel("Brake Engaged: ");
-  fuel_value = new QLabel("NULL");
-  gas_value = new QLabel("NULL");
-  brake_value = new QLabel("NULL");
-
-  fuel->addWidget(fuel_name);
-  fuel->addWidget(fuel_value);
-  fuel->addWidget(gas_pressed);
-  fuel->addWidget(gas_value);
-  fuel->addWidget(brake_pressed);
-  fuel->addWidget(brake_value);
-
-  QHBoxLayout *steeringStatus = new QHBoxLayout();
-  QLabel *steeringPressed = new QLabel("Steering Engaged: ");
-  QLabel *steeringVal = new QLabel("Steering Val: ");
-  steer_enabled = new QLabel("NULL");
-  steer_value = new QLabel("NULL");
-
-  steeringStatus->addWidget(steeringPressed);
-  steeringStatus->addWidget(steer_enabled);
-  steeringStatus->addWidget(steeringVal);
-  steeringStatus->addWidget(steer_value);
-
-  QHBoxLayout *carStat = new QHBoxLayout();
-  QLabel *cruiseStat = new QLabel("Cruise Control: ");
-  QLabel *gearShift = new QLabel("Gear: ");
-
-  cruise_value = new QLabel("NULL");
-  gear_value = new QLabel("NULL");
-
-  carStat->addWidget(cruiseStat);
-  carStat->addWidget(cruise_value);
-  carStat->addWidget(gearShift);
-  carStat->addWidget(gear_value);
-
-  
-  main->addLayout(fuel);
-  main->addLayout(steeringStatus);
-  main->addLayout(carStat);
   setStyleSheet(R"(
     QLabel {
     color: #BBBBBB;
@@ -73,15 +30,8 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 }
 
 void StatusWidget::update(const SubMaster &sm) {
-  auto cs = sm["carState"].getCarState();
-  gear_value->setText(QString::number(static_cast<int>(cs.getGearShifter())));
-  fuel_value->setText(QString::number(cs.getGas()));
-  gas_value->setText(QString::number(cs.getGasPressed()));
-  brake_value->setText(QString::number(cs.getBrakePressed()));
-  steer_enabled->setText(QString::number(cs.getSteeringPressed()));
-  steer_value->setText(QString::number(cs.getSteeringAngleDeg()));
 
-  cruise_value->setText(QString::number(cs.getCruiseState().getEnabled()));
+ 
 }
 
 SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
@@ -138,10 +88,71 @@ void SpeedStatus::update(const SubMaster &sm){
 }
 
 BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
+  main = new QVBoxLayout(this);
+  QHBoxLayout *main2 = new QHBoxLayout(this);
+  QLabel *leftBlinker = new QLabel("Left Blinker");
+  QLabel *rightBlinker = new QLabel("Right Blinker");
   
+  QPixmap ind_on = QPixmap("../assets/icons/indicator_on");
+  QPixmap ind_off = QPixmap("../assets/icons/indicator_off");
+
+  iconMap[0] = ind_off;
+  iconMap[1] = ind_on;
+  leftInd = new QLabel();
+  leftInd->setScaledContents(true);
+  rightInd = new QLabel();
+  rightInd->setScaledContents(true);
+  
+  leftInd->setPixmap(iconMap[0]);
+  rightInd->setPixmap(iconMap[1]);
+
+  leftInd->setStyleSheet(R"(
+    QLabel {
+      max-height: 50px;
+      max-width: 50px;
+      min-height: 50px;
+      min-width: 50px;
+    }
+    )");
+  rightInd->setStyleSheet(R"(
+    QLabel {
+      max-height: 50px;
+      max-width: 50px;
+      min-height: 50px;
+      min-width: 50px;
+    }
+    )");
+  main2->addWidget(leftBlinker);
+  main2->addWidget(leftInd);
+  main2->addWidget(rightBlinker);
+  main2->addWidget(rightInd);
+  main->addLayout(main2);
+  setStyleSheet(R"(
+    QLabel {
+    color: #BBBBBB;
+    font-size: 30px;
+    }
+    )");
+}
+
+void BlinkerStatus::update(const SubMaster &sm){
+  if(sm["carState"].getCarState().getLeftBlinker() == true){
+    leftInd->setPixmap(iconMap[1]);
+  }
+  else{
+    leftInd->setPixmap(iconMap[0]);
+  }
+
+  if(sm["carState"].getCarState().getRightBlinker() == true){
+    rightInd->setPixmap(iconMap[1]);
+  }
+  else{
+    rightInd->setPixmap(iconMap[0]);
+  }
 }
 
 CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
+  main = new QVBoxLayout(this);
   QHBoxLayout *driverStatus = new QHBoxLayout();
   QLabel *door_status = new QLabel("Door Status: ");
   QLabel *seatbelt_stat = new QLabel("Seatbelt: ");
@@ -173,6 +184,78 @@ void CarStatus::update(const SubMaster &sm){
   esp_value->setText(QString::number(cs.getEspDisabled()));
 }
 
-DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {}
-SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {}
+DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
+  main = new QVBoxLayout(this);
+  QHBoxLayout *hLay = new QHBoxLayout();
+  QLabel *fuel_name = new QLabel("Gas Pedal: ");
+  QLabel *gas_pressed = new QLabel("Gas Engaged: ");
+  QLabel *brake_pressed = new QLabel("Brake Engaged: ");
+  gas_engaged = new QLabel("NULL");
+  gas_value = new QLabel("NULL");
+  brake_engaged = new QLabel("NULL");
 
+  hLay->addWidget(fuel_name);
+  hLay->addWidget(gas_value);
+  hLay->addWidget(gas_pressed);
+  hLay->addWidget(gas_engaged);
+  hLay->addWidget(brake_pressed);
+  hLay->addWidget(brake_engaged);
+
+  QHBoxLayout *carStat = new QHBoxLayout();
+  QLabel *cruiseStat = new QLabel("Cruise Control: ");
+  QLabel *gearShift = new QLabel("Gear: ");
+
+  cruise_enabled = new QLabel("NULL");
+  gear_value = new QLabel("NULL");
+
+  carStat->addWidget(cruiseStat);
+  carStat->addWidget(cruise_enabled);
+  carStat->addWidget(gearShift);
+  carStat->addWidget(gear_value);
+
+  main->addLayout(hLay);
+  main->addLayout(carStat);
+setStyleSheet(R"(
+    QLabel {
+    color: #BBBBBB;
+    font-size: 30px;
+    }
+    )");
+}
+
+void DriveStatus::update(QWidget *parent) : QWidget(parent) {
+  auto cs = sm["carState"].getCarState();
+  cruise_enabled->setText(QString::number(cs.getCruiseState().getEnabled()));
+  gear_value->setText(QString::number(static_cast<int>(cs.getGearShifter())));
+  gas_value->setText(QString::number(cs.getGas()));
+  gas_engaged->setText(QString::number(cs.getGasPressed()));
+  brake_engaged->setText(QString::number(cs.getBrakePressed()));
+}
+
+SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
+  main = new QVBoxLayout(this);
+  QHBoxLayout *steeringStatus = new QHBoxLayout();
+  QLabel *steeringPressed = new QLabel("Steering Engaged: ");
+  QLabel *steeringVal = new QLabel("Steering Val: ");
+  steer_enabled = new QLabel("NULL");
+  steer_value = new QLabel("NULL");
+
+  steeringStatus->addWidget(steeringPressed);
+  steeringStatus->addWidget(steer_enabled);
+  steeringStatus->addWidget(steeringVal);
+  steeringStatus->addWidget(steer_value);
+
+  main->addLayout(steeringStatus);
+  setStyleSheet(R"(
+    QLabel {
+    color: #BBBBBB;
+    font-size: 30px;
+    }
+    )");
+}
+
+void SteerStatus::update(QWidget *parent) : QWidget(parent) {
+  auto cs = sm["carState"].getCarState();
+  steer_enabled->setText(QString::number(cs.getSteeringPressed()));
+  steer_value->setText(QString::number(cs.getSteeringAngleDeg()));
+}
