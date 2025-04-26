@@ -122,15 +122,15 @@ SpeedStatus::SpeedStatus(QWidget* parent, std::string units) : QWidget(parent) {
     )");
   
   main->addWidget(title);
-
+  
   speed_value = new QLabel("0");
-  unit = new QLabel(units);
+  unit = new QLabel(QString(units));
   QLabel *standstill = new QLabel("Standstill: ");
   ss_value = new QLabel("NULL");
   
   QHBoxLayout *i = new QHBoxLayout();
   QHBoxLayout *i2 = new QHBoxLayout();
-  i->addWidget(indicator);
+  i->addWidget(speed_value);
   i->addWidget(unit);
   i2->addWidget(standstill);
   i2->addWidget(ss_value);
@@ -148,7 +148,7 @@ SpeedStatus::SpeedStatus(QWidget* parent, std::string units) : QWidget(parent) {
 }
 
 SpeedStatus::update(const SubMaster &sm){
-    auto cs = sm["carState"].getCarState();v
+    auto cs = sm["carState"].getCarState();
     ss_value->setText(QString::number(cs.getStandstill()));
     speed_value->setText(QString::number((convFactor+cs.getVEgoCluster())));
 }
