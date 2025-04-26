@@ -20,7 +20,9 @@
 
 StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   //Tempory for testing in car on Tuesday
-  QVBoxLayout *main = new QVBoxLayout(this);
+  main = new QVBoxLayout(this);
+
+  
   QHBoxLayout *fuel = new QHBoxLayout();
   QLabel *fuel_name = new QLabel("Gas Pedal: ");
   QLabel *gas_pressed = new QLabel("Gas Engaged: ");
@@ -103,4 +105,9 @@ void StatusWidget::update(const SubMaster &sm) {
   steer_value->setText(QString::number(cs.getSteeringAngleDeg()));
   esp_value->setText(QString::number(cs.getEspDisabled()));
   cruise_value->setText(QString::number(cs.getCruiseState().getEnabled()));
+}
+
+SpeedStatus::SpeedStatus(QWidget *parent, QString units) : StatusWidget parent {
+// (Name, bool?, inverted, functionCall)
+
 }
