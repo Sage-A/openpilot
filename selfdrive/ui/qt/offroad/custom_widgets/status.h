@@ -24,16 +24,6 @@ class StatusWidget : public QWidget {
  
  private:
    QVBoxLayout *main;
-   QLabel *fuel_value;
-   QLabel *gas_value;
-   QLabel *brake_value;
-   QLabel *steer_enabled;
-   QLabel *steer_value;
-   QLabel *esp_value;
-   QLabel *cruise_value;
-   QLabel *gear_value;
-   QLabel *door_value;
-   QLabel *seatbelt_value;
  };
 
 class SpeedStatus : public QWidget {
@@ -84,6 +74,11 @@ class DriveStatus : public QWidget {
  
  private: // Gas pedal, gas pressed, brake pressed, current gear, cruise control enabled
    QVBoxLayout *main;
+   QLabel *gas_engaged;
+   QLabel *gas_value;
+   QLabel *brake_engaged;
+   QLabel *cruise_enabled;
+   QLabel *gear_value;
 };
 
 class SteerStatus : public QWidget {
@@ -94,4 +89,6 @@ class SteerStatus : public QWidget {
  
  private: // Steering value, steering engaged
    QVBoxLayout *main;
+   QLabel *steer_enabled;
+   QLabel *steer_value;
 };
