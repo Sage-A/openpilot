@@ -17,42 +17,6 @@
 #include "selfdrive/ui/qt/offroad/customGUI.h"
 #include "cereal/gen/cpp/car.capnp.h"
 
-speedWidget::speedWidget(QWidget* parent) : QWidget(parent) {
-  QVBoxLayout *main = new QVBoxLayout(this);
-  QLabel *title = new QLabel("Speed");
-  title->setStyleSheet(R"(
-    QLabel {
-     font-size: 40px;
-     font-weight: bold;
-     color: #a9a9a9;
-     }
-    )");
-  
-  main->addWidget(title);
-
-  indicator = new QLabel("0");
-  unit = new QLabel(" mph");
-
-  indicator->setStyleSheet(R"(
-    QLabel {
-     font-size: 30px;
-     color: #FFFFFF;
-     }
-    )");
-  unit->setStyleSheet(R"(
-    QLabel {
-     font-size: 30px;
-     color: #FFFFFF;
-     }
-    )");
-  QHBoxLayout *internal = new QHBoxLayout();
-  internal->addWidget(indicator);
-  internal->addWidget(unit);
-
-  main->addLayout(internal);
-  main->setAlignment(Qt::AlignCenter);
-}
-
 lightWidget::lightWidget(QWidget* parent) : QWidget(parent) {
   QHBoxLayout *main = new QHBoxLayout(this);
   QLabel *leftBlinker = new QLabel("Left Blinker");
@@ -99,8 +63,6 @@ lightWidget::lightWidget(QWidget* parent) : QWidget(parent) {
     )");
 }
 
-
-
 void CustomWindow::showEvent(QShowEvent *event) {
   setCurrentPanel(0);
 }
@@ -145,7 +107,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   primary->addWidget(ss);
 
   accW = new AccelerationW(this);
-  spW = new speedWidget(this);
+  spW = new SpeedStatus(this);
   speed_bar->addWidget(spW);
   speed_bar->addWidget(accW);
 
@@ -163,7 +125,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
 void CustomWindow::updateState(const UIState &s) {
   const SubMaster &sm = *(s.sm);
   lW->update(sm);
-  spW->update(sm);
+  spW->update(sm["carState"].getCarState());
   statusW->update(sm);
 }
 
@@ -181,9 +143,4 @@ void lightWidget::update(const SubMaster &sm){
   else{
     rightInd->setPixmap(iconMap[0]);
   }
-}
-
-void speedWidget::update(const SubMaster &sm){
-  //Fetch current speed from car
-  indicator->setText(QString::number(sm["carState"].getCarState().getVEgoCluster()));
 }
