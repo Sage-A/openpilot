@@ -18,8 +18,10 @@
 #include "selfdrive/ui/qt/offroad/customGUI.h"
 #include "selfdrive/ui/qt/offroad/custom_widgets/status.h"
 
+// General status widget outline
 StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   main = new QVBoxLayout(this);
+  statusValue = new QLabel();
   
   setStyleSheet(R"(
     QLabel {
@@ -30,9 +32,11 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
 }
 
 void StatusWidget::update(const SubMaster &sm) {
+  statusValue->setText("Update");
 }
 
 SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
+  // Set up pixmap array and conversion values
   convFactor = 1;
   QLabel *units;
   QPixmap indOff = QPixmap("../assets/icons/indicatorC_off");
@@ -48,9 +52,9 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
     convFactor = 3.6;
     units = new QLabel("KMH");
   }
-      
+
+  // Create labels and value objects
   main = new QVBoxLayout(this);
-  
   speed_value = new QLabel("0");
   QLabel *standstill = new QLabel("Standstill");
   ss_value = new QLabel();
@@ -69,7 +73,8 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
     font-size: 35px;
     }
   )");
-  
+
+  // Add labels and values to layouts
   QHBoxLayout *i = new QHBoxLayout();
   QHBoxLayout *i2 = new QHBoxLayout();
   i2->setAlignment(Qt::AlignCenter);
@@ -92,11 +97,13 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
     )");
 }
 
+// Update speed and standstill state
 void SpeedStatus::update(const SubMaster &sm){
     auto cs = sm["carState"].getCarState();
     speed_value->setText(QString::number((static_cast<int>(convFactor*cs.getVEgoCluster()))));
   
     if(cs.getStandstill() == 1){
+      // Car is stationary
       ss_value->setPixmap(iconMap[1]);
     }
     else{
@@ -105,6 +112,7 @@ void SpeedStatus::update(const SubMaster &sm){
 }
 
 BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
+  // Create icon map array, labels, and values
   main = new QVBoxLayout(this);
   QHBoxLayout *main2 = new QHBoxLayout();
   QLabel *title = new QLabel("Turn Signals");
@@ -143,6 +151,7 @@ BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
     }
     )");
 
+  // Add widgets to layout
   main2->setSpacing(25);
   main2->setAlignment(Qt::AlignCenter);
   main2->addWidget(leftInd);
@@ -160,6 +169,7 @@ BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
 
 void BlinkerStatus::update(const SubMaster &sm){
   if(sm["carState"].getCarState().getLeftBlinker() == true){
+    // Left turn signal is on
     leftInd->setPixmap(iconMap[1]);
   }
   else{
@@ -167,6 +177,7 @@ void BlinkerStatus::update(const SubMaster &sm){
   }
 
   if(sm["carState"].getCarState().getRightBlinker() == true){
+    // right turn signal is on
     rightInd->setPixmap(iconMap[3]);
   }
   else{
@@ -175,6 +186,7 @@ void BlinkerStatus::update(const SubMaster &sm){
 }
 
 CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
+  // Create icon map, labels, and value objects
   main = new QVBoxLayout(this);
   QPixmap indOff = QPixmap("../assets/icons/indicatorC_off");
   QPixmap indAlert = QPixmap("../assets/icons/indicatorC_alert");
@@ -193,7 +205,8 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
   QLabel *seatbelt_stat = new QLabel("Seatbelt Unbuckled");
   QLabel *espEnabled = new QLabel("ESP Disabled");
   QLabel *cruiseStat = new QLabel("Cruise Control");
-  
+
+  // Set up indicator objects and fix image size
   door_value = new QLabel();
   door_value->setScaledContents(true);
   door_value->setPixmap(iconMap[0]);
@@ -232,12 +245,14 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
       min-height: 60px;
       min-width: 60px; } )");
 
+  // Add widgets to layout
   driverStatus->addWidget(door_status);
   driverStatus->addWidget(door_value);
   driverStatus->addStretch();
   driverStatus->addWidget(seatbelt_stat);
   driverStatus->addWidget(seatbelt_value);
   main->addLayout(driverStatus);
+  
   QHBoxLayout *temp = new QHBoxLayout();
   temp->setAlignment(Qt::AlignLeft);
   temp->setSpacing(30);
@@ -284,6 +299,7 @@ void CarStatus::update(const SubMaster &sm){
   }
   
   if(cs.getCruiseState().getEnabled() == 1){
+    // Cruise control is turned on
     cruise_enabled->setPixmap(iconMap[3]);
   }
   else{
@@ -292,6 +308,7 @@ void CarStatus::update(const SubMaster &sm){
 }
 
 DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
+  // Create icon layout, labels and value objects
   main = new QVBoxLayout(this);
   QPixmap indOff = QPixmap("../assets/icons/indicatorC_off");
   QPixmap indOn = QPixmap("../assets/icons/indicatorC_on");
@@ -306,7 +323,8 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
   QLabel *brake_pressed = new QLabel("Brake Engaged");
   QLabel *gearShift = new QLabel("Gear: ");
   gear_value = new QLabel();
-  
+
+  // Create indicator objects
   gas_engaged = new QLabel();
   gas_engaged->setScaledContents(true);
   gas_engaged->setPixmap(iconMap[0]);
@@ -327,6 +345,7 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
       min-height: 60px;
       min-width: 60px; } )");
 
+  // Add widgets to layout
   hLay->addWidget(gas_pressed);
   hLay->addWidget(gas_engaged);
   hLay->addStretch();
@@ -357,6 +376,7 @@ void DriveStatus::update(const SubMaster &sm){
   auto cs = sm["carState"].getCarState();
 
   if(cs.getGasPressed() == 1){
+    // Gas pedal is pressed
     gas_engaged->setPixmap(iconMap[1]);
   }
   else{
@@ -364,12 +384,14 @@ void DriveStatus::update(const SubMaster &sm){
   }
 
   if(cs.getBrakePressed() == 1){
+    // Brake pedal is pressed
     brake_engaged->setPixmap(iconMap[1]);
   }
   else{
     brake_engaged->setPixmap(iconMap[0]);
   }
-  
+
+  // Set text based on current gear position
   if(static_cast<int>(cs.getGearShifter()) == 1){
     gear_value->setText("Park");
   }
@@ -383,10 +405,12 @@ void DriveStatus::update(const SubMaster &sm){
     gear_value->setText("Unknown");
   }
 
+  // Set % of gas pedal down, estimates 250 as maximum
   gas_value->setText(QString::number(static_cast<int>(cs.getGas() / 250)));
 }
 
 SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
+  // Creates icon map, labels, and value objects
   main = new QVBoxLayout(this);
   QHBoxLayout *steeringStatus = new QHBoxLayout();
   steeringStatus->setSpacing(35);
@@ -401,6 +425,7 @@ SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
   iconMap[0] = indOff;
   iconMap[1] = indOn;
 
+  // Create indicator objects
   steer_enabled->setScaledContents(true);
   steer_enabled->setPixmap(iconMap[0]);
   steer_enabled->setStyleSheet(R"(
@@ -429,12 +454,14 @@ SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
 void SteerStatus::update(const SubMaster &sm){
   auto cs = sm["carState"].getCarState();
   if(cs.getSteeringPressed() == 1){
+    // Currently adjusting steering wheel
     steer_enabled->setPixmap(iconMap[1]);
   }
   else{
     steer_enabled->setPixmap(iconMap[0]);
   }
 
+  // Set labels for how far the wheel is turned, estimates 480 as maximum
   float val = cs.getSteeringAngleDeg();
   steer_value->setText(QString::number(static_cast<int>(std::abs(val) / 480)));
   if(val < 0){
