@@ -47,7 +47,7 @@ class BlinkerStatus : public QWidget {
    explicit BlinkerStatus(QWidget *parent);
    void update(const SubMaster &sm);
  
- private: // left/right blinkers on and off
+ private:
    QVBoxLayout *main;
    QPixmap iconMap[4];
    QLabel *leftInd;
@@ -60,11 +60,12 @@ class CarStatus : public QWidget {
    explicit CarStatus(QWidget *parent);
    void update(const SubMaster &sm);
  
- private: // doors open, seatbelt unlatched, esp enabled
+ private: 
    QVBoxLayout *main;
    QLabel *door_value;
    QLabel *seatbelt_value;
    QLabel *esp_value;
+   QPixmap iconMap[3];
 };
 
 class DriveStatus : public QWidget {
