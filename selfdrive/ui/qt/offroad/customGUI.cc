@@ -150,6 +150,12 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
     QObject::connect(ss, &SteeringSlider::valueChange, [&]() {
       SteeringGUI::get_slider_value(value / 100);
     });
+    QObject::connect(accW, &AccelerationW::accelStart, [](){
+      SteeringGUI::GUI_ACCEL = true;
+    });
+    QObject::connect(accW, &AccelerationW::accelStop, [](){
+      SteeringGUI::GUI_ACCEL = false;
+    });
   }
   main_layout->addLayout(sidebar);
   main_layout->addLayout(primary);
