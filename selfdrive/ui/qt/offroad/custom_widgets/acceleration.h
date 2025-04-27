@@ -20,4 +20,7 @@ class AccelerationW : public QWidget {
   Q_OBJECT
 public:
   explicit AccelerationW(QWidget *parent);
+
+signals:
+  void accel();
 };
