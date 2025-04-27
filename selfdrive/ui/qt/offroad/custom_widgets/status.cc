@@ -23,7 +23,7 @@ StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
   
   setStyleSheet(R"(
     QLabel {
-    color: #BBBBBB;
+    color: #CCCCCC;
     font-size: 30px;
     }
     )");
@@ -151,7 +151,7 @@ BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
   main->addLayout(main2);
   setStyleSheet(R"(
     QLabel {
-    color: #BBBBBB;
+    color: #CCCCCC;
     font-size: 60px;
     font-weight: bold;
     }
@@ -235,7 +235,7 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
   main->addLayout(temp);
   setStyleSheet(R"(
     QLabel {
-      color: #BBBBBB;
+      color: #CCCCCC;
       font-size: 55px;
       font-weight: bold;
     }
@@ -338,7 +338,7 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
   main->addLayout(carStat);
 setStyleSheet(R"(
     QLabel {
-    color: #BBBBBB;
+    color: #CCCCCC;
     font-size: 55px;
     font-weight: bold;
     }
