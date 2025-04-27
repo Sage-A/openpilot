@@ -40,22 +40,22 @@ SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
   connect(steering_slider, &SliderControl::valueChanged, turnAngle, &QSpinBox::setValue);
   steering_slider->setStyleSheet(R"(
           QSlider {
-          min-height: 100px;
-          max-height: 100px;
+          min-height: 200px;
+          max-height: 200px;
           background: #FFFFFF;
           color: black;
       }
       QSlider::groove:horizontal {
           border: 1px solid #262626;
-          height: 25px;
+          height: 150px;
           background: #FF0000;
-          margin: 0 12px;
+          margin: 0 75px;
       }
       QSlider::handle:horizontal {
           background: #0000ff;
-          width: 30px;
-          height: 150px;
-          margin: -24px -12px;
+          width: 100px;
+          height: 250px;
+          margin: -100px -50px;
       }
           )");
 
