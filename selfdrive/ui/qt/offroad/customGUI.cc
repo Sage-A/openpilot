@@ -1,3 +1,4 @@
+#include <Python.h>
 #include <cassert>
 #include <cmath>
 #include <string>
@@ -147,7 +148,10 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   });
   QObject::connect(close_btn, &QPushButton::clicked, this, &CustomWindow::closeCustom);
   try {
-    connect(accW, &AccelerationW::accelStart, [=]() { emit accelDown(); });
+    connect(accW, &AccelerationW::accelStart, [=]() { 
+      Py_Initalize();
+      Py_Finalize();
+    });
     connect(accW, &AccelerationW::accelStop, [=]() { emit accelRelease(); });
     connect(ss, &SteeringSlider::valueChange, [=](int val) { emit emitSliderVal(val); });
   }
