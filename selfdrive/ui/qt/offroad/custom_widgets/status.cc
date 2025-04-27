@@ -194,42 +194,43 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
   door_value->setPixmap(iconMap[0]);
   door_value->setStyleSheet(R"(
     QLabel {
-      max-height: 75px;
-      max-width: 75px;
-      min-height: 75px;
-      min-width: 75px; } )");
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
   seatbelt_value = new QLabel();
   seatbelt_value->setPixmap(iconMap[0]);
   seatbelt_value->setScaledContents(true);
   seatbelt_value->setStyleSheet(R"(
     QLabel {
-      max-height: 75px;
-      max-width: 75px;
-      min-height: 75px;
-      min-width: 75px; } )");
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
   
   esp_value = new QLabel();
   esp_value->setPixmap(iconMap[0]);
   esp_value->setScaledContents(true);
   esp_value->setStyleSheet(R"(
     QLabel {
-      max-height: 75px;
-      max-width: 75px;
-      min-height: 75px;
-      min-width: 75px; } )");
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
 
   driverStatus->addWidget(door_status);
   driverStatus->addWidget(door_value);
   driverStatus->addWidget(seatbelt_stat);
   driverStatus->addWidget(seatbelt_value);
-  driverStatus->addWidget(espEnabled);
-  driverStatus->addWidget(esp_value);
-  
   main->addLayout(driverStatus);
+  main->addWidget(espEnabled);
+  main->addWidget(esp_value);
+  
   setStyleSheet(R"(
     QLabel {
       color: #BBBBBB;
       font-size: 60px;
+      font-weight: bold;
     }
     )");
 }
