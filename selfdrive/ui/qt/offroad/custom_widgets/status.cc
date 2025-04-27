@@ -279,7 +279,7 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
   hLay->setSpacing(35);
   hLay->setAlignment(Qt::AlignLeft);
   
-  QLabel *fuel_name = new QLabel("Gas Pedal: ");
+  QLabel *fuel_name = new QLabel("Gas Pedal  %");
   QLabel *gas_pressed = new QLabel("Gas Engaged");
   QLabel *brake_pressed = new QLabel("Brake Engaged");
   gas_engaged = new QLabel();
@@ -368,8 +368,20 @@ void DriveStatus::update(const SubMaster &sm){
     brake_engaged->setPixmap(iconMap[0]);
   }
   
-  gear_value->setText(QString::number(static_cast<int>(cs.getGearShifter())));
-  gas_value->setText(QString::number(cs.getGas()));
+  if(static_cast<int>(cs.getGearShifter()) == 1){
+    gear_value->setText("Park");
+  }
+  else if(static_cast<int>(cs.getGearShifter()) == 2){
+    gear_value->setText("Drive");
+  }
+  else if(static_cast<int>(cs.getGearShifter()) == 4){
+    gear_value->setText("Reverse");
+  }
+  else{
+    gear_value->setText("Unknown");
+  }
+
+  gas_value->setText(static_cast<int>(QString::number(cs.getGas()) / 250));
 }
 
 SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
