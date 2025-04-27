@@ -186,7 +186,7 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
   
   QHBoxLayout *driverStatus = new QHBoxLayout();
   driverStatus->setSpacing(30);
-  main->setSpacing(30);
+  driverStatus->setAlignment(Qt::AlignLeft);
   
   QLabel *door_status = new QLabel("Door Open");
   QLabel *seatbelt_stat = new QLabel("Seatbelt Unbuckled");
@@ -223,10 +223,12 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
 
   driverStatus->addWidget(door_status);
   driverStatus->addWidget(door_value);
+  driverStatus->addStretch();
   driverStatus->addWidget(seatbelt_stat);
   driverStatus->addWidget(seatbelt_value);
   main->addLayout(driverStatus);
   QHBoxLayout *temp = new QHBoxLayout();
+  temp->setAlignment(Qt::AlignLeft);
   temp->addWidget(espEnabled);
   temp->addWidget(esp_value);
  
