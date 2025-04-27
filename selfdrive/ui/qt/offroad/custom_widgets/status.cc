@@ -74,6 +74,7 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   QHBoxLayout *i = new QHBoxLayout();
   QHBoxLayout *i2 = new QHBoxLayout();
   i2->setAlignment(Qt::AlignCenter);
+  i2->setSpacing(35);
   
   i->addWidget(speed_value);
   i->addWidget(units);
@@ -218,11 +219,11 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
       min-width: 75px; } )");
 
   driverStatus->addWidget(door_status);
-  driverStatus->addWidget(door_value);
+  //driverStatus->addWidget(door_value);
   driverStatus->addWidget(seatbelt_stat);
-  driverStatus->addWidget(seatbelt_value);
+  //driverStatus->addWidget(seatbelt_value);
   driverStatus->addWidget(espEnabled);
-  driverStatus->addWidget(esp_value);
+  //driverStatus->addWidget(esp_value);
   
   main->addLayout(driverStatus);
   setStyleSheet(R"(
