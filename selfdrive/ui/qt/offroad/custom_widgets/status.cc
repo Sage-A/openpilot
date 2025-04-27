@@ -91,18 +91,22 @@ BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
   QLabel *leftBlinker = new QLabel("Left Blinker");
   QLabel *rightBlinker = new QLabel("Right Blinker");
   
-  QPixmap ind_on = QPixmap("../assets/icons/indicator_on");
-  QPixmap ind_off = QPixmap("../assets/icons/indicator_off");
+  QPixmap indL_on = QPixmap("../assets/icons/blinkL_on");
+  QPixmap indL_off = QPixmap("../assets/icons/blinkL_off");
+  QPixmap indR_on = QPixmap("../assets/icons/blinkR_on");
+  QPixmap indR_off = QPixmap("../assets/icons/blinkR_off");
 
-  iconMap[0] = ind_off;
-  iconMap[1] = ind_on;
+  iconMap[0] = indL_off;
+  iconMap[1] = indL_on;
+  iconMap[2] = indR_off;
+  iconMap[3] = indR_on;
   leftInd = new QLabel();
   leftInd->setScaledContents(true);
   rightInd = new QLabel();
   rightInd->setScaledContents(true);
   
   leftInd->setPixmap(iconMap[0]);
-  rightInd->setPixmap(iconMap[1]);
+  rightInd->setPixmap(iconMap[2]);
 
   leftInd->setStyleSheet(R"(
     QLabel {
@@ -142,10 +146,10 @@ void BlinkerStatus::update(const SubMaster &sm){
   }
 
   if(sm["carState"].getCarState().getRightBlinker() == true){
-    rightInd->setPixmap(iconMap[1]);
+    rightInd->setPixmap(iconMap[3]);
   }
   else{
-    rightInd->setPixmap(iconMap[0]);
+    rightInd->setPixmap(iconMap[2]);
   }
 }
 
