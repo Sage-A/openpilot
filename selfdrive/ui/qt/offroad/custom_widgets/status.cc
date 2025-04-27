@@ -388,7 +388,6 @@ SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
   main = new QVBoxLayout(this);
   QHBoxLayout *steeringStatus = new QHBoxLayout();
   steeringStatus->setSpacing(35);
-  steeringStatus->setAlignment(Qt::AlignLeft);
   QLabel *steeringPressed = new QLabel("Steering Engaged");
   QLabel *steeringVal = new QLabel("Wheel Angle");
   steer_enabled = new QLabel();
@@ -416,8 +415,9 @@ SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
   main->addLayout(steeringStatus);
   setStyleSheet(R"(
     QLabel {
-    color: #BBBBBB;
-    font-size: 30px;
+    color: #CCCCCC;
+    font-size: 55px;
+    font-weight: bold;
     }
     )");
 }
