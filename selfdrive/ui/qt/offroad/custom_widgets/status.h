@@ -64,6 +64,7 @@ class CarStatus : public QWidget {
    QVBoxLayout *main;
    QLabel *door_value;
    QLabel *seatbelt_value;
+   QLabel *cruise_enabled;
    QLabel *esp_value;
    QPixmap iconMap[4];
 };
@@ -79,7 +80,6 @@ class DriveStatus : public QWidget {
    QLabel *gas_engaged;
    QLabel *gas_value;
    QLabel *brake_engaged;
-   QLabel *cruise_enabled;
    QLabel *gear_value;
    QPixmap iconMap[2];
 };
