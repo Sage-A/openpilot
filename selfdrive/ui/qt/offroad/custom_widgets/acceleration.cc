@@ -32,7 +32,8 @@ AccelerationW::AccelerationW(QWidget* parent) : QWidget(parent) {
   
   QPushButton *incBtn = new QPushButton(tr("^"));
   incBtn->setFixedSize(200, 350);
-  QObject::connect(&incBtn, &QPushButton::clicked, this, &AccelerationW::accel);
+  QObject::connect(&incBtn, &QPushButton::pressed, this, &AccelerationW::accelStart);
+  QObject::connect(&incBtn, &QPushButton::released, this, &AccelerationW::accelStop);
   
   QPushButton *decBtn = new QPushButton(tr("V"));
   decBtn->setFixedSize(200, 350);
