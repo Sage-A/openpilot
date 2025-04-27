@@ -106,25 +106,26 @@ BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
   
   leftInd->setPixmap(iconMap[0]);
   rightInd->setPixmap(iconMap[2]);
-
+  
   leftInd->setStyleSheet(R"(
     QLabel {
-      max-height: 50px;
-      max-width: 50px;
-      min-height: 50px;
-      min-width: 50px;
+      max-height: 100px;
+      max-width: 100px;
+      min-height: 100px;
+      min-width: 100px;
     }
     )");
   rightInd->setStyleSheet(R"(
     QLabel {
-      max-height: 50px;
-      max-width: 50px;
-      min-height: 50px;
-      min-width: 50px;
+      max-height: 100px;
+      max-width: 100px;
+      min-height: 100px;
+      min-width: 100px;
     }
     )");
 
   main2->setSpacing(25);
+  main2->setAlignment(Qt::AlignCenter);
   main2->addWidget(leftInd);
   main2->addWidget(title);
   main2->addWidget(rightInd);
