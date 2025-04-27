@@ -61,7 +61,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   primary->addWidget(lW);
   primary->addWidget(carStat);
   //primary->addWidget(steerStat);
- // primary->addWidget(driveStat);
+  primary->addWidget(driveStat);
   primary->addWidget(ss);
 
   accW = new AccelerationW(this);
