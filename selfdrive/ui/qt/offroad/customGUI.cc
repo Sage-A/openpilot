@@ -157,6 +157,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
       SteeringGUI::GUI_ACCEL = false;
     });
   }
+    catch (...){}
   main_layout->addLayout(sidebar);
   main_layout->addLayout(primary);
   main_layout->addLayout(speed_bar);
