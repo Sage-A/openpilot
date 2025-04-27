@@ -37,6 +37,7 @@ class SpeedStatus : public QWidget {
    QLabel *speed_value;
    QLabel *unit;
    QLabel *ss_value;
+   QPixmap iconMap[2];
    float convFactor;
 };
 
