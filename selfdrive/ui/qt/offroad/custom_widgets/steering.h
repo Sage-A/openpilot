@@ -16,6 +16,7 @@
 #include "selfdrive/ui/qt/util.h"
 #include "selfdrive/ui/qt/widgets/controls.h"
 
+// Creates steering slider widget
 class SteeringSlider : public QWidget {
   Q_OBJECT
 public:
