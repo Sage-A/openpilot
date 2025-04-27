@@ -22,5 +22,6 @@ public:
   explicit AccelerationW(QWidget *parent);
 
 signals:
-  void accel();
+  void accelStart();
+  void accelStop();
 };
