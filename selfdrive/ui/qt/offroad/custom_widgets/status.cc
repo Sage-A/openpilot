@@ -226,7 +226,7 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
   driverStatus->addWidget(seatbelt_stat);
   driverStatus->addWidget(seatbelt_value);
   main->addLayout(driverStatus);
-  QHBoxLayout *temp = QHBoxLayout();
+  QHBoxLayout *temp = new QHBoxLayout();
   temp->addWidget(espEnabled);
   temp->addWidget(esp_value);
  
