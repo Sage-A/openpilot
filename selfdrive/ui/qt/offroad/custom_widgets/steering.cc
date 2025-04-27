@@ -11,17 +11,18 @@
 #include "selfdrive/ui/qt/network/networking.h"
 #include "selfdrive/ui/qt/offroad/settings.h"
 #include "selfdrive/ui/qt/qt_window.h"
-#include "selfdrive/ui/qt/widgets/prime.h"
 #include "selfdrive/ui/qt/widgets/scrollview.h"
-#include "selfdrive/ui/qt/offroad/developer_panel.h"
 #include "selfdrive/ui/qt/offroad/customGUI.h"
 #include "cereal/gen/cpp/car.capnp.h"
 #include "selfdrive/ui/qt/offroad/custom_widgets/steering.h"
 
+// Create steering control slider widget
 SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
   QVBoxLayout *main = new QVBoxLayout(this);
   main->addStretch();
   main->setAlignment(Qt::AlignHCenter);
+
+  // Create and add labels
   QLabel *title = new QLabel("Wheel Control");
   turnAngle = new QSpinBox();
   turnAngle->setPrefix("Angle: ");
@@ -38,9 +39,11 @@ SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
   temp->setAlignment(Qt::AlignCenter);
   temp->addWidget(title);
   temp->addWidget(turnAngle);
-
   main->addLayout(temp);
   main->setSpacing(20);
+
+  // Create new slider control
+  // Set style of slider
   steering_slider = new SliderControl(Qt::Horizontal);
   connect(steering_slider, &SliderControl::valueChanged, turnAngle, &QSpinBox::setValue);
   steering_slider->setStyleSheet(R"(
@@ -72,6 +75,7 @@ SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
           font-weight: bold;
       })");
 
+  // Slider initialization 
   turnAngle->setReadOnly(true);
   steering_slider->setMinimum(-100);
   steering_slider->setMaximum(100);
