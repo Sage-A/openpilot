@@ -147,9 +147,9 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   });
   QObject::connect(close_btn, &QPushButton::clicked, this, &CustomWindow::closeCustom);
   try {
-    QObject::connect(ss, &SteeringSlider::valueChange, this, &CustomWindow::emitSliderVal);
-    QObject::connect(accW, &AccelerationW::accelStart, this, &CustomWindow::accelDown);
-    QObject::connect(accW, &AccelerationW::accelStop, this, &CustomWindow::accelRelease);
+    connect(accW, &AccelerationW::accelStart, [=]() { emit accelDown(); });
+    connect(accW, &AccelerationW::accelStop, [=]() { emit accelRelease(); });
+    connect(ss, &SteeringSlider::valueChange, [=](int val) { emit emitSliderVal(val); });
   }
   catch (...) {}
   main_layout->addLayout(sidebar);
