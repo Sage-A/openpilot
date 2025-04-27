@@ -16,6 +16,7 @@
 #include "selfdrive/ui/qt/util.h"
 #include "selfdrive/ui/qt/widgets/controls.h"
 
+// General status widget outline
 class StatusWidget : public QWidget {
    Q_OBJECT
  public:
@@ -24,8 +25,10 @@ class StatusWidget : public QWidget {
  
  private:
    QVBoxLayout *main;
+   QLabel *statusValue;
  };
 
+// Displays speed of vehicle
 class SpeedStatus : public QWidget {
    Q_OBJECT
  public:
@@ -41,6 +44,7 @@ class SpeedStatus : public QWidget {
    float convFactor;
 };
 
+// Displays status of turn signals
 class BlinkerStatus : public QWidget {
    Q_OBJECT
  public:
@@ -54,6 +58,7 @@ class BlinkerStatus : public QWidget {
    QLabel *rightInd;
 };
 
+// General car status
 class CarStatus : public QWidget {
    Q_OBJECT
  public:
@@ -69,13 +74,14 @@ class CarStatus : public QWidget {
    QPixmap iconMap[4];
 };
 
+// Active driving status
 class DriveStatus : public QWidget {
    Q_OBJECT
  public:
    explicit DriveStatus(QWidget *parent);
    void update(const SubMaster &sm);
  
- private: // Gas pedal, gas pressed, brake pressed, current gear, cruise control enabled
+ private:
    QVBoxLayout *main;
    QLabel *gas_engaged;
    QLabel *gas_value;
@@ -84,13 +90,14 @@ class DriveStatus : public QWidget {
    QPixmap iconMap[2];
 };
 
+// Steering wheel status
 class SteerStatus : public QWidget {
    Q_OBJECT
  public:
    explicit SteerStatus(QWidget *parent);
    void update(const SubMaster &sm);
  
- private: // Steering value, steering engaged
+ private:
    QVBoxLayout *main;
    QLabel *steer_enabled;
    QLabel *steer_value;
