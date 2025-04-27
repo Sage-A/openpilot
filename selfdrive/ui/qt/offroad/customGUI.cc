@@ -16,6 +16,7 @@
 #include "selfdrive/ui/qt/offroad/developer_panel.h"
 #include "selfdrive/ui/qt/offroad/customGUI.h"
 #include "cereal/gen/cpp/car.capnp.h"
+#include "tools/joystick/joystick_control.h"
 
 // Bring custom window to the front
 void CustomWindow::showEvent(QShowEvent *event) {
@@ -146,8 +147,8 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
     driveStat->setVisible(!driveStat->isVisible());
   });
   QObject::connect(close_btn, &QPushButton::clicked, this, &CustomWindow::closeCustom);
-  try{
-    QObject::connect(ss, &SteeringSlider::valueChange, [&]() {
+  try {
+    QObject::connect(ss, &SteeringSlider::valueChange, [=](int value) {
       SteeringGUI::get_slider_value(value / 100);
     });
     QObject::connect(accW, &AccelerationW::accelStart, [](){
@@ -157,7 +158,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
       SteeringGUI::GUI_ACCEL = false;
     });
   }
-    catch (...){}
+  catch (...) {}
   main_layout->addLayout(sidebar);
   main_layout->addLayout(primary);
   main_layout->addLayout(speed_bar);
