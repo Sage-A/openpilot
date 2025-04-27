@@ -41,7 +41,8 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   iconMap[1] = indOn;
   
   if(uSel == 0){
-    convFactor = 2.2369;
+    //convFactor = 2.2369;
+    convFactor = 100;
     units = new QLabel("MPH");
   }
   else if(uSel == 1){
@@ -67,7 +68,6 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   standstill->setStyleSheet(R"(
     QLabel {
     font-size: 35px;
-    font-weight: normal;
     }
   )");
   
@@ -229,6 +229,7 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
   main->addLayout(driverStatus);
   QHBoxLayout *temp = new QHBoxLayout();
   temp->setAlignment(Qt::AlignLeft);
+  temp->setSpacing(30);
   temp->addWidget(espEnabled);
   temp->addWidget(esp_value);
  
