@@ -11,6 +11,7 @@ authors = [
 dependencies = [
   # multiple users
   "sounddevice",  # micd + soundd
+  "python-dev",
   "pyserial",     # pigeond + qcomgpsd
   "requests",     # many one-off uses
   "sympy",        # rednose + friends
