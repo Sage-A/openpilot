@@ -64,6 +64,11 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
       min-width: 75px;
     }
     )");
+  standstill->setStyleSheet(R"(
+    QLabel {
+    font-size: 35px;
+    }
+  )");
   
   QHBoxLayout *i = new QHBoxLayout();
   QHBoxLayout *i2 = new QHBoxLayout();
@@ -74,11 +79,6 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   
   i2->addWidget(standstill);
   i2->addWidget(ss_value);
-  i2->setStyleSheet(R"(
-    QLabel {
-    font-size: 35px;
-    }
-  )");
   
   main->addLayout(i);
   main->addLayout(i2);  
