@@ -15,6 +15,7 @@
 #include "selfdrive/ui/ui.h"
 #include "selfdrive/ui/qt/util.h"
 
+// Creates gas / brake controls
 class AccelerationW : public QWidget {
   Q_OBJECT
 public:
