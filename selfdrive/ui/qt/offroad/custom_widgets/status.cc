@@ -35,8 +35,8 @@ void StatusWidget::update(const SubMaster &sm) {
 SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   convFactor = 1;
   QLabel *units;
-  QPixmap indOff = new QPixmap("../assets/icons/indC_off");
-  QPixmap indOn = new QPixmap("../assets/icons/indC_alert");
+  QPixmap indOff = new QPixmap("../assets/icons/indicatorC_off");
+  QPixmap indOn = new QPixmap("../assets/icons/indicatorC_alert");
   iconMap[0] = indOff;
   iconMap[1] = indOn;
   
