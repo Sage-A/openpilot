@@ -16,7 +16,11 @@
 #include "selfdrive/ui/qt/offroad/developer_panel.h"
 #include "selfdrive/ui/qt/offroad/customGUI.h"
 #include "cereal/gen/cpp/car.capnp.h"
-#include "tools/joystick/joystick_control.h"
+
+try {
+  #include "tools/joystick/joystick_control.h"
+}
+  catch (...) {}
 
 // Bring custom window to the front
 void CustomWindow::showEvent(QShowEvent *event) {
