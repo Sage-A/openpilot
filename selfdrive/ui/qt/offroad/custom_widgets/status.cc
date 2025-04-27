@@ -179,9 +179,11 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
   QPixmap indOff = QPixmap("../assets/icons/indicatorC_off");
   QPixmap indAlert = QPixmap("../assets/icons/indicatorC_alert");
   QPixmap indWarn = QPixmap("../assets/icons/indicatorC_warn");
+  QPixmap indOn = QPixmap("../assets/icons/indicatorC_on");
   iconMap[0] = indOff;
   iconMap[1] = indAlert;
   iconMap[2] = indWarn;
+  iconMap[3] = indOn;
   
   QHBoxLayout *driverStatus = new QHBoxLayout();
   driverStatus->setSpacing(30);
@@ -190,6 +192,7 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
   QLabel *door_status = new QLabel("Door Open");
   QLabel *seatbelt_stat = new QLabel("Seatbelt Unbuckled");
   QLabel *espEnabled = new QLabel("ESP Disabled");
+  QLabel *cruiseStat = new QLabel("Cruise Control");
   
   door_value = new QLabel();
   door_value->setScaledContents(true);
@@ -219,6 +222,15 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
       max-width: 60px;
       min-height: 60px;
       min-width: 60px; } )");
+  cruise_enabled = new QLabel();
+  cruise_enabled->setScaledContents(true);
+  cruise_enabled->setPixmap(iconMap[0]);
+  cruise_enabled->setStyleSheet(R"(
+    QLabel {
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
 
   driverStatus->addWidget(door_status);
   driverStatus->addWidget(door_value);
@@ -231,6 +243,9 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
   temp->setSpacing(30);
   temp->addWidget(espEnabled);
   temp->addWidget(esp_value);
+  temp->addStretch();
+  temp->addWidget(cruiseStat);
+  temp->addWidget(cruise_enabled);
  
   main->addLayout(temp);
   setStyleSheet(R"(
@@ -267,6 +282,13 @@ void CarStatus::update(const SubMaster &sm){
   else{
     esp_value->setPixmap(iconMap[0]);
   }
+  
+  if(cs.getCruiseState().getEnabled() == 1){
+    cruise_enabled->setPixmap(iconMap[3]);
+  }
+  else{
+    cruise_enabled->setPixmap(iconMap[3]);
+  }
 }
 
 DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
@@ -282,6 +304,9 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
   QLabel *fuel_name = new QLabel("Gas Pedal  %");
   QLabel *gas_pressed = new QLabel("Gas Engaged");
   QLabel *brake_pressed = new QLabel("Brake Engaged");
+  QLabel *gearShift = new QLabel("Gear: ");
+  gear_value = new QLabel();
+  
   gas_engaged = new QLabel();
   gas_engaged->setScaledContents(true);
   gas_engaged->setPixmap(iconMap[0]);
@@ -311,28 +336,11 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
   QHBoxLayout *carStat = new QHBoxLayout();
   carStat->setSpacing(35);
   carStat->setAlignment(Qt::AlignLeft);
-  QLabel *cruiseStat = new QLabel("Cruise Control");
-  QLabel *gearShift = new QLabel("Gear: ");
-
-  cruise_enabled = new QLabel();
-  cruise_enabled->setScaledContents(true);
-  cruise_enabled->setPixmap(iconMap[0]);
-  cruise_enabled->setStyleSheet(R"(
-    QLabel {
-      max-height: 60px;
-      max-width: 60px;
-      min-height: 60px;
-      min-width: 60px; } )");
-  gear_value = new QLabel();
-
-  carStat->addWidget(cruiseStat);
-  carStat->addWidget(cruise_enabled);
+  carStat->addWidget(fuel_name);
+  carStat->addWidget(gas_value);
   carStat->addStretch();
   carStat->addWidget(gearShift);
   carStat->addWidget(gear_value);
-  carStat->addStretch();
-  carStat->addWidget(fuel_name);
-  carStat->addWidget(gas_value);
 
   main->addLayout(hLay);
   main->addLayout(carStat);
@@ -347,12 +355,6 @@ setStyleSheet(R"(
 
 void DriveStatus::update(const SubMaster &sm){
   auto cs = sm["carState"].getCarState();
-  if(cs.getCruiseState().getEnabled() == 1){
-    cruise_enabled->setPixmap(iconMap[1]);
-  }
-  else{
-    cruise_enabled->setPixmap(iconMap[0]);
-  }
 
   if(cs.getGasPressed() == 1){
     gas_engaged->setPixmap(iconMap[1]);
