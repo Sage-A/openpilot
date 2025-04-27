@@ -19,7 +19,7 @@
 #include "selfdrive/ui/qt/offroad/custom_widgets/steering.h"
 #include "selfdrive/ui/qt/offroad/custom_widgets/status.h"
 
-// ********** custom window + top-level panels **********
+// ********** custom window **********
 class CustomWindow : public QFrame {
   Q_OBJECT
 
@@ -35,6 +35,7 @@ signals:
   void closeCustom();
 
 private:
+// All widgets present in custom window
   SteeringSlider *ss;
   BlinkerStatus *lW;
   AccelerationW *accW;
