@@ -185,6 +185,9 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
   iconMap[2] = indWarn;
   
   QHBoxLayout *driverStatus = new QHBoxLayout();
+  driverStatus->setSpacing(30);
+  main->setSpacing(30);
+  
   QLabel *door_status = new QLabel("Door Open");
   QLabel *seatbelt_stat = new QLabel("Seatbelt Unbuckled");
   QLabel *espEnabled = new QLabel("ESP Disabled");
