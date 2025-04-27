@@ -1,4 +1,3 @@
-#include <Python.h>
 #include <cassert>
 #include <cmath>
 #include <string>
