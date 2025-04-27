@@ -19,7 +19,6 @@ echo "updating uv..."
 # ok to fail, can also fail due to installing with brew
 uv self update || true
 
-uv lock
 echo "installing python packages..."
 uv sync --frozen --all-extras
 source .venv/bin/activate
