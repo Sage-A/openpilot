@@ -152,15 +152,9 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   });
   QObject::connect(close_btn, &QPushButton::clicked, this, &CustomWindow::closeCustom);
   try {
-    QObject::connect(ss, &SteeringSlider::valueChange, [=](int value) {
-      SteeringGUI::get_slider_value(value / 100);
-    });
-    QObject::connect(accW, &AccelerationW::accelStart, [](){
-      SteeringGUI::GUI_ACCEL = true;
-    });
-    QObject::connect(accW, &AccelerationW::accelStop, [](){
-      SteeringGUI::GUI_ACCEL = false;
-    });
+    QObject::connect(ss, &SteeringSlider::valueChange, this, &CustomWindow::emitSliderVal);
+    QObject::connect(accW, &AccelerationW::accelStart, this, &CustomWindow::accelDown);
+    QObject::connect(accW, &AccelerationW::accelStop, this, &CustomWindow::accelRelease);
   }
   catch (...) {}
   main_layout->addLayout(sidebar);
