@@ -19,6 +19,7 @@
 #include "selfdrive/ui/qt/offroad/custom_widgets/acceleration.h"
 
 AccelerationW::AccelerationW(QWidget* parent) : QWidget(parent) {
+  // Create title and control buttons
   QVBoxLayout *main = new QVBoxLayout(this);
   QLabel *title2 = new QLabel("Acceleration");
   title2->setStyleSheet(R"(
@@ -34,7 +35,8 @@ AccelerationW::AccelerationW(QWidget* parent) : QWidget(parent) {
   
   QPushButton *decBtn = new QPushButton(tr("V"));
   decBtn->setFixedSize(200, 350);
-  
+
+  // Add widgets to layout
   main->addWidget(title2);
   main->addWidget(incBtn);
   main->addWidget(decBtn);
