@@ -33,7 +33,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
       font-size: 140px;
       padding-bottom: 20px;
       border-radius: 75px;
-      background-color: #292929;
+      background-color: #555555;
       font-weight: 400;
     }
     QPushButton:pressed {
