@@ -20,7 +20,6 @@
 
 AccelerationW::AccelerationW(QWidget* parent) : QWidget(parent) {
   QVBoxLayout *main = new QVBoxLayout(this);
-  main->setAlignment(Qt::AlignCenter);
   QLabel *title2 = new QLabel("Acceleration");
   title2->setStyleSheet(R"(
     QLabel {
@@ -52,5 +51,5 @@ AccelerationW::AccelerationW(QWidget* parent) : QWidget(parent) {
     }
   )");
 
-  main->setAlignment(Qt::AlignCenter);
+  main->setAlignment(Qt::AlignRight);
 }
