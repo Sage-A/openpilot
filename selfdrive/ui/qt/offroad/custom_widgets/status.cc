@@ -132,7 +132,8 @@ BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
   setStyleSheet(R"(
     QLabel {
     color: #BBBBBB;
-    font-size: 75px;
+    font-size: 60px;
+    font-weight: bold;
     }
     )");
 }
