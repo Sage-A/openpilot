@@ -102,6 +102,7 @@ dev = [
   "dictdiffer",
   "lru-dict",
   "matplotlib",
+  "PySide6",
   "parameterized >=0.8, <0.9",
   "pyautogui",
   "pyopencl; platform_machine != 'aarch64'", # broken on arm64
