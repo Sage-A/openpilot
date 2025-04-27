@@ -391,7 +391,7 @@ SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
   QHBoxLayout *steeringStatus = new QHBoxLayout();
   steeringStatus->setSpacing(35);
   QLabel *steeringPressed = new QLabel("Steering Engaged");
-  QLabel *steeringVal = new QLabel("Wheel Angle");
+  QLabel *steeringVal = new QLabel("Wheel Angle  %");
   steer_enabled = new QLabel();
   steer_value = new QLabel("NULL");
   steer_dir = new QLabel("NULL");
