@@ -33,6 +33,9 @@ protected:
 
 signals:
   void closeCustom();
+  void emitSliderVal();
+  void accelDown();
+  void accelRelease();
 
 private:
 // All widgets present in custom window
