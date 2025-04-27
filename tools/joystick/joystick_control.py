@@ -10,6 +10,7 @@ from openpilot.common.params import Params
 from openpilot.common.realtime import Ratekeeper
 from openpilot.system.hardware import HARDWARE
 from openpilot.tools.lib.kbhit import KBHit
+from PySide6.QtCore import QObject
 
 EXPO = 0.4
 
