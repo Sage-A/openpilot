@@ -88,8 +88,7 @@ void SpeedStatus::update(const SubMaster &sm){
 BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
   main = new QVBoxLayout(this);
   QHBoxLayout *main2 = new QHBoxLayout(this);
-  QLabel *leftBlinker = new QLabel("Left Blinker");
-  QLabel *rightBlinker = new QLabel("Right Blinker");
+  QLabel *title = new QLabel("Turn Signals");
   
   QPixmap indL_on = QPixmap("../assets/icons/blinkL_on");
   QPixmap indL_off = QPixmap("../assets/icons/blinkL_off");
@@ -124,15 +123,14 @@ BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
       min-width: 50px;
     }
     )");
-  main2->addWidget(leftBlinker);
   main2->addWidget(leftInd);
-  main2->addWidget(rightBlinker);
+  main2->addWidget(title);
   main2->addWidget(rightInd);
   main->addLayout(main2);
   setStyleSheet(R"(
     QLabel {
     color: #BBBBBB;
-    font-size: 30px;
+    font-size: 75px;
     }
     )");
 }
