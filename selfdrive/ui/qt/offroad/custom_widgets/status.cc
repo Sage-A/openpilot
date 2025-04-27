@@ -381,7 +381,7 @@ void DriveStatus::update(const SubMaster &sm){
     gear_value->setText("Unknown");
   }
 
-  gas_value->setText(static_cast<int>(QString::number(cs.getGas()) / 250));
+  gas_value->setText(static_cast<int>(cs.getGas() / 250));
 }
 
 SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
