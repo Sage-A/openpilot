@@ -42,6 +42,9 @@ class Keyboard:
     
 class SteeringGUI:
   def __init__(self, steer_slider):
+      managed_processes['ui'].w.customWindow.emitSliderVal.connect(self.get_slider_value(val))
+      managed_processes['ui'].w.customWindow.accelDown.connect(self.GUI_ACCEL)
+      managed_processes['ui'].w.customWindow.accelRelease.connect(self.GUI_ACCEL)
       # Refers to the acceleration and steering inputs
       self.accel_axis = 'GUI_ACCEL'
       self.steer_axis = 'GUI_STEER'
