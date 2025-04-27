@@ -20,6 +20,7 @@
 
 SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
   QVBoxLayout *main = new QVBoxLayout(this);
+  main->setAlignment(Qt::AlignCenter);
   QLabel *title = new QLabel("Wheel Control");
   turnAngle = new QSpinBox();
   turnAngle->setPrefix("Angle:");
