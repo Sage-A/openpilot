@@ -18,7 +18,7 @@ class Keyboard:
   def __init__(self):
     self.kb = KBHit()
     self.axis_increment = 0.05  # 5% of full actuation each key press
-    self.axes_map = {'b': 'gb', 's': 'gb',
+    self.axes_map = {'GUI_ACCEL': 'gb', 's': 'gb',
                      'a': 'steer', 'd': 'steer'}
     self.axes_values = {'gb': 0., 'steer': 0.}
     self.axes_order = ['gb', 'steer']
@@ -33,7 +33,7 @@ class Keyboard:
       self.cancel = True
     elif key in self.axes_map:
       axis = self.axes_map[key]
-      incr = self.axis_increment if key in ['b', 'a'] else -self.axis_increment
+      incr = self.axis_increment if key in ['GUI_ACCEL', 'a'] else -self.axis_increment
       self.axes_values[axis] = float(np.clip(self.axes_values[axis] + incr, -1, 1))
     else:
       return False
@@ -42,7 +42,7 @@ class Keyboard:
 class SteeringGUI:
   def __init__(self, steer_slider):
       # Refers to the acceleration and steering inputs
-      self.accel_axis = 'GUI_ACCEL'
+      self.accel_axis = 'b'
       self.steer_axis = 'GUI_STEER'
 
       # Acceleration and steering both range from -1.0 to 1.0
@@ -192,7 +192,7 @@ if __name__ == '__main__':
   if args.gui:
     print('Using GUI for control (slider + throttle inputs).')
   elif args.keyboard:
-    print('Gas/brake control: `B` and `S` keys')
+    print('Gas/brake control: `GUI_ACCEL` and `S` keys')
     print('Steering control: `A` and `D` keys')
     print('Buttons')
     print('- `R`: Resets axes')
