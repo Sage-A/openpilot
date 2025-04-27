@@ -33,7 +33,7 @@ protected:
 
 signals:
   void closeCustom();
-  void emitSliderVal();
+  void emitSliderVal(int val);
   void accelDown();
   void accelRelease();
 
