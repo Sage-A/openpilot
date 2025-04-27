@@ -287,7 +287,7 @@ void CarStatus::update(const SubMaster &sm){
     cruise_enabled->setPixmap(iconMap[3]);
   }
   else{
-    cruise_enabled->setPixmap(iconMap[3]);
+    cruise_enabled->setPixmap(iconMap[0]);
   }
 }
 
