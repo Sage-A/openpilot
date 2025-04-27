@@ -163,14 +163,14 @@ void BlinkerStatus::update(const SubMaster &sm){
     leftInd->setPixmap(iconMap[1]);
   }
   else{
-    leftInd->setPixmap(iconMap[1]);
+    leftInd->setPixmap(iconMap[0]);
   }
 
   if(sm["carState"].getCarState().getRightBlinker() == true){
     rightInd->setPixmap(iconMap[3]);
   }
   else{
-    rightInd->setPixmap(iconMap[3]);
+    rightInd->setPixmap(iconMap[2]);
   }
 }
 
@@ -249,7 +249,7 @@ void CarStatus::update(const SubMaster &sm){
     door_value->setPixmap(iconMap[2]);
   }
   else{
-    door_value->setPixmap(iconMap[2]);
+    door_value->setPixmap(iconMap[0]);
   }
 
   if(cs.getSeatbeltUnlatched() == 1){
@@ -257,7 +257,7 @@ void CarStatus::update(const SubMaster &sm){
     seatbelt_value->setPixmap(iconMap[2]);
   }
   else{
-    seatbelt_value->setPixmap(iconMap[1]);
+    seatbelt_value->setPixmap(iconMap[0]);
   }
 
   if(cs.getEspDisabled() == 0){
@@ -302,10 +302,9 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
       min-height: 60px;
       min-width: 60px; } )");
 
-  hLay->addWidget(fuel_name);
-  hLay->addWidget(gas_value);
   hLay->addWidget(gas_pressed);
   hLay->addWidget(gas_engaged);
+  hLay->addStretch();
   hLay->addWidget(brake_pressed);
   hLay->addWidget(brake_engaged);
 
@@ -328,8 +327,12 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
 
   carStat->addWidget(cruiseStat);
   carStat->addWidget(cruise_enabled);
+  carStat->addStretch();
   carStat->addWidget(gearShift);
   carStat->addWidget(gear_value);
+  carStat->addStretch();
+  carStat->addWidget(fuel_name);
+  carStat->addWidget(gas_value);
 
   main->addLayout(hLay);
   main->addLayout(carStat);
