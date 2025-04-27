@@ -219,17 +219,18 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
       min-width: 75px; } )");
 
   driverStatus->addWidget(door_status);
-  //driverStatus->addWidget(door_value);
+  driverStatus->addWidget(door_value);
   driverStatus->addWidget(seatbelt_stat);
-  //driverStatus->addWidget(seatbelt_value);
+  driverStatus->addWidget(seatbelt_value);
   driverStatus->addWidget(espEnabled);
-  //driverStatus->addWidget(esp_value);
+  driverStatus->addWidget(esp_value);
   
   main->addLayout(driverStatus);
   setStyleSheet(R"(
     QLabel {
       color: #BBBBBB;
       font-size: 60px;
+    }
     )");
 }
 
