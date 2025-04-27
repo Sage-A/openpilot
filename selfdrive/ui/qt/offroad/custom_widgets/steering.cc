@@ -64,7 +64,9 @@ SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
 
   turnAngle->setStyleSheet(R"(
           QSpinBox {
-          font-size: 25px;
+          background: #333333;
+          color: #CCCCCC;
+          font-size: 40px;
       })");
 
   turnAngle->setReadOnly(true);
