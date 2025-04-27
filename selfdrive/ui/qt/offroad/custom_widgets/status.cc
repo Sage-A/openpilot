@@ -48,8 +48,7 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   QLabel *title = new QLabel("Speed");
   title->setStyleSheet(R"(
     QLabel {
-     font-size: 40px;
-     font-weight: bold;
+     font-size: 35px;
      color: #a9a9a9;
      }
     )");
@@ -73,8 +72,8 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   
   setStyleSheet(R"(
     QLabel {
-     font-size: 30px;
-     color: #FFFFFF;
+     font-size: 50px;
+     color: #CCCCCC;
      }
     )");
 }
@@ -82,7 +81,7 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
 void SpeedStatus::update(const SubMaster &sm){
     auto cs = sm["carState"].getCarState();
     ss_value->setText(QString::number(cs.getStandstill()));
-    speed_value->setText(QString::number((convFactor+cs.getVEgoCluster())));
+    speed_value->setText(QString::number((static_cast<int>(convFactor+cs.getVEgoCluster()))));
 }
 
 BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
