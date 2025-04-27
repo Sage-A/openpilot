@@ -146,6 +146,11 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
     driveStat->setVisible(!driveStat->isVisible());
   });
   QObject::connect(close_btn, &QPushButton::clicked, this, &CustomWindow::closeCustom);
+  try{
+    QObject::connect(ss, &SteeringSlider::valueChange, [&]() {
+      SteeringGUI::get_slider_value(value / 100);
+    });
+  }
   main_layout->addLayout(sidebar);
   main_layout->addLayout(primary);
   main_layout->addLayout(speed_bar);
