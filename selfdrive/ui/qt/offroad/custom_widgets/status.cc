@@ -85,7 +85,7 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   main->addLayout(i2);  
   setStyleSheet(R"(
     QLabel {
-     font-size: 50px;
+     font-size: 75px;
      font-weight: bold;
      color: #CCCCCC;
      }
@@ -94,7 +94,7 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
 
 void SpeedStatus::update(const SubMaster &sm){
     auto cs = sm["carState"].getCarState();
-    speed_value->setText(QString::number((static_cast<int>(convFactor+cs.getVEgoCluster()))));
+    speed_value->setText(QString::number((static_cast<int>(convFactor*cs.getVEgoCluster()))));
   
     if(cs.getStandstill() == 1){
       ss_value->setPixmap(iconMap[1]);
