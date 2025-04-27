@@ -23,12 +23,12 @@ SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
   main->setAlignment(Qt::AlignHCenter);
   QLabel *title = new QLabel("Wheel Control");
   turnAngle = new QSpinBox();
-  turnAngle->setPrefix("Angle:");
+  turnAngle->setPrefix("Angle: ");
   title->setStyleSheet(R"(
     QLabel {
       font-size: 40px;
       font-weight: bold;
-      color: #a9a9a9;
+      color: #CCCCCC;
     }
   )");
 
@@ -39,6 +39,7 @@ SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
   temp->addWidget(turnAngle);
 
   main->addLayout(temp);
+  main->setSpacing(20);
   steering_slider = new SliderControl(Qt::Horizontal);
   connect(steering_slider, &SliderControl::valueChanged, turnAngle, &QSpinBox::setValue);
   steering_slider->setStyleSheet(R"(
@@ -57,16 +58,17 @@ SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
       QSlider::handle:horizontal {
           background: #CCCCCC;
           width: 100px;
-          height: 250px;
+          height: 200px;
           margin: -100px -50px;
       }
           )");
 
   turnAngle->setStyleSheet(R"(
           QSpinBox {
-          background: #333333;
+          background: #000000;
           color: #CCCCCC;
           font-size: 40px;
+          font-weight: bold;
       })");
 
   turnAngle->setReadOnly(true);
