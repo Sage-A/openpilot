@@ -277,7 +277,7 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
   iconMap[1] = indOn;
   QHBoxLayout *hLay = new QHBoxLayout();
   hLay->setSpacing(35);
-  hLay->setAlign(Qt::AlignLeft);
+  hLay->setAlignment(Qt::AlignLeft);
   
   QLabel *fuel_name = new QLabel("Gas Pedal: ");
   QLabel *gas_pressed = new QLabel("Gas Engaged");
@@ -311,7 +311,7 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
 
   QHBoxLayout *carStat = new QHBoxLayout();
   carStat->setSpacing(35);
-  carStat->setAlign(Qt::AlignLeft);
+  carStat->setAlignment(Qt::AlignLeft);
   QLabel *cruiseStat = new QLabel("Cruise Control");
   QLabel *gearShift = new QLabel("Gear: ");
 
