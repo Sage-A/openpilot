@@ -381,17 +381,33 @@ void DriveStatus::update(const SubMaster &sm){
     gear_value->setText("Unknown");
   }
 
-  gas_value->setText(Qt::number(static_cast<int>(cs.getGas() / 250)));
+  gas_value->setText(QString::number(static_cast<int>(cs.getGas() / 250)));
 }
 
 SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
   main = new QVBoxLayout(this);
   QHBoxLayout *steeringStatus = new QHBoxLayout();
-  QLabel *steeringPressed = new QLabel("Steering Engaged: ");
-  QLabel *steeringVal = new QLabel("Steering Val: ");
-  steer_enabled = new QLabel("NULL");
+  steeringStatus->setSpacing(35);
+  steeringStatus->setAlignment(Qt::AlignLeft);
+  QLabel *steeringPressed = new QLabel("Steering Engaged");
+  QLabel *steeringVal = new QLabel("Wheel Angle");
+  steer_enabled = new QLabel();
   steer_value = new QLabel("NULL");
+  steer_dir = new QLabel("NULL");
+  
+  QPixmap indOff = QPixmap("../assets/icons/indicatorC_off");
+  QPixmap indOn = QPixmap("../assets/icons/indicatorC_on");
+  iconMap[0] = indOff;
+  iconMap[1] = indOn;
 
+  steer_enabled->setScaledContents(true);
+  steer_enabled->setPixmap(iconMap[0]);
+  steer_enabled->setStyleSheet(R"(
+    QLabel {
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
   steeringStatus->addWidget(steeringPressed);
   steeringStatus->addWidget(steer_enabled);
   steeringStatus->addWidget(steeringVal);
@@ -408,6 +424,19 @@ SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
 
 void SteerStatus::update(const SubMaster &sm){
   auto cs = sm["carState"].getCarState();
-  steer_enabled->setText(QString::number(cs.getSteeringPressed()));
-  steer_value->setText(QString::number(cs.getSteeringAngleDeg()));
+  if(cs.getSteeringPressed() == 1){
+    steer_enabled->setPixmap(iconMap[1]);
+  }
+  else{
+    steer_enabled->setPixmap(iconMap[0]);
+  }
+
+  float val = cs.getSteeringAngleDeg();
+  steer_value->setText(QString::number(static_cast<int>(std::abs(val) / 480)));
+  if(val < 0){
+    steer_dir->setText("Right");
+  }
+  else{
+    steer_dir->setText("Left");
+  }
 }
