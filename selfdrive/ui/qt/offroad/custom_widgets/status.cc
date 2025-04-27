@@ -58,15 +58,16 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   ss_value->setPixmap(iconMap[0]);
   ss_value->setStyleSheet(R"(
     QLabel {
-      max-height: 75px;
-      max-width: 75px;
-      min-height: 75px;
-      min-width: 75px;
+      max-height: 35px;
+      max-width: 35px;
+      min-height: 35px;
+      min-width: 35px;
     }
     )");
   standstill->setStyleSheet(R"(
     QLabel {
     font-size: 35px;
+    font-weight: normal;
     }
   )");
   
@@ -85,6 +86,7 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   setStyleSheet(R"(
     QLabel {
      font-size: 50px;
+     font-weight: bold;
      color: #CCCCCC;
      }
     )");
@@ -174,13 +176,46 @@ void BlinkerStatus::update(const SubMaster &sm){
 
 CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
   main = new QVBoxLayout(this);
+  QPixmap indOff = QPixmap("../assets/icons/indicatorC_off");
+  QPixmap indAlert = QPixmap("../assets/icons/indicatorC_alert");
+  QPixmap indWarn = QPixmap("../assets/icons/indicatorC_warn");
+  iconMap[0] = indOff;
+  iconMap[1] = indAlert;
+  iconMap[2] = indWarn;
+  
   QHBoxLayout *driverStatus = new QHBoxLayout();
-  QLabel *door_status = new QLabel("Door Status: ");
-  QLabel *seatbelt_stat = new QLabel("Seatbelt: ");
-  QLabel *espEnabled = new QLabel("ESP Enabled: ");
-  door_value = new QLabel("NULL");
-  seatbelt_value = new QLabel("NULL");
-  esp_value = new QLabel("NULL");
+  QLabel *door_status = new QLabel("Door Open");
+  QLabel *seatbelt_stat = new QLabel("Seatbelt Unbuckled");
+  QLabel *espEnabled = new QLabel("ESP Disabled");
+  
+  door_value = new QLabel();
+  door_value->setScaledContents(true);
+  door_value->setPixmap(iconMap[0]);
+  door_value->setStyleSheet(R"(
+    QLabel {
+      max-height: 75px;
+      max-width: 75px;
+      min-height: 75px;
+      min-width: 75px; } )");
+  seatbelt_value = new QLabel();
+  seatbelt_value->setPixmap(iconMap[0]);
+  seatbelt_value->setScaledContents(true);
+  seatbelt_value->setStyleSheet(R"(
+    QLabel {
+      max-height: 75px;
+      max-width: 75px;
+      min-height: 75px;
+      min-width: 75px; } )");
+  
+  esp_value = new QLabel();
+  esp_value->setPixmap(iconMap[0]);
+  esp_value->setScaledContents(true);
+  esp_value->setStyleSheet(R"(
+    QLabel {
+      max-height: 75px;
+      max-width: 75px;
+      min-height: 75px;
+      min-width: 75px; } )");
 
   driverStatus->addWidget(door_status);
   driverStatus->addWidget(door_value);
@@ -192,17 +227,36 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
   main->addLayout(driverStatus);
   setStyleSheet(R"(
     QLabel {
-    color: #BBBBBB;
-    font-size: 30px;
-    }
+      color: #BBBBBB;
+      font-size: 60px;
     )");
 }
 
 void CarStatus::update(const SubMaster &sm){
   auto cs = sm["carState"].getCarState();
-  door_value->setText(QString::number(cs.getDoorOpen()));
-  seatbelt_value->setText(QString::number(cs.getSeatbeltUnlatched()));
-  esp_value->setText(QString::number(cs.getEspDisabled()));
+  if(cs.getDoorOpen() == 1){
+    // Door is open in car, turn on warning light
+    door_value->setPixmap(iconMap[2]);
+  }
+  else{
+    door_value->setPixmap(iconMap[0]);
+  }
+
+  if(cs.getSeatbeltUnlatched() == 1){
+    // Seatbelt unbuckled
+    seatbelt_value->setPixmap(iconMap[2]);
+  }
+  else{
+    seatbelt_value->setPixmap(iconMap[0]);
+  }
+
+  if(cs.getEspDisabled() == 0){
+    // ESP is off
+    esp_value->setPixmap(iconMap[1]);
+  }
+  else{
+    esp_value->setPixmap(iconMap[0]);
+  }
 }
 
 DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
