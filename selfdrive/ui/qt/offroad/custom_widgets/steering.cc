@@ -20,7 +20,7 @@
 
 SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
   QVBoxLayout *main = new QVBoxLayout(this);
-  main->setAlignment(Qt::AlignCenter);
+  main->setAlignment(Qt::AlignHCenter);
   QLabel *title = new QLabel("Wheel Control");
   turnAngle = new QSpinBox();
   turnAngle->setPrefix("Angle:");
@@ -42,7 +42,7 @@ SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
           QSlider {
           min-height: 200px;
           max-height: 200px;
-          background: #FFFFFF;
+          background: #000000;
           color: black;
       }
       QSlider::groove:horizontal {
@@ -52,7 +52,7 @@ SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
           margin: 0 75px;
       }
       QSlider::handle:horizontal {
-          background: #0000ff;
+          background: #BBBBBB;
           width: 100px;
           height: 250px;
           margin: -100px -50px;
@@ -65,12 +65,9 @@ SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
       })");
 
   turnAngle->setReadOnly(true);
-  steering_slider->setTickStyle(QSlider::TicksBothSides);
   steering_slider->setMinimum(-100);
   steering_slider->setMaximum(100);
   turnAngle->setRange(-100, 100);
   steering_slider->setValue(0);
-  steering_slider->setTickInterval(10);
   main->addWidget(steering_slider);
-  main->setAlignment(Qt::AlignCenter);
 }
