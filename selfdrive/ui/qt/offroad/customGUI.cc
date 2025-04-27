@@ -73,7 +73,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   main_layout->addLayout(sidebar);
   main_layout->addLayout(primary);
   main_layout->addLayout(speed_bar);
-  
+  carStat->hide();
   setStyleSheet(R"(
     CustomWindow {
       background-color: black;
