@@ -15,8 +15,10 @@
 #include "selfdrive/ui/qt/widgets/scrollview.h"
 #include "selfdrive/ui/qt/offroad/developer_panel.h"
 
+// Adds a new panel to the settings
+// Contains settings relevant to custom page
 CustomPanel::CustomPanel(QWidget* parent) : ListWidget(parent) {
-  //Custom button
+  // Enable GUI button to switch to the custom window
   enableGui = new ButtonControl(tr("Drive-by-wire GUI"), tr("ENABLE"));
   connect(enableGui, &ButtonControl::clicked, [=]() { emit openCustom(); });
   addItem(enableGui);
