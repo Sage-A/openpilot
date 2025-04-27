@@ -41,8 +41,7 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   iconMap[1] = indOn;
   
   if(uSel == 0){
-    //convFactor = 2.2369;
-    convFactor = 100;
+    convFactor = 2.2369;
     units = new QLabel("MPH");
   }
   else if(uSel == 1){
@@ -164,14 +163,14 @@ void BlinkerStatus::update(const SubMaster &sm){
     leftInd->setPixmap(iconMap[1]);
   }
   else{
-    leftInd->setPixmap(iconMap[0]);
+    leftInd->setPixmap(iconMap[1]);
   }
 
   if(sm["carState"].getCarState().getRightBlinker() == true){
     rightInd->setPixmap(iconMap[3]);
   }
   else{
-    rightInd->setPixmap(iconMap[2]);
+    rightInd->setPixmap(iconMap[3]);
   }
 }
 
@@ -237,7 +236,7 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
   setStyleSheet(R"(
     QLabel {
       color: #BBBBBB;
-      font-size: 60px;
+      font-size: 55px;
       font-weight: bold;
     }
     )");
@@ -250,7 +249,7 @@ void CarStatus::update(const SubMaster &sm){
     door_value->setPixmap(iconMap[2]);
   }
   else{
-    door_value->setPixmap(iconMap[0]);
+    door_value->setPixmap(iconMap[2]);
   }
 
   if(cs.getSeatbeltUnlatched() == 1){
@@ -258,7 +257,7 @@ void CarStatus::update(const SubMaster &sm){
     seatbelt_value->setPixmap(iconMap[2]);
   }
   else{
-    seatbelt_value->setPixmap(iconMap[0]);
+    seatbelt_value->setPixmap(iconMap[1]);
   }
 
   if(cs.getEspDisabled() == 0){
@@ -272,13 +271,36 @@ void CarStatus::update(const SubMaster &sm){
 
 DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
   main = new QVBoxLayout(this);
+  QPixmap indOff = QPixmap("../assets/icons/indicatorC_off");
+  QPixmap indOn = QPixmap("../assets/icons/indicatorC_on");
+  iconMap[0] = indOff;
+  iconMap[1] = indOn;
   QHBoxLayout *hLay = new QHBoxLayout();
+  hLay->setSpacing(35);
+  hLay->setAlign(Qt::AlignLeft);
+  
   QLabel *fuel_name = new QLabel("Gas Pedal: ");
-  QLabel *gas_pressed = new QLabel("Gas Engaged: ");
-  QLabel *brake_pressed = new QLabel("Brake Engaged: ");
-  gas_engaged = new QLabel("NULL");
-  gas_value = new QLabel("NULL");
-  brake_engaged = new QLabel("NULL");
+  QLabel *gas_pressed = new QLabel("Gas Engaged");
+  QLabel *brake_pressed = new QLabel("Brake Engaged");
+  gas_engaged = new QLabel();
+  gas_engaged->setScaledContent(true);
+  gas_engaged->setPixmap(iconMap[0]);
+  gas_engaged->setStyleSheet(R"(
+    QLabel {
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
+  gas_value = new QLabel();
+  brake_engaged = new QLabel();
+  brake_engaged->setScaledContent(true);
+  brake_engaged->setPixmap(iconMap[0]);
+  brake_engaged->setStyleSheet(R"(
+    QLabel {
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
 
   hLay->addWidget(fuel_name);
   hLay->addWidget(gas_value);
@@ -288,11 +310,21 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
   hLay->addWidget(brake_engaged);
 
   QHBoxLayout *carStat = new QHBoxLayout();
-  QLabel *cruiseStat = new QLabel("Cruise Control: ");
+  carStat->setSpacing(35);
+  carStat->setAlign(Qt::AlignLeft);
+  QLabel *cruiseStat = new QLabel("Cruise Control");
   QLabel *gearShift = new QLabel("Gear: ");
 
-  cruise_enabled = new QLabel("NULL");
-  gear_value = new QLabel("NULL");
+  cruise_enabled = new QLabel();
+  cruise_enabled->setScaledContent(true);
+  cruise_enabled->setPixmap(iconMap[0]);
+  cruise_enabled->setStyleSheet(R"(
+    QLabel {
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
+  gear_value = new QLabel();
 
   carStat->addWidget(cruiseStat);
   carStat->addWidget(cruise_enabled);
@@ -304,18 +336,37 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
 setStyleSheet(R"(
     QLabel {
     color: #BBBBBB;
-    font-size: 30px;
+    font-size: 55px;
+    font-weight: bold;
     }
     )");
 }
 
 void DriveStatus::update(const SubMaster &sm){
   auto cs = sm["carState"].getCarState();
-  cruise_enabled->setText(QString::number(cs.getCruiseState().getEnabled()));
+  if(cs.getCruiseState().getEnabled() == 1){
+    cruise_enabled->setPixmap(iconMap[1]);
+  }
+  else{
+    cruise_enabled->setPixmap(iconMap[0]);
+  }
+
+  if(cs.getGasPressed() == 1){
+    gas_engaged->setPixmap(iconMap[1]);
+  }
+  else{
+    gas_engaged->setPixmap(iconMap[0]);
+  }
+
+  if(cs.getBrakePressed() == 1){
+    brake_engaged->setPixmap(iconMap[1]);
+  }
+  else{
+    brake_engaged->setPixmap(iconMap[0]);
+  }
+  
   gear_value->setText(QString::number(static_cast<int>(cs.getGearShifter())));
   gas_value->setText(QString::number(cs.getGas()));
-  gas_engaged->setText(QString::number(cs.getGasPressed()));
-  brake_engaged->setText(QString::number(cs.getBrakePressed()));
 }
 
 SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
