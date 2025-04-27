@@ -411,8 +411,10 @@ SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
       min-width: 60px; } )");
   steeringStatus->addWidget(steeringPressed);
   steeringStatus->addWidget(steer_enabled);
+  steeringStatus->addStretch();
   steeringStatus->addWidget(steeringVal);
   steeringStatus->addWidget(steer_value);
+  steeringStatus->addWidget(steer_dir);
 
   main->addLayout(steeringStatus);
   setStyleSheet(R"(
