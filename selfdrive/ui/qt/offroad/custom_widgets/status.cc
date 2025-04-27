@@ -226,9 +226,11 @@ CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
   driverStatus->addWidget(seatbelt_stat);
   driverStatus->addWidget(seatbelt_value);
   main->addLayout(driverStatus);
-  main->addWidget(espEnabled);
-  main->addWidget(esp_value);
-  
+  QHBoxLayout temp = QHBoxLayout();
+  temp->addWidget(espEnabled);
+  temp->addWidget(esp_value);
+ 
+  main->addLayout(temp);
   setStyleSheet(R"(
     QLabel {
       color: #BBBBBB;
