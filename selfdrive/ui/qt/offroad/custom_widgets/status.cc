@@ -45,15 +45,6 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   }
       
   main = new QVBoxLayout(this);
-  QLabel *title = new QLabel("Speed");
-  title->setStyleSheet(R"(
-    QLabel {
-     font-size: 35px;
-     color: #a9a9a9;
-     }
-    )");
-  
-  main->addWidget(title);
   
   speed_value = new QLabel("0");
   QLabel *standstill = new QLabel("Standstill: ");
@@ -61,15 +52,18 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   
   QHBoxLayout *i = new QHBoxLayout();
   QHBoxLayout *i2 = new QHBoxLayout();
+  i->setAlignment(Qt::AlignCenter);
+  i2->setAlignment(Qt::AlignCenter);
+  i2->setSpacing(30);
+  
   i->addWidget(speed_value);
   i->addWidget(units);
+  
   i2->addWidget(standstill);
   i2->addWidget(ss_value);
   
   main->addLayout(i);
-  main->addLayout(i2);
-  main->setAlignment(Qt::AlignCenter);
-  
+  main->addLayout(i2);  
   setStyleSheet(R"(
     QLabel {
      font-size: 50px;
