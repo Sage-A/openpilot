@@ -35,6 +35,11 @@ void StatusWidget::update(const SubMaster &sm) {
 SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   convFactor = 1;
   QLabel *units;
+  QPixmap indOff = new QPixmap("../assets/icons/indC_off");
+  QPixmap indOn = new QPixmap("../assets/icons/indC_alert");
+  iconMap[0] = indOff;
+  iconMap[1] = indOn;
+  
   if(uSel == 0){
     convFactor = 2.2369;
     units = new QLabel("MPH");
@@ -47,20 +52,33 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
   main = new QVBoxLayout(this);
   
   speed_value = new QLabel("0");
-  QLabel *standstill = new QLabel("Standstill: ");
-  ss_value = new QLabel("NULL");
+  QLabel *standstill = new QLabel("Standstill");
+  ss_value = new QLabel();
+  ss_value->setScaledContents(true);
+  ss_value->setPixmap(iconMap[0]);
+  ss_value->setStyleSheet(R"(
+    QLabel {
+      max-height: 75px;
+      max-width: 75px;
+      min-height: 75px;
+      min-width: 75px;
+    }
+    )");
   
   QHBoxLayout *i = new QHBoxLayout();
   QHBoxLayout *i2 = new QHBoxLayout();
-  i->setAlignment(Qt::AlignCenter);
   i2->setAlignment(Qt::AlignCenter);
-  i2->setSpacing(30);
   
   i->addWidget(speed_value);
   i->addWidget(units);
   
   i2->addWidget(standstill);
   i2->addWidget(ss_value);
+  i2->setStyleSheet(R"(
+    QLabel {
+    font-size: 35px;
+    }
+  )");
   
   main->addLayout(i);
   main->addLayout(i2);  
@@ -74,8 +92,14 @@ SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
 
 void SpeedStatus::update(const SubMaster &sm){
     auto cs = sm["carState"].getCarState();
-    ss_value->setText(QString::number(cs.getStandstill()));
     speed_value->setText(QString::number((static_cast<int>(convFactor+cs.getVEgoCluster()))));
+  
+    if(cs.getStandstill() == 1){
+      ss_value->setPixmap(iconMap[1]);
+    }
+    else{
+      ss_value->setPixmap(iconMap[0]);
+    }
 }
 
 BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
