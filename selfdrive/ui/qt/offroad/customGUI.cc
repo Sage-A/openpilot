@@ -41,7 +41,21 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
     }
   )");
   close_btn->setFixedSize(150, 150);
-  QObject::connect(close_btn, &QPushButton::clicked, this, &CustomWindow::closeCustom);
+
+  QPushButton *blink_btn = new QPushButton(tr("×"));
+  blink_btn->setStyleSheet(R"(
+    QPushButton {
+      font-size: 110px;
+      padding-bottom: 20px;
+      border-radius: 62px;
+      background-color: #555555;
+      font-weight: 400;
+    }
+    QPushButton:pressed {
+      background-color: #3B3B3B;
+    }
+  )");
+  blink_btn->setFixedSize(125, 125);
 
   // main settings layout, sidebar + main panel
   QHBoxLayout *main_layout = new QHBoxLayout(this);
@@ -51,6 +65,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   QVBoxLayout *speed_bar = new QVBoxLayout();
 
   sidebar->addWidget(close_btn);
+  sidebar->addWidget(blink_btn);
   
   ss = new SteeringSlider(this);
   lW = new BlinkerStatus(this);
@@ -70,6 +85,10 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   speed_bar->addWidget(spW);
   speed_bar->addWidget(accW);
 
+  QObject::connect(blink_btn, &QPushButton::clicked, [&](){
+    lW->setVisible(!lW->isVisible());
+  });
+  QObject::connect(close_btn, &QPushButton::clicked, this, &CustomWindow::closeCustom);
   main_layout->addLayout(sidebar);
   main_layout->addLayout(primary);
   main_layout->addLayout(speed_bar);
