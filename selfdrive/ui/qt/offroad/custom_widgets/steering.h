@@ -22,6 +22,8 @@ class SteeringSlider : public QWidget {
 public:
   explicit SteeringSlider(QWidget *parent);
 
+signals:
+  void valueChange(int value);
 private:
   SliderControl *steering_slider;
   QSpinBox *turnAngle;
