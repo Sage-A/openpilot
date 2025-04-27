@@ -46,7 +46,7 @@ SteeringSlider::SteeringSlider(QWidget* parent) : QWidget(parent) {
   // Set style of slider
   steering_slider = new SliderControl(Qt::Horizontal);
   connect(steering_slider, &SliderControl::valueChanged, turnAngle, &QSpinBox::setValue);
-  QObject::connect(steering_slider, &SliderControl::valueChanged, this, &SteeringSlider::valueChange);
+  connect(steering_slider, &SliderControl::valueChanged, this, &SteeringSlider::valueChange);
   steering_slider->setStyleSheet(R"(
           QSlider {
           min-height: 200px;
