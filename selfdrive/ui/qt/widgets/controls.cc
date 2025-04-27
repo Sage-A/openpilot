@@ -140,11 +140,11 @@ void ParamControl::toggleClicked(bool state) {
   }
 }
 
+// Create a slider component for control
 SliderControl::SliderControl(Qt::Orientation orientation, QWidget *parent) {
   QVBoxLayout *main_layout = new QVBoxLayout(this);
   main_layout->setMargin(0);
 
-  //Start slider code here
   slider.setOrientation(orientation);
   QObject::connect(&slider, &QAbstractSlider::valueChanged, this, &SliderControl::valueChanged);
   main_layout->addWidget(&slider);
