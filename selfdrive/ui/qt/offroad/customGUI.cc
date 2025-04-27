@@ -45,6 +45,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
 
   // main settings layout, sidebar + main panel
   QHBoxLayout *main_layout = new QHBoxLayout(this);
+  main_layout->setSpacing(40);
   QVBoxLayout *sidebar = new QVBoxLayout();
   QVBoxLayout *primary = new QVBoxLayout();
   QVBoxLayout *speed_bar = new QVBoxLayout();
