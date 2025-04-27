@@ -10,7 +10,7 @@ from openpilot.common.params import Params
 from openpilot.common.realtime import Ratekeeper
 from openpilot.system.hardware import HARDWARE
 from openpilot.tools.lib.kbhit import KBHit
-from PySide6.QtCore import QObject, Slot
+from PyQt5.QtCore import QObject, pyqtSlot
 
 EXPO = 0.4
 
@@ -42,6 +42,9 @@ class Keyboard:
     
 class SteeringGUI:
   def __init__(self, steer_slider):
+      managed_processes['ui'].w.customWindow.emitSliderVal.connect(self.get_slider_value(val))
+      managed_processes['ui'].w.customWindow.accelDown.connect(self.GUI_ACCEL)
+      managed_processes['ui'].w.customWindow.accelRelease.connect(self.GUI_ACCEL)
       # Refers to the acceleration and steering inputs
       self.accel_axis = 'GUI_ACCEL'
       self.steer_axis = 'GUI_STEER'
@@ -63,9 +66,6 @@ class SteeringGUI:
       self._cancel_prev = False
 
   def update(self):
-    managed_processes['ui'].w.customWindow.emitSliderVal.connect(self.get_slider_value(val))
-    managed_processes['ui'].w.customWindow.accelDown.connect(self.GUI_ACCEL)
-    managed_processes['ui'].w.customWindow.accelRelease.connect(self.GUI_ACCEL)
     # Read input values directly from the GUI
     try:
       accel_raw = get_throttle_value()
