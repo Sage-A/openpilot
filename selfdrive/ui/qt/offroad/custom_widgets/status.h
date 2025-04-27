@@ -94,5 +94,6 @@ class SteerStatus : public QWidget {
    QVBoxLayout *main;
    QLabel *steer_enabled;
    QLabel *steer_value;
+   QLabel *steer_dir;
    QPixmap iconMap[2];
 };
