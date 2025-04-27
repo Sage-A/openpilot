@@ -81,6 +81,7 @@ class DriveStatus : public QWidget {
    QLabel *brake_engaged;
    QLabel *cruise_enabled;
    QLabel *gear_value;
+   QPixmap iconMap[2];
 };
 
 class SteerStatus : public QWidget {
