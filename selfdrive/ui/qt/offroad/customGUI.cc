@@ -42,14 +42,13 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   )");
   close_btn->setFixedSize(150, 150);
 
-  QPushButton *blink_btn = new QPushButton(tr("1"));
+  QPushButton *blink_btn = new QPushButton(tr("Blinker"));
   blink_btn->setStyleSheet(R"(
     QPushButton {
-      font-size: 110px;
+      font-size: 25px;
       padding-bottom: 20px;
-      border-radius: 62px;
+      border-radius: 25px;
       background-color: #555555;
-      font-weight: 400;
     }
     QPushButton:pressed {
       background-color: #3B3B3B;
@@ -57,14 +56,13 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   )");
   blink_btn->setFixedSize(125, 125);
   
-  QPushButton *car_btn = new QPushButton(tr("2"));
+  QPushButton *car_btn = new QPushButton(tr("Car"));
   car_btn->setStyleSheet(R"(
     QPushButton {
-      font-size: 110px;
+      font-size: 30px;
       padding-bottom: 20px;
-      border-radius: 62px;
+      border-radius: 25px;
       background-color: #555555;
-      font-weight: 400;
     }
     QPushButton:pressed {
       background-color: #3B3B3B;
@@ -72,14 +70,13 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   )");
   car_btn->setFixedSize(125, 125);
 
-  QPushButton *steer_btn = new QPushButton(tr("1"));
+  QPushButton *steer_btn = new QPushButton(tr("Steer"));
   steer_btn->setStyleSheet(R"(
     QPushButton {
-      font-size: 110px;
+      font-size: 30px;
       padding-bottom: 20px;
-      border-radius: 62px;
+      border-radius: 25px;
       background-color: #555555;
-      font-weight: 400;
     }
     QPushButton:pressed {
       background-color: #3B3B3B;
@@ -87,14 +84,13 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   )");
   steer_btn->setFixedSize(125, 125);
 
-  QPushButton *drive_btn = new QPushButton(tr("1"));
+  QPushButton *drive_btn = new QPushButton(tr("Drive"));
   drive_btn->setStyleSheet(R"(
     QPushButton {
-      font-size: 110px;
+      font-size: 30px;
       padding-bottom: 20px;
-      border-radius: 62px;
+      border-radius: 25px;
       background-color: #555555;
-      font-weight: 400;
     }
     QPushButton:pressed {
       background-color: #3B3B3B;
