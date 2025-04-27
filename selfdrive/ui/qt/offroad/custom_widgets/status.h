@@ -65,7 +65,7 @@ class CarStatus : public QWidget {
    QLabel *door_value;
    QLabel *seatbelt_value;
    QLabel *esp_value;
-   QPixmap iconMap[3];
+   QPixmap iconMap[4];
 };
 
 class DriveStatus : public QWidget {
