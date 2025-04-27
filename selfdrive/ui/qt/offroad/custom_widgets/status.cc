@@ -1,0 +1,473 @@
+
+#include <cassert>
+#include <cmath>
+#include <string>
+#include <tuple>
+#include <vector>
+
+#include <QDebug>
+
+#include "common/watchdog.h"
+#include "common/util.h"
+#include "selfdrive/ui/qt/network/networking.h"
+#include "selfdrive/ui/qt/offroad/settings.h"
+#include "selfdrive/ui/qt/qt_window.h"
+#include "selfdrive/ui/qt/widgets/prime.h"
+#include "selfdrive/ui/qt/widgets/scrollview.h"
+#include "selfdrive/ui/qt/offroad/developer_panel.h"
+#include "selfdrive/ui/qt/offroad/customGUI.h"
+#include "selfdrive/ui/qt/offroad/custom_widgets/status.h"
+
+// General status widget outline
+StatusWidget::StatusWidget(QWidget* parent) : QWidget(parent) {
+  main = new QVBoxLayout(this);
+  statusValue = new QLabel();
+  
+  setStyleSheet(R"(
+    QLabel {
+    color: #CCCCCC;
+    font-size: 30px;
+    }
+    )");
+}
+
+void StatusWidget::update(const SubMaster &sm) {
+  statusValue->setText("Update");
+}
+
+SpeedStatus::SpeedStatus(QWidget* parent, int uSel) : QWidget(parent) {
+  // Set up pixmap array and conversion values
+  convFactor = 1;
+  QLabel *units;
+  QPixmap indOff = QPixmap("../assets/icons/indicatorC_off");
+  QPixmap indOn = QPixmap("../assets/icons/indicatorC_alert");
+  iconMap[0] = indOff;
+  iconMap[1] = indOn;
+  
+  if(uSel == 0){
+    convFactor = 2.2369;
+    units = new QLabel("MPH");
+  }
+  else if(uSel == 1){
+    convFactor = 3.6;
+    units = new QLabel("KMH");
+  }
+
+  // Create labels and value objects
+  main = new QVBoxLayout(this);
+  speed_value = new QLabel("0");
+  QLabel *standstill = new QLabel("Standstill");
+  ss_value = new QLabel();
+  ss_value->setScaledContents(true);
+  ss_value->setPixmap(iconMap[0]);
+  ss_value->setStyleSheet(R"(
+    QLabel {
+      max-height: 35px;
+      max-width: 35px;
+      min-height: 35px;
+      min-width: 35px;
+    }
+    )");
+  standstill->setStyleSheet(R"(
+    QLabel {
+    font-size: 35px;
+    }
+  )");
+
+  // Add labels and values to layouts
+  QHBoxLayout *i = new QHBoxLayout();
+  QHBoxLayout *i2 = new QHBoxLayout();
+  i2->setAlignment(Qt::AlignCenter);
+  i2->setSpacing(35);
+  
+  i->addWidget(speed_value);
+  i->addWidget(units);
+  
+  i2->addWidget(standstill);
+  i2->addWidget(ss_value);
+  
+  main->addLayout(i);
+  main->addLayout(i2);  
+  setStyleSheet(R"(
+    QLabel {
+     font-size: 75px;
+     font-weight: bold;
+     color: #CCCCCC;
+     }
+    )");
+}
+
+// Update speed and standstill state
+void SpeedStatus::update(const SubMaster &sm){
+    auto cs = sm["carState"].getCarState();
+    speed_value->setText(QString::number((static_cast<int>(convFactor*cs.getVEgoCluster()))));
+  
+    if(cs.getStandstill() == 1){
+      // Car is stationary
+      ss_value->setPixmap(iconMap[1]);
+    }
+    else{
+      ss_value->setPixmap(iconMap[0]);
+    }
+}
+
+BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
+  // Create icon map array, labels, and values
+  main = new QVBoxLayout(this);
+  QHBoxLayout *main2 = new QHBoxLayout();
+  QLabel *title = new QLabel("Turn Signals");
+  
+  QPixmap indL_on = QPixmap("../assets/icons/blinkL_on");
+  QPixmap indL_off = QPixmap("../assets/icons/blinkL_off");
+  QPixmap indR_on = QPixmap("../assets/icons/blinkR_on");
+  QPixmap indR_off = QPixmap("../assets/icons/blinkR_off");
+
+  iconMap[0] = indL_off;
+  iconMap[1] = indL_on;
+  iconMap[2] = indR_off;
+  iconMap[3] = indR_on;
+  leftInd = new QLabel();
+  leftInd->setScaledContents(true);
+  rightInd = new QLabel();
+  rightInd->setScaledContents(true);
+  
+  leftInd->setPixmap(iconMap[0]);
+  rightInd->setPixmap(iconMap[2]);
+  
+  leftInd->setStyleSheet(R"(
+    QLabel {
+      max-height: 150px;
+      max-width: 150px;
+      min-height: 150px;
+      min-width: 150px;
+    }
+    )");
+  rightInd->setStyleSheet(R"(
+    QLabel {
+      max-height: 150px;
+      max-width: 150px;
+      min-height: 150px;
+      min-width: 150px;
+    }
+    )");
+
+  // Add widgets to layout
+  main2->setSpacing(25);
+  main2->setAlignment(Qt::AlignCenter);
+  main2->addWidget(leftInd);
+  main2->addWidget(title);
+  main2->addWidget(rightInd);
+  main->addLayout(main2);
+  setStyleSheet(R"(
+    QLabel {
+    color: #CCCCCC;
+    font-size: 60px;
+    font-weight: bold;
+    }
+    )");
+}
+
+void BlinkerStatus::update(const SubMaster &sm){
+  if(sm["carState"].getCarState().getLeftBlinker() == true){
+    // Left turn signal is on
+    leftInd->setPixmap(iconMap[1]);
+  }
+  else{
+    leftInd->setPixmap(iconMap[0]);
+  }
+
+  if(sm["carState"].getCarState().getRightBlinker() == true){
+    // right turn signal is on
+    rightInd->setPixmap(iconMap[3]);
+  }
+  else{
+    rightInd->setPixmap(iconMap[2]);
+  }
+}
+
+CarStatus::CarStatus(QWidget *parent) :  QWidget(parent) {
+  // Create icon map, labels, and value objects
+  main = new QVBoxLayout(this);
+  QPixmap indOff = QPixmap("../assets/icons/indicatorC_off");
+  QPixmap indAlert = QPixmap("../assets/icons/indicatorC_alert");
+  QPixmap indWarn = QPixmap("../assets/icons/indicatorC_warn");
+  QPixmap indOn = QPixmap("../assets/icons/indicatorC_on");
+  iconMap[0] = indOff;
+  iconMap[1] = indAlert;
+  iconMap[2] = indWarn;
+  iconMap[3] = indOn;
+  
+  QHBoxLayout *driverStatus = new QHBoxLayout();
+  driverStatus->setSpacing(30);
+  driverStatus->setAlignment(Qt::AlignLeft);
+  
+  QLabel *door_status = new QLabel("Door Open");
+  QLabel *seatbelt_stat = new QLabel("Seatbelt Unbuckled");
+  QLabel *espEnabled = new QLabel("ESP Disabled");
+  QLabel *cruiseStat = new QLabel("Cruise Control");
+
+  // Set up indicator objects and fix image size
+  door_value = new QLabel();
+  door_value->setScaledContents(true);
+  door_value->setPixmap(iconMap[0]);
+  door_value->setStyleSheet(R"(
+    QLabel {
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
+  seatbelt_value = new QLabel();
+  seatbelt_value->setPixmap(iconMap[0]);
+  seatbelt_value->setScaledContents(true);
+  seatbelt_value->setStyleSheet(R"(
+    QLabel {
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
+  
+  esp_value = new QLabel();
+  esp_value->setPixmap(iconMap[0]);
+  esp_value->setScaledContents(true);
+  esp_value->setStyleSheet(R"(
+    QLabel {
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
+  cruise_enabled = new QLabel();
+  cruise_enabled->setScaledContents(true);
+  cruise_enabled->setPixmap(iconMap[0]);
+  cruise_enabled->setStyleSheet(R"(
+    QLabel {
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
+
+  // Add widgets to layout
+  driverStatus->addWidget(door_status);
+  driverStatus->addWidget(door_value);
+  driverStatus->addStretch();
+  driverStatus->addWidget(seatbelt_stat);
+  driverStatus->addWidget(seatbelt_value);
+  main->addLayout(driverStatus);
+  
+  QHBoxLayout *temp = new QHBoxLayout();
+  temp->setAlignment(Qt::AlignLeft);
+  temp->setSpacing(30);
+  temp->addWidget(espEnabled);
+  temp->addWidget(esp_value);
+  temp->addStretch();
+  temp->addWidget(cruiseStat);
+  temp->addWidget(cruise_enabled);
+ 
+  main->addLayout(temp);
+  setStyleSheet(R"(
+    QLabel {
+      color: #CCCCCC;
+      font-size: 55px;
+      font-weight: bold;
+    }
+    )");
+}
+
+void CarStatus::update(const SubMaster &sm){
+  auto cs = sm["carState"].getCarState();
+  if(cs.getDoorOpen() == 1){
+    // Door is open in car, turn on warning light
+    door_value->setPixmap(iconMap[2]);
+  }
+  else{
+    door_value->setPixmap(iconMap[0]);
+  }
+
+  if(cs.getSeatbeltUnlatched() == 1){
+    // Seatbelt unbuckled
+    seatbelt_value->setPixmap(iconMap[2]);
+  }
+  else{
+    seatbelt_value->setPixmap(iconMap[0]);
+  }
+
+  if(cs.getEspDisabled() == 0){
+    // ESP is off
+    esp_value->setPixmap(iconMap[1]);
+  }
+  else{
+    esp_value->setPixmap(iconMap[0]);
+  }
+  
+  if(cs.getCruiseState().getEnabled() == 1){
+    // Cruise control is turned on
+    cruise_enabled->setPixmap(iconMap[3]);
+  }
+  else{
+    cruise_enabled->setPixmap(iconMap[0]);
+  }
+}
+
+DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
+  // Create icon layout, labels and value objects
+  main = new QVBoxLayout(this);
+  QPixmap indOff = QPixmap("../assets/icons/indicatorC_off");
+  QPixmap indOn = QPixmap("../assets/icons/indicatorC_on");
+  iconMap[0] = indOff;
+  iconMap[1] = indOn;
+  QHBoxLayout *hLay = new QHBoxLayout();
+  hLay->setSpacing(35);
+  hLay->setAlignment(Qt::AlignLeft);
+  
+  QLabel *fuel_name = new QLabel("Gas Pedal  %");
+  QLabel *gas_pressed = new QLabel("Gas Engaged");
+  QLabel *brake_pressed = new QLabel("Brake Engaged");
+  QLabel *gearShift = new QLabel("Gear: ");
+  gear_value = new QLabel();
+
+  // Create indicator objects
+  gas_engaged = new QLabel();
+  gas_engaged->setScaledContents(true);
+  gas_engaged->setPixmap(iconMap[0]);
+  gas_engaged->setStyleSheet(R"(
+    QLabel {
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
+  gas_value = new QLabel();
+  brake_engaged = new QLabel();
+  brake_engaged->setScaledContents(true);
+  brake_engaged->setPixmap(iconMap[0]);
+  brake_engaged->setStyleSheet(R"(
+    QLabel {
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
+
+  // Add widgets to layout
+  hLay->addWidget(gas_pressed);
+  hLay->addWidget(gas_engaged);
+  hLay->addStretch();
+  hLay->addWidget(brake_pressed);
+  hLay->addWidget(brake_engaged);
+
+  QHBoxLayout *carStat = new QHBoxLayout();
+  carStat->setSpacing(35);
+  carStat->setAlignment(Qt::AlignLeft);
+  carStat->addWidget(fuel_name);
+  carStat->addWidget(gas_value);
+  carStat->addStretch();
+  carStat->addWidget(gearShift);
+  carStat->addWidget(gear_value);
+
+  main->addLayout(hLay);
+  main->addLayout(carStat);
+setStyleSheet(R"(
+    QLabel {
+    color: #CCCCCC;
+    font-size: 55px;
+    font-weight: bold;
+    }
+    )");
+}
+
+void DriveStatus::update(const SubMaster &sm){
+  auto cs = sm["carState"].getCarState();
+
+  if(cs.getGasPressed() == 1){
+    // Gas pedal is pressed
+    gas_engaged->setPixmap(iconMap[1]);
+  }
+  else{
+    gas_engaged->setPixmap(iconMap[0]);
+  }
+
+  if(cs.getBrakePressed() == 1){
+    // Brake pedal is pressed
+    brake_engaged->setPixmap(iconMap[1]);
+  }
+  else{
+    brake_engaged->setPixmap(iconMap[0]);
+  }
+
+  // Set text based on current gear position
+  if(static_cast<int>(cs.getGearShifter()) == 1){
+    gear_value->setText("Park");
+  }
+  else if(static_cast<int>(cs.getGearShifter()) == 2){
+    gear_value->setText("Drive");
+  }
+  else if(static_cast<int>(cs.getGearShifter()) == 4){
+    gear_value->setText("Reverse");
+  }
+  else{
+    gear_value->setText("Unknown");
+  }
+
+  // Set % of gas pedal down, estimates 250 as maximum
+  gas_value->setText(QString::number(static_cast<int>(cs.getGas() / 250)));
+}
+
+SteerStatus::SteerStatus(QWidget *parent) :  QWidget(parent) {
+  // Creates icon map, labels, and value objects
+  main = new QVBoxLayout(this);
+  QHBoxLayout *steeringStatus = new QHBoxLayout();
+  steeringStatus->setSpacing(35);
+  QLabel *steeringPressed = new QLabel("Steering Engaged");
+  QLabel *steeringVal = new QLabel("Wheel Angle  %");
+  steer_enabled = new QLabel();
+  steer_value = new QLabel("NULL");
+  steer_dir = new QLabel("NULL");
+  
+  QPixmap indOff = QPixmap("../assets/icons/indicatorC_off");
+  QPixmap indOn = QPixmap("../assets/icons/indicatorC_on");
+  iconMap[0] = indOff;
+  iconMap[1] = indOn;
+
+  // Create indicator objects
+  steer_enabled->setScaledContents(true);
+  steer_enabled->setPixmap(iconMap[0]);
+  steer_enabled->setStyleSheet(R"(
+    QLabel {
+      max-height: 60px;
+      max-width: 60px;
+      min-height: 60px;
+      min-width: 60px; } )");
+  steeringStatus->addWidget(steeringPressed);
+  steeringStatus->addWidget(steer_enabled);
+  steeringStatus->addStretch();
+  steeringStatus->addWidget(steeringVal);
+  steeringStatus->addWidget(steer_value);
+  steeringStatus->addWidget(steer_dir);
+
+  main->addLayout(steeringStatus);
+  setStyleSheet(R"(
+    QLabel {
+    color: #CCCCCC;
+    font-size: 55px;
+    font-weight: bold;
+    }
+    )");
+}
+
+void SteerStatus::update(const SubMaster &sm){
+  auto cs = sm["carState"].getCarState();
+  if(cs.getSteeringPressed() == 1){
+    // Currently adjusting steering wheel
+    steer_enabled->setPixmap(iconMap[1]);
+  }
+  else{
+    steer_enabled->setPixmap(iconMap[0]);
+  }
+
+  // Set labels for how far the wheel is turned, estimates 480 as maximum
+  float val = cs.getSteeringAngleDeg();
+  steer_value->setText(QString::number(static_cast<int>(std::abs(val) / 480)));
+  if(val < 0){
+    steer_dir->setText("Right");
+  }
+  else{
+    steer_dir->setText("Left");
+  }
+}

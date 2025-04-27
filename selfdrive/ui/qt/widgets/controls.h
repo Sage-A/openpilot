@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <QPainter>
 #include <QPushButton>
+#include <QSlider>
 
 #include "common/params.h"
 #include "selfdrive/ui/qt/widgets/input.h"
@@ -293,4 +294,22 @@ public:
   LayoutWidget(QLayout *l, QWidget *parent = nullptr) : QWidget(parent) {
     setLayout(l);
   }
+};
+
+// slider widget
+class SliderControl : public QFrame {
+  Q_OBJECT
+
+public:
+  SliderControl(Qt::Orientation orientation, QWidget *parent = nullptr);
+  inline void setMaximum(int value) {slider.setMaximum(value); }
+  inline void setMinimum(int value) { slider.setMinimum(value); }
+  inline void setTickStyle(QSlider::TickPosition position) { slider.setTickPosition(position); }
+  inline void setValue(int value) {slider.setValue(value); }
+  inline void setTickInterval(int value) { slider.setTickInterval(value); }
+
+signals:
+  void valueChanged(int value);
+private:
+  QSlider slider;
 };

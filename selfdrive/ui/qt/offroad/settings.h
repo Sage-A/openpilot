@@ -27,6 +27,7 @@ protected:
 
 signals:
   void closeSettings();
+  void openCustom();
   void reviewTrainingGuide();
   void showDriverView();
   void expandToggleDescription(const QString &param);
@@ -97,4 +98,14 @@ private:
 
   Params params;
   ParamWatcher *fs_watch;
+};
+
+class CustomPanel : public ListWidget {
+  Q_OBJECT
+public:
+  explicit CustomPanel(QWidget* parent = nullptr);
+signals:
+  void openCustom();
+private:
+  ButtonControl *enableGui;
 };

@@ -77,7 +77,7 @@ void Sidebar::updateState(const UIState &s) {
   networking = networking ? networking : window()->findChild<Networking *>("");
   bool tethering_on = networking && networking->wifi->tethering_on;
   auto deviceState = sm["deviceState"].getDeviceState();
-  setProperty("netType", tethering_on ? "Hotspot": network_type[deviceState.getNetworkType()]);
+  setProperty("netType", tethering_on ? "Hotspot": "Testing");
   int strength = tethering_on ? 4 : (int)deviceState.getNetworkStrength();
   setProperty("netStrength", strength > 0 ? strength + 1 : 0);
 
@@ -123,19 +123,13 @@ void Sidebar::paintEvent(QPaintEvent *event) {
   p.setOpacity(1.0);
 
   // network
-  int x = 58;
-  const QColor gray(0x54, 0x54, 0x54);
-  for (int i = 0; i < 5; ++i) {
-    p.setBrush(i < net_strength ? Qt::white : gray);
-    p.drawEllipse(x, 196, 27, 27);
-    x += 37;
-  }
-
-  p.setFont(InterFont(35));
-  p.setPen(QColor(0xff, 0xff, 0xff));
-  const QRect r = QRect(58, 247, width() - 100, 50);
-  p.drawText(r, Qt::AlignLeft | Qt::AlignVCenter, net_type);
-
+   int x = 58;
+   const QColor gray(0x54, 0x54, 0x54);
+   for (int i = 0; i < 5; ++i) {
+     p.setBrush(i < net_strength ? Qt::white : gray);
+     p.drawEllipse(x, 196, 27, 27);
+     x += 37;
+   }
   // metrics
   drawMetric(p, temp_status.first, temp_status.second, 338);
   drawMetric(p, panda_status.first, panda_status.second, 496);
