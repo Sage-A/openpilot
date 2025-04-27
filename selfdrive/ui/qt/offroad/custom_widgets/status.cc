@@ -283,7 +283,7 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
   QLabel *gas_pressed = new QLabel("Gas Engaged");
   QLabel *brake_pressed = new QLabel("Brake Engaged");
   gas_engaged = new QLabel();
-  gas_engaged->setScaledContent(true);
+  gas_engaged->setScaledContents(true);
   gas_engaged->setPixmap(iconMap[0]);
   gas_engaged->setStyleSheet(R"(
     QLabel {
@@ -293,7 +293,7 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
       min-width: 60px; } )");
   gas_value = new QLabel();
   brake_engaged = new QLabel();
-  brake_engaged->setScaledContent(true);
+  brake_engaged->setScaledContents(true);
   brake_engaged->setPixmap(iconMap[0]);
   brake_engaged->setStyleSheet(R"(
     QLabel {
@@ -316,7 +316,7 @@ DriveStatus::DriveStatus(QWidget *parent) :  QWidget(parent) {
   QLabel *gearShift = new QLabel("Gear: ");
 
   cruise_enabled = new QLabel();
-  cruise_enabled->setScaledContent(true);
+  cruise_enabled->setScaledContents(true);
   cruise_enabled->setPixmap(iconMap[0]);
   cruise_enabled->setStyleSheet(R"(
     QLabel {
