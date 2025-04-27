@@ -109,18 +109,18 @@ BlinkerStatus::BlinkerStatus(QWidget *parent) :  QWidget(parent) {
   
   leftInd->setStyleSheet(R"(
     QLabel {
-      max-height: 100px;
-      max-width: 100px;
-      min-height: 100px;
-      min-width: 100px;
+      max-height: 150px;
+      max-width: 150px;
+      min-height: 150px;
+      min-width: 150px;
     }
     )");
   rightInd->setStyleSheet(R"(
     QLabel {
-      max-height: 100px;
-      max-width: 100px;
-      min-height: 100px;
-      min-width: 100px;
+      max-height: 150px;
+      max-width: 150px;
+      min-height: 150px;
+      min-width: 150px;
     }
     )");
 
