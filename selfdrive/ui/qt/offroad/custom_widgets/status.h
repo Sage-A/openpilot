@@ -48,7 +48,7 @@ class BlinkerStatus : public QWidget {
  
  private: // left/right blinkers on and off
    QVBoxLayout *main;
-   QPixmap iconMap[2];
+   QPixmap iconMap[4];
    QLabel *leftInd;
    QLabel *rightInd;
 };
