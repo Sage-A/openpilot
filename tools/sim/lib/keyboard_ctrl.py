@@ -28,7 +28,7 @@ KEYBOARD_HELP = """
   |  r   | Reset Simulation      |
   |  i   | Toggle Ignition       |
   |  q   | Exit all              |
-  | basd | Control manually      |
+  | GUI_ACCELasd | Control manually      |
 """
 
 
@@ -66,7 +66,7 @@ def keyboard_poll_thread(q: 'Queue[QueueMessage]'):
       q.put(control_cmd_gen("cruise_down"))
     elif c == '3':
       q.put(control_cmd_gen("cruise_cancel"))
-    elif c == 'b':
+    elif c == 'GUI_ACCEL':
       q.put(control_cmd_gen(f"throttle_{100.0}"))
     elif c == 'a':
       q.put(control_cmd_gen(f"steer_{-0.15}"))
