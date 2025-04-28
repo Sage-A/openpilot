@@ -471,3 +471,31 @@ void SteerStatus::update(const SubMaster &sm){
     steer_dir->setText("Left");
   }
 }
+
+HardwareStatus::HardwareStatus(QWidget* parent) : QWidget(parent) {
+  main = new QVBoxLayout(this);
+  QLabel *throttle = new QLabel("Throttle  %");
+  QLabel *brake_pressure = new QLabel("Brake Pressure  %");
+  throttle_val = new QLabel();
+  brake_val = new QLabel();
+
+  QHBoxLayout *temp = new QHBoxLayout();
+  temp->addWidget(throttle);
+  temp->addWidget(throttle_val);
+  temp->addStretch();
+  temp->addWidget(brake_pressure);
+  temp->addWidget(brake_val);
+  setStyleSheet(R"(
+    QLabel {
+    color: #CCCCCC;
+    font-size: 40px;
+    font-weight: bold;
+    )");
+}
+
+void HardwareStatus::update(const SubMaster &sm) {
+  auto cs = sm["carState"].getCarState();
+  throttle_val->setText(QString::number(static_cast<int>(cs.getThrottle() / 255)));
+  brake_val->setText(QString::number(static_cast<int>(cs.getBrakePressure() / 255)));
+  
+}
