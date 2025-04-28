@@ -485,6 +485,7 @@ HardwareStatus::HardwareStatus(QWidget* parent) : QWidget(parent) {
   temp->addStretch();
   temp->addWidget(brake_pressure);
   temp->addWidget(brake_val);
+  main->addLayout(temp);
   setStyleSheet(R"(
     QLabel {
     color: #CCCCCC;
