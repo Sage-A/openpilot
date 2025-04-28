@@ -491,6 +491,7 @@ HardwareStatus::HardwareStatus(QWidget* parent) : QWidget(parent) {
     color: #CCCCCC;
     font-size: 40px;
     font-weight: bold;
+    }
     )");
 }
 
