@@ -17,7 +17,8 @@ EXPO = 0.4
 class Keyboard:
   def __init__(self):
     managed_processes['ui'].w.customWindow.accelDown.connect(self.GUI_ACCEL)
-    managed_processes['ui'].w.customWindow.accelRelease.connect(self.GUI_ACCEL)    self.kb = KBHit()
+    managed_processes['ui'].w.customWindow.accelRelease.connect(self.GUI_ACCEL)    
+    self.kb = KBHit()
     self.axis_increment = 0.05  # 5% of full actuation each key press
     self.axes_map = {'GUI_ACCEL': 'gb', 's': 'gb',
                      'a': 'steer', 'd': 'steer'}
