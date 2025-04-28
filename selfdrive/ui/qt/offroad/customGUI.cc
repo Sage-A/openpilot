@@ -101,6 +101,20 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   )");
   drive_btn->setFixedSize(125, 125);
 
+   QPushButton *hardware_btn = new QPushButton(tr("Hardware"));
+  hardware_btn->setStyleSheet(R"(
+    QPushButton {
+      font-size: 25px;
+      padding-bottom: 10px;
+      border-radius: 17px;
+      background-color: #555555;
+    }
+    QPushButton:pressed {
+      background-color: #3B3B3B;
+    }
+  )");
+  hardware_btn->setFixedSize(100, 100);
+
   // main settings layout, sidebar + main panel
   QHBoxLayout *main_layout = new QHBoxLayout(this);
   main_layout->setSpacing(40);
@@ -113,6 +127,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   sidebar->addWidget(car_btn);
   sidebar->addWidget(steer_btn);
   sidebar->addWidget(drive_btn);
+  sidebar->addWidget(hardware_btn);
   
   ss = new SteeringSlider(this);
   lW = new BlinkerStatus(this);
@@ -132,6 +147,9 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   speed_bar->addWidget(spW);
   speed_bar->addWidget(accW);
 
+  hardwareStat = new HardwareStatus(this);
+  primary->addWidget(hardwareStat);
+
   // Connect buttons to visibility functions + settings close
   QObject::connect(blink_btn, &QPushButton::clicked, [&](){
     lW->setVisible(!lW->isVisible());
@@ -144,6 +162,9 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   });
   QObject::connect(drive_btn, &QPushButton::clicked, [&](){
     driveStat->setVisible(!driveStat->isVisible());
+  });
+  QObject::connect(hardware_btn, &QPushButton::clicked, [&](){
+    hardwareStat->setVisible(!hardwareStat->isVisible());
   });
   QObject::connect(close_btn, &QPushButton::clicked, this, &CustomWindow::closeCustom);
   main_layout->addLayout(sidebar);
@@ -165,6 +186,7 @@ void CustomWindow::updateState(const UIState &s) {
   carStat->update(sm);
   steerStat->update(sm);
   driveStat->update(sm);
+  hardwareStat->update(sm);
 }
 
 
