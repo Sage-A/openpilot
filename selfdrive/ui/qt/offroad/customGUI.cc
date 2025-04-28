@@ -33,7 +33,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   close_btn->setStyleSheet(R"(
     QPushButton {
       font-size: 140px;
-      padding-bottom: 20px;
+      padding-bottom: 15px;
       border-radius: 75px;
       background-color: #555555;
       font-weight: 400;
@@ -49,7 +49,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   blink_btn->setStyleSheet(R"(
     QPushButton {
       font-size: 25px;
-      padding-bottom: 20px;
+      padding-bottom: 15px;
       border-radius: 25px;
       background-color: #555555;
     }
@@ -63,7 +63,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   car_btn->setStyleSheet(R"(
     QPushButton {
       font-size: 30px;
-      padding-bottom: 20px;
+      padding-bottom: 15px;
       border-radius: 25px;
       background-color: #555555;
     }
@@ -77,7 +77,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   steer_btn->setStyleSheet(R"(
     QPushButton {
       font-size: 30px;
-      padding-bottom: 20px;
+      padding-bottom: 15px;
       border-radius: 25px;
       background-color: #555555;
     }
@@ -91,7 +91,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   drive_btn->setStyleSheet(R"(
     QPushButton {
       font-size: 30px;
-      padding-bottom: 20px;
+      padding-bottom: 15px;
       border-radius: 25px;
       background-color: #555555;
     }
@@ -104,16 +104,16 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
    QPushButton *hardware_btn = new QPushButton(tr("Hardware"));
   hardware_btn->setStyleSheet(R"(
     QPushButton {
-      font-size: 25px;
-      padding-bottom: 10px;
-      border-radius: 17px;
+      font-size: 30px;
+      padding-bottom: 15px;
+      border-radius: 25px;
       background-color: #555555;
     }
     QPushButton:pressed {
       background-color: #3B3B3B;
     }
   )");
-  hardware_btn->setFixedSize(100, 100);
+  hardware_btn->setFixedSize(125, 125);
 
   // main settings layout, sidebar + main panel
   QHBoxLayout *main_layout = new QHBoxLayout(this);
