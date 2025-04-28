@@ -104,3 +104,15 @@ class SteerStatus : public QWidget {
    QLabel *steer_dir;
    QPixmap iconMap[2];
 };
+
+class HardwareStatus : public QWidget {
+   Q_OBJECT
+ public:
+   explicit HardwareStatus(QWidget *parent);
+   void update(const SubMaster &sm);
+ 
+ private:
+   QVBoxLayout *main;
+   QLabel *throttle_val;
+   QLabel *brake_val;
+ };
