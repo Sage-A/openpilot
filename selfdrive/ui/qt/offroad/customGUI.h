@@ -43,4 +43,5 @@ private:
   SteerStatus *steerStat;
   DriveStatus *driveStat;
   CarStatus *carStat;
+  HardwareStatus *hardwareStat;
 };
