@@ -44,5 +44,16 @@ Openpilot only needs to be built once and the subsequently produced uv.lock file
 	  		- steering.h
 	  		- steering.cc
 
+## Adding a New Widget
+#### Status 
+1. Create a copy of the *StatusWidget* class and functions outlined in status.h/cc.
+2. Add a QLabel title in the class constructor and initialize the value label. Add both labels to the layout. 
+3. Within the update function, update the display of the value label with the current status. The update functions are provided with the listener SubMaster by default and can retrieve various readers from there. 
+4. If the value should be an indicator instead of a number or text, create a QPixmap iconMap[x]. Fill this iconMap with the needed versions of the indicator and use setPixmap() on the value label to display the desired image. 
+5. Create a new object within the *CustomWindow* constructor and add it to the main layout. Add object->update() to *CustomWindow::updateState* to update the status each frame.
+
+#### General Widget
+ If creating a new widget not contained within the status.h file, you will need to update several other files to pass the build tests. In selfdrive/ui/SConscript, add the path for the .cc file to the qt_src array. To update each frame, add a call for the widget’s update function to *CustomWindow::updateState*. 
+
 ## SConscript
 Holds references to qt library. Must be updated with new widget files to pass build tests
