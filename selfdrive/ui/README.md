@@ -43,3 +43,6 @@ Openpilot only needs to be built once and the subsequently produced uv.lock file
   			- status.h
 	  		- steering.h
 	  		- steering.cc
+
+## SConscript
+Holds references to qt library. Must be updated with new widget files to pass build tests
