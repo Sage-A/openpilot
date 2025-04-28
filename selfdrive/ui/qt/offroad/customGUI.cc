@@ -104,7 +104,7 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
    QPushButton *hardware_btn = new QPushButton(tr("Hardware"));
   hardware_btn->setStyleSheet(R"(
     QPushButton {
-      font-size: 30px;
+      font-size: 20px;
       padding-bottom: 15px;
       border-radius: 25px;
       background-color: #555555;
