@@ -135,20 +135,19 @@ CustomWindow::CustomWindow(QWidget *parent) : QFrame(parent) {
   carStat = new CarStatus(this);
   steerStat = new SteerStatus(this);
   driveStat = new DriveStatus(this);
+  hardwareStat = new HardwareStatus(this);
   
   primary->addWidget(lW);
   primary->addWidget(carStat);
   primary->addWidget(steerStat);
   primary->addWidget(driveStat);
+  primary->addWidget(hardwareStat);
   primary->addWidget(ss);
 
   accW = new AccelerationW(this);
   spW = new SpeedStatus(this, 0);
   speed_bar->addWidget(spW);
   speed_bar->addWidget(accW);
-
-  hardwareStat = new HardwareStatus(this);
-  primary->addWidget(hardwareStat);
 
   // Connect buttons to visibility functions + settings close
   QObject::connect(blink_btn, &QPushButton::clicked, [&](){
