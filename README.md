@@ -1,3 +1,6 @@
+# Capstone Final
+Merges SGUI and ADBranch. Works in simulator, needs additioanl modifications to work on comma 3x, PySide6 library needs to be installed during comma set up.
+
 <div align="center" style="text-align: center;">
 
 <h1>openpilot</h1>
