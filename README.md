@@ -1,3 +1,7 @@
+# SGUI
+Contains graphics work; custom window + widgets
+
+# Openpilot
 <div align="center" style="text-align: center;">
 
 <h1>openpilot</h1>
