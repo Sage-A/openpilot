@@ -1,3 +1,6 @@
+# HD Branch
+Contains edits to CAN signal repo to introduce acceleration signals. Currently nonfunctional
+
 <div align="center" style="text-align: center;">
 
 <h1>openpilot</h1>
